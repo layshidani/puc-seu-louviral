@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/core/theme/custom_text_style.dart';
-import 'package:seu_lourival/core/theme/spacing.dart';
+import 'package:seu_lourival/core/theme/text_style.dart';
+import 'package:seu_lourival/core/values/spacing.dart';
 
-class CustomTextField extends StatelessWidget {
+class DSTextField extends StatelessWidget {
   final String labelText;
   final TextInputType keyboardType;
   final AutovalidateMode autovalidateMode;
@@ -12,7 +12,7 @@ class CustomTextField extends StatelessWidget {
   final Function(String)? onChange;
   final String? Function(String?)? validator;
 
-  CustomTextField({
+  DSTextField({
     this.iconData,
     this.keyboardType = TextInputType.text,
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
@@ -38,7 +38,7 @@ class CustomTextField extends StatelessWidget {
           ),
           labelText: labelText,
         ),
-        style: CustomTextStyle.textBase,
+        style: DSTextStyle.textBase,
         autovalidateMode: autovalidateMode,
         validator: validator,
         onChanged: this.onChange,

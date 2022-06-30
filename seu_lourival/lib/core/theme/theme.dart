@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:seu_lourival/core/values/custom_colors.dart';
 
-class CustomTheme {
+class DSTheme {
   static final light = ThemeData(
     brightness: Brightness.light,
-    primaryColor: CustomColors.primary,
+    primaryColor: DSColors.primary,
     appBarTheme: const AppBarTheme(
-      backgroundColor: CustomColors.primary,
+      backgroundColor: DSColors.primary,
     ),
   );
 }

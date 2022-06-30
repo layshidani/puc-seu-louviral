@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/global_widgets/text/text.dart';
-import 'package:seu_lourival/global_widgets/text/title.dart';
+import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
+import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 
 class TextCatalog extends StatelessWidget {
   const TextCatalog({Key? key}) : super(key: key);

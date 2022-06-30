@@ -1,4 +1,4 @@
-class TextSize {
+class DSTextSize {
   static const xxs = 12.0;
   static const xs = 14.0;
   static const sm = 16.0;

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/core/theme/custom_text_style.dart';
 import 'package:seu_lourival/core/values/custom_colors.dart';
-import 'package:seu_lourival/global_widgets/text/text.dart';
+import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 
-class MyIconButton extends StatelessWidget {
+class DSIconButton extends StatelessWidget {
   final String buttonText;
   final IconData? iconData;
   final void Function()? onPressAction;
 
-  MyIconButton({
+  DSIconButton({
     required this.buttonText,
     this.iconData = Icons.check,
     this.onPressAction,
@@ -26,14 +25,14 @@ class MyIconButton extends StatelessWidget {
             child: ElevatedButton.icon(
               label: Padding(
                 padding: EdgeInsets.all(12),
-                child: CustomText(
-                  text: buttonText,
+                child: DSText.base(
+                  buttonText,
                 ),
               ),
               icon: Icon(iconData),
               style: ButtonStyle(
                 backgroundColor:
-                    MaterialStateProperty.all(CustomColors.primary),
+                    MaterialStateProperty.all(DSColors.primary),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(22),

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/core/theme/custom_text_style.dart';
+import 'package:seu_lourival/core/theme/text_style.dart';
 
 class DSTitle {
   static Text base(String title) {
-    return getWidget(title, CustomTextStyle.titleBase);
+    return getWidget(title, DSTextStyle.titleBase);
   }
 
   static Text sm(String title) {
-    return getWidget(title, CustomTextStyle.titleSm);
+    return getWidget(title, DSTextStyle.titleSm);
   }
 
   static Text lg(String title) {
-    return getWidget(title, CustomTextStyle.titleLg);
+    return getWidget(title, DSTextStyle.titleLg);
   }
 
   static Text getWidget(String text, TextStyle type) {
