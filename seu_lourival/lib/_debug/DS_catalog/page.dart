@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:seu_lourival/_debug/DS_catalog/text.dart';
 
 class ThemesCatalogPage extends StatelessWidget {

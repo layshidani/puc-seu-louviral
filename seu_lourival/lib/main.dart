@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/_debug/DS_catalog/page.dart';
+import 'package:seu_lourival/_debug/page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Seu Lourival',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ThemesCatalogPage(),
+      home: const DebugHomePage(),
     );
   }
 }
