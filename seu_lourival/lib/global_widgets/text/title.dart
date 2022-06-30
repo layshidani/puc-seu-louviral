@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:seu_lourival/core/theme/custom_text_style.dart';
 
-class CustomTitle extends StatelessWidget {
-  final String text;
-  final TextStyle? style;
+class DSTitle {
+  static Text base(String title) {
+    return getWidget(title, CustomTextStyle.titleBase);
+  }
 
-  CustomTitle({required this.text, this.style = CustomTextStyle.titleBase});
+  static Text sm(String title) {
+    return getWidget(title, CustomTextStyle.titleSm);
+  }
 
-  @override
-  Widget build(BuildContext context) {
-     return Center(
-      child: Text(
-        text,
-        style: style,
-        textAlign: TextAlign.center,
-      ),
-    );
+  static Text lg(String title) {
+    return getWidget(title, CustomTextStyle.titleLg);
+  }
+
+  static Text getWidget(String text, TextStyle type) {
+    return Text(text, style: type);
   }
 }
