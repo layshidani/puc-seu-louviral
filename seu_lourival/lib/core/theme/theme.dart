@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/core/values/custom_colors.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 
 class DSTheme {
   static final light = ThemeData(
