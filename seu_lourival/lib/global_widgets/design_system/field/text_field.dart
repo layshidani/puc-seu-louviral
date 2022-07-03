@@ -33,9 +33,9 @@ class DSTextField extends StatelessWidget {
         keyboardType: keyboardType,
         decoration: InputDecoration(
           suffixIcon: Icon(iconData),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(Spacing.s5),
-          ),
+          // border: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(Spacing.s5),
+          // ),
           labelText: labelText,
         ),
         style: DSTextStyle.textBase,
