@@ -1,37 +1,43 @@
 import 'package:flutter/material.dart';
 
 import 'package:seu_lourival/app/pages/users_manager/pre-register/list/page.dart';
+import 'package:seu_lourival/app/pages/users_manager/registered/list/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 
 class UsersManagerTabbar extends StatelessWidget {
-  const UsersManagerTabbar({super.key});
+  UsersManagerTabbar({super.key});
+
+  List<Tab> tabNames = [
+    const Tab(text: 'Pré registro'),
+    const Tab(text: 'Cadastrados'),
+  ];
+
+  List<Widget> tabPages = [
+    PreRegisterListPage(),
+    RegisteredPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: DefaultTabController(
-        length: 2,
-        child: Column(
-          children: [
-            TabBar(
-              labelColor: DSColors.primary,
-              indicatorColor: DSColors.primary,
-              unselectedLabelColor: Colors.grey[700],
-              tabs: const [
-                Tab(text: 'Pré registro'),
-                Tab(text: 'Cadastrados'),
-              ],
-            ),
-            const Expanded(
+    return DefaultTabController(
+      length: tabNames.length,
+      child: Column(
+        children: [
+          TabBar(
+            labelColor: DSColors.primary,
+            indicatorColor: DSColors.primary,
+            unselectedLabelColor: Colors.grey[700],
+            tabs: tabNames,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
               child: TabBarView(
-                children: [
-                  PreRegisterListPage(),
-                  Icon(Icons.construction_outlined),
-                ],
+                children: tabPages,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

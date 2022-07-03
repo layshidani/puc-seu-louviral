@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seu_lourival/core/values/strings.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
@@ -47,7 +48,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                         if (value != null && value.length >= 1) {
                           return null;
                         }
-                        return 'Selecione um tipo de usuário';
+                        return 'Selecione um tipo';
                       },
                       decoration: const InputDecoration(
                         labelText: 'Selecione um tipo de usuário',
