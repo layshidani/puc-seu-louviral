@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:seu_lourival/app/pages/users_manager/pre_register_list/page.dart';
+import 'package:seu_lourival/app/pages/users_manager/pre-register/list/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 
 class UsersManagerTabbar extends StatelessWidget {

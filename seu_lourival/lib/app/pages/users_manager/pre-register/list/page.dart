@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:seu_lourival/app/pages/users_manager/pre_register_form/page.dart';
+import 'package:seu_lourival/app/pages/users_manager/pre-register/form/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 
 class PreRegisterListPage extends StatelessWidget {
