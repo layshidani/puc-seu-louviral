@@ -1,5 +1,5 @@
 class MyStrings {
-  static preRegisterForm() {
+  static PreRegisterFormPage() {
     return 'Cadastro de usuário';
   }
 }

@@ -50,7 +50,7 @@ class PreRegisterListPage extends StatelessWidget {
               child: const Icon(Icons.add),
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => PreRegisterForm()),
+                  MaterialPageRoute(builder: (_) => PreRegisterFormPage()),
                 );
               },
             ),
