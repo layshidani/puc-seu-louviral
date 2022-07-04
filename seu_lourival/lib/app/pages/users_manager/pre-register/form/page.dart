@@ -77,6 +77,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                         DSTextField(
                           labelText: 'CPF',
                           iconData: Icons.document_scanner_outlined,
+                          keyboardType: TextInputType.number,
                           validator: (value) {
                             return (value != null)
                                 ? null
@@ -128,6 +129,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                         DSTextField(
                           labelText: 'Apartamento',
                           iconData: Icons.apartment_outlined,
+                          keyboardType: TextInputType.number,
                           validator: (value) {
                             if (value != null && value.length >= 1) {
                               return null;
@@ -139,10 +141,10 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                           labelText: 'Complemento (bloco, torre, etc)',
                           iconData: Icons.domain_outlined,
                           validator: (value) {
-                            if (value != null && value.length >= 1) {
+                            if (value != null && value.length >= 3) {
                               return null;
                             }
-                            return 'Ops! Informe qual o complemento';
+                            return 'Ops! Informe qual o complemento. (Ex: Bloco A)';
                           },
                         ),
                       ],
