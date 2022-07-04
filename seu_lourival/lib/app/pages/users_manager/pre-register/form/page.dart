@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
@@ -46,12 +47,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                           child: Text(dropDownStringItem),
                         );
                       }).toList(),
-                      validator: (value) {
-                        if (value != null && value.length >= 1) {
-                          return null;
-                        }
-                        return 'Selecione um tipo';
-                      },
+                      validator: (value) => DSInputValidators.isUserTypeSelected(value),
                       decoration: const InputDecoration(
                         labelText: 'Selecione um tipo de usuário',
                       ),
@@ -70,11 +66,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                         DSTextField(
                           labelText: 'Nome completo',
                           iconData: Icons.person_outline,
-                          validator: (value) {
-                            return (value != null && value.isValidName())
-                                ? null
-                                : 'Ops! Informe o nome completo';
-                          },
+                          validator: (value) => DSInputValidators.isValidName(value),
                         ),
                         DSTextField(
                           labelText: 'CPF',
@@ -84,11 +76,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                             FilteringTextInputFormatter.digitsOnly,
                             CpfInputFormatter(),
                           ],
-                          validator: (value) {
-                            return (GetUtils.isCpf(value!))
-                                ? null
-                                : 'Ops! CPF inválido';
-                          },
+                          validator: (value) => DSInputValidators.isValidCPF(value),
                         ),
                       ],
                     ),
@@ -109,21 +97,13 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                             FilteringTextInputFormatter.digitsOnly,
                             TelefoneInputFormatter(),
                           ],
-                          validator: (value) {
-                            return (GetUtils.isPhoneNumber(value!))
-                                ? null
-                                : 'Ops! Informe um telefone válido';
-                          },
+                          validator: (value) => DSInputValidators.isValidPhone(value),
                         ),
                         DSTextField(
                           labelText: 'E-mail',
                           keyboardType: TextInputType.emailAddress,
                           iconData: Icons.email_outlined,
-                          validator: (value) {
-                            return (GetUtils.isEmail(value!))
-                                ? null
-                                : 'Ops! Informe um e-mail válido';
-                          },
+                          validator: (value) => DSInputValidators.isValidEmail(value),
                         ),
                       ],
                     ),
@@ -140,20 +120,12 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                           labelText: 'Apartamento',
                           iconData: Icons.apartment_outlined,
                           keyboardType: TextInputType.number,
-                          validator: (value) {
-                            return GetUtils.isLengthBetween(value, 1, 10)
-                                ? null
-                                : 'Ops! Informe qual o nº do apartamento';
-                          },
+                          validator: (value) => DSInputValidators.isValidApartment(value),
                         ),
                         DSTextField(
                           labelText: 'Complemento (bloco, torre, etc)',
                           iconData: Icons.domain_outlined,
-                          validator: (value) {
-                            return GetUtils.isLengthBetween(value, 4, 10)
-                                ? null
-                                : 'Ops! Informe qual o complemento. (Ex: Bloco A)';
-                          },
+                          validator: (value) => DSInputValidators.isValidApartmentComplement(value),
                         ),
                       ],
                     ),
@@ -194,13 +166,5 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
 
   cancel() {
     _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
-  }
-}
-
-extension StringValidators on String {
-  bool isValidName() {
-    return RegExp(
-            r'^[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+\s([A-ZÀ-ŸA-zÀ-ÿ]\s?)*[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+$')
-        .hasMatch(this);
   }
 }
