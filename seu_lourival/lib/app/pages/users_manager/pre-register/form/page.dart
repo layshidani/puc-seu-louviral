@@ -1,5 +1,7 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/core/values/strings.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
@@ -29,7 +31,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
           children: [
             Expanded(
               child: Stepper(
-                physics: ScrollPhysics(),
+                physics: const ScrollPhysics(),
                 currentStep: _currentStep,
                 onStepTapped: (step) => tapped(step),
                 onStepContinue: continued,
@@ -78,10 +80,14 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                           labelText: 'CPF',
                           iconData: Icons.document_scanner_outlined,
                           keyboardType: TextInputType.number,
+                          formatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            CpfInputFormatter(),
+                          ],
                           validator: (value) {
-                            return (value != null)
+                            return (GetUtils.isCpf(value!))
                                 ? null
-                                : 'Ops! Informe o CPF completo';
+                                : 'Ops! CPF inválido';
                           },
                         ),
                       ],
@@ -99,8 +105,12 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                           labelText: 'Celular',
                           keyboardType: TextInputType.phone,
                           iconData: Icons.phone_android,
+                          formatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            TelefoneInputFormatter(),
+                          ],
                           validator: (value) {
-                            return (value != null)
+                            return (GetUtils.isPhoneNumber(value!))
                                 ? null
                                 : 'Ops! Informe um telefone válido';
                           },
@@ -110,7 +120,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                           keyboardType: TextInputType.emailAddress,
                           iconData: Icons.email_outlined,
                           validator: (value) {
-                            return (value != null && value.isValidEmail())
+                            return (GetUtils.isEmail(value!))
                                 ? null
                                 : 'Ops! Informe um e-mail válido';
                           },
@@ -131,20 +141,18 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                           iconData: Icons.apartment_outlined,
                           keyboardType: TextInputType.number,
                           validator: (value) {
-                            if (value != null && value.length >= 1) {
-                              return null;
-                            }
-                            return 'Ops! Informe qual o apartamento';
+                            return GetUtils.isLengthBetween(value, 1, 10)
+                                ? null
+                                : 'Ops! Informe qual o nº do apartamento';
                           },
                         ),
                         DSTextField(
                           labelText: 'Complemento (bloco, torre, etc)',
                           iconData: Icons.domain_outlined,
                           validator: (value) {
-                            if (value != null && value.length >= 3) {
-                              return null;
-                            }
-                            return 'Ops! Informe qual o complemento. (Ex: Bloco A)';
+                            return GetUtils.isLengthBetween(value, 4, 10)
+                                ? null
+                                : 'Ops! Informe qual o complemento. (Ex: Bloco A)';
                           },
                         ),
                       ],
@@ -190,12 +198,6 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
 }
 
 extension StringValidators on String {
-  bool isValidEmail() {
-    return RegExp(
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-        .hasMatch(this);
-  }
-
   bool isValidName() {
     return RegExp(
             r'^[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+\s([A-ZÀ-ŸA-zÀ-ÿ]\s?)*[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+$')
