@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "478852115396",
+    "firebase_url": "https://imgroot-default-rtdb.firebaseio.com",
+    "project_id": "imgroot",
+    "storage_bucket": "imgroot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478852115396:android:15c6ac06c14cefb3c09291",
+        "android_client_info": {
+          "package_name": "com.example.seu_lourival"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478852115396-8ag30kmr5pcvliuta38qu0s9lde402s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuB9NgQbQij_blUhFjxea58wtUgRU3Vvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478852115396-8ag30kmr5pcvliuta38qu0s9lde402s3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "478852115396-1efih4k8df4cllsri29od1hglpfiiqcj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bryanbarreto.todolist"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
