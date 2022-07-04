@@ -122,7 +122,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                         : StepState.disabled,
                   ),
                   Step(
-                    title: DSText.base('Dados da moradia'),
+                    title: DSText.base('Dados adicionais'),
                     content: Column(
                       children: <Widget>[
                         DSTextField(
@@ -153,7 +153,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
                         : StepState.disabled,
                   ),
                   Step(
-                    title: DSText.base('🎉 Sucesso!'),
+                    title: DSText.base('🎉 Sucesso'),
                     content: Column(
                       children: <Widget>[
                         DSText.base(
@@ -179,7 +179,7 @@ class _PreRegisterFormState extends State<PreRegisterForm> {
   }
 
   continued() {
-    _currentStep < 2 ? setState(() => _currentStep += 1) : null;
+    _currentStep < 4 ? setState(() => _currentStep += 1) : null;
   }
 
   cancel() {
