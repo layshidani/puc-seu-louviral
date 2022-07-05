@@ -49,7 +49,7 @@ class AddUsersListPage extends StatelessWidget {
               backgroundColor: DSColors.primary,
               child: const Icon(Icons.add),
               onPressed: () {
-                Get.toNamed(Routes.preRegister);
+                Get.toNamed(Routes.addUsers);
               },
             ),
           ],

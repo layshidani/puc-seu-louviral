@@ -32,7 +32,7 @@ class Pages {
       page: () => ReportListPage(),
     ),
     GetPage(
-      name: Routes.addUsers,
+      name: Routes.usersManager,
       page: () => const UsersManagerPage(),
       binding: UsersManagerBinding(),
     ),
@@ -49,7 +49,7 @@ class Pages {
       page: () => const FinancePage(),
     ),
     GetPage(
-      name: Routes.preRegister,
+      name: Routes.addUsers,
       page: () => AddUsersFormPage(),
     ),
 

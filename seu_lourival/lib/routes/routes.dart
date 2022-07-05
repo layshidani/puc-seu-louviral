@@ -5,6 +5,7 @@ class Routes {
   static const reportList = "/report-list";
   static const preRegister = "/pre-register";
   static const addUsers = "/add-users";
+  static const usersManager = "/users-manager";
   static const billboard = "/billboard";
   static const financial = "/financial";
 
