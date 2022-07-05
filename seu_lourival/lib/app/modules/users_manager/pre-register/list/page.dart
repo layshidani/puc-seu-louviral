@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:seu_lourival/app/pages/users_manager/pre-register/form/page.dart';
+import 'package:seu_lourival/app/modules/users_manager/pre-register/form/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 

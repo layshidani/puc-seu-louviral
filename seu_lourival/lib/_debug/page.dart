@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:seu_lourival/_debug/DS_catalog/page.dart';
-import 'package:seu_lourival/app/pages/login/page.dart';
-import 'package:seu_lourival/app/pages/login_error/page.dart';
-import 'package:seu_lourival/app/pages/reports/page.dart';
-import 'package:seu_lourival/app/pages/users_manager/page.dart';
+import 'package:seu_lourival/app/modules/login/page.dart';
+import 'package:seu_lourival/app/modules/login_error/page.dart';
+import 'package:seu_lourival/app/modules/reports/page.dart';
+import 'package:seu_lourival/app/modules/users_manager/page.dart';
 
 class DebugHomePage extends StatelessWidget {
   const DebugHomePage({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class DebugHomePage extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LoginPage(),
+                    builder: (context) => LoginPage(),
                   ),
                 ),
               },

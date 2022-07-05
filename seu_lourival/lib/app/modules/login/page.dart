@@ -7,7 +7,7 @@ import 'package:seu_lourival/core/values/login_strings.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
 
 class LoginPage extends StatelessWidget {
-  final controller = Get.find<LoginController>();
+  final controller = Get.put(LoginController());
   final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {

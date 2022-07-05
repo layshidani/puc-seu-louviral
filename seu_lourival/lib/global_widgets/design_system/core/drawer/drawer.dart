@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'package:seu_lourival/app/pages/billboard/page.dart';
-import 'package:seu_lourival/app/pages/finance/page.dart';
-import 'package:seu_lourival/app/pages/reports/page.dart';
-import 'package:seu_lourival/app/pages/users_manager/page.dart';
+import 'package:seu_lourival/app/modules/billboard/page.dart';
+import 'package:seu_lourival/app/modules/finance/page.dart';
+import 'package:seu_lourival/app/modules/reports/page.dart';
 import 'package:seu_lourival/core/values/text_size.dart';
 
 class DSDrawer extends StatelessWidget {
