@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'package:seu_lourival/_debug/DS_catalog/page.dart';
-import 'package:seu_lourival/app/modules/login/page.dart';
-import 'package:seu_lourival/app/modules/login_error/page.dart';
-import 'package:seu_lourival/app/modules/reports/page.dart';
-import 'package:seu_lourival/app/modules/users_manager/page.dart';
+import 'package:seu_lourival/routes/routes.dart';
 
 class DebugHomePage extends StatelessWidget {
   const DebugHomePage({Key? key}) : super(key: key);
@@ -12,73 +9,38 @@ class DebugHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Debug')),
+      appBar: AppBar(title: const Text('Debug')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
               child: const Text('Aplicação >> Login'),
-              onPressed: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage(),
-                  ),
-                ),
-              },
+              onPressed: () => Get.toNamed(Routes.login),
             ),
             ElevatedButton(
               child: const Text('Aplicação >> Home Page: Usuário cadastrado'),
-              onPressed: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ReportPage(),
-                  ),
-                ),
-              },
+              onPressed: () => Get.toNamed(Routes.reportList),
             ),
             ElevatedButton(
               child: const Text('Aplicação >> Cadastro de usuário'),
-              onPressed: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const UsersManagerPage(),
-                  ),
-                ),
-              },
+              onPressed: () => Get.toNamed(Routes.addUsers),
             ),
             const Divider(),
             ElevatedButton(
-              child: const Text('Aplicação >> Usuário não encontrado'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.red[300],
               ),
-              onPressed: () => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginErrorPage(),
-                  ),
-                ),
-              },
+              onPressed: () => Get.toNamed(Routes.loginError),
+              child: const Text('Aplicação >> Usuário não encontrado'),
             ),
             const Divider(),
             ElevatedButton(
-              child: const Text('Design System >> Catálogo de Temas'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.purple[400],
               ),
-              onPressed: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ThemesCatalogPage(),
-                  ),
-                ),
-              },
+              onPressed: () => Get.toNamed(Routes.themeCatalog),
+              child: const Text('Design System >> Catálogo de Temas'),
             ),
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:seu_lourival/app/modules/users_manager/pre-register/form/page.dart';
+import 'package:seu_lourival/app/modules/add_users/pre-register/form/page.dart';
 
 class PreRegisterFormController extends GetxController {
   var _currentStep = 0.obs;

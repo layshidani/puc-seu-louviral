@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:seu_lourival/_debug/page.dart';
+import 'package:seu_lourival/core/values/colors.dart';
+import 'package:seu_lourival/routes/pages.dart';
+import 'package:seu_lourival/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Seu Lourival',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: DSColors.primary,
       ),
-      home: const DebugHomePage(),
+      initialRoute: Routes.debug,
+      // initialRoute: isDebugMode ? Routes.login : Routes.debug,
+      // initialBinding: InitialBinding(),
+      getPages: Pages.pages,
     );
   }
 }
