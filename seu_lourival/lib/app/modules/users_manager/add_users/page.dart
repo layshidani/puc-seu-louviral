@@ -13,8 +13,8 @@ import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 
 class AddUsersPage extends StatelessWidget {
   AddUsersPage({Key? key}) : super(key: key);
-
   var controller = Get.put(AddUsersController());
+
   List<String> userTypes = [
     "Morador",
     "Zelador",
@@ -45,22 +45,25 @@ class AddUsersPage extends StatelessWidget {
                   steps: <Step>[
                     Step(
                       title: DSText.base('Qual o tipo de usuário?'),
-                      content: DropdownButtonFormField<String>(
-                        items: userTypes.map((String dropDownStringItem) {
-                          return DropdownMenuItem<String>(
-                            value: dropDownStringItem,
-                            child: Text(dropDownStringItem),
-                          );
-                        }).toList(),
-                        validator: (value) =>
-                            DSInputValidators.isUserTypeSelected(value),
-                        decoration: const InputDecoration(
-                          labelText: 'Selecione um tipo de usuário',
+                      content: Form(
+                        key: controller.formKeys[0],
+                        child: DropdownButtonFormField<String>(
+                          items: userTypes.map((String dropDownStringItem) {
+                            return DropdownMenuItem<String>(
+                              value: dropDownStringItem,
+                              child: Text(dropDownStringItem),
+                            );
+                          }).toList(),
+                          validator: (value) =>
+                              DSInputValidators.isUserTypeSelected(value),
+                          decoration: const InputDecoration(
+                            labelText: 'Selecione um tipo de usuário',
+                          ),
+                          onChanged: (value) {
+                            controller.formModel.type = value ?? '';
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
-                        onChanged: (value) {
-                          controller.formModel.type = value?? '';
-                        },
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       isActive: controller.currentStep >= 0,
                       state: controller.currentStep >= 0
@@ -69,32 +72,35 @@ class AddUsersPage extends StatelessWidget {
                     ),
                     Step(
                       title: DSText.base('Dados pessoais'),
-                      content: Column(
-                        children: <Widget>[
-                          DSTextField(
-                            labelText: 'Nome completo',
-                            iconData: Icons.person_outline,
-                            validator: (value) =>
-                                DSInputValidators.isValidName(value),
-                            onChange: (value) {
-                              controller.formModel.name = value;
-                            },
-                          ),
-                          DSTextField(
-                            labelText: 'CPF',
-                            iconData: Icons.document_scanner_outlined,
-                            keyboardType: TextInputType.number,
-                            formatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              CpfInputFormatter(),
-                            ],
-                            validator: (value) =>
-                                DSInputValidators.isValidCPF(value),
-                            onChange: (value) {
-                              controller.formModel.cpf = value;
-                            },
-                          ),
-                        ],
+                      content: Form(
+                        key: controller.formKeys[1],
+                        child: Column(
+                          children: <Widget>[
+                            DSTextField(
+                              labelText: 'Nome completo',
+                              iconData: Icons.person_outline,
+                              validator: (value) =>
+                                  DSInputValidators.isValidName(value),
+                              onChange: (value) {
+                                controller.formModel.name = value;
+                              },
+                            ),
+                            DSTextField(
+                              labelText: 'CPF',
+                              iconData: Icons.document_scanner_outlined,
+                              keyboardType: TextInputType.number,
+                              formatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                CpfInputFormatter(),
+                              ],
+                              validator: (value) =>
+                                  DSInputValidators.isValidCPF(value),
+                              onChange: (value) {
+                                controller.formModel.cpf = value;
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                       isActive: controller.currentStep >= 0,
                       state: controller.currentStep >= 1
@@ -103,33 +109,36 @@ class AddUsersPage extends StatelessWidget {
                     ),
                     Step(
                       title: DSText.base('Informações de contato'),
-                      content: Column(
-                        children: <Widget>[
-                          DSTextField(
-                            labelText: 'Celular',
-                            keyboardType: TextInputType.phone,
-                            iconData: Icons.phone_android,
-                            formatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              TelefoneInputFormatter(),
-                            ],
-                            validator: (value) =>
-                                DSInputValidators.isValidPhone(value),
-                            onChange: (value) {
-                              controller.formModel.phone = value;
-                            },
-                          ),
-                          DSTextField(
-                            labelText: 'E-mail',
-                            keyboardType: TextInputType.emailAddress,
-                            iconData: Icons.email_outlined,
-                            validator: (value) =>
-                                DSInputValidators.isValidEmail(value),
-                            onChange: (value) {
-                              controller.formModel.email = value;
-                            },
-                          ),
-                        ],
+                      content: Form(
+                        key: controller.formKeys[2],
+                        child: Column(
+                          children: <Widget>[
+                            DSTextField(
+                              labelText: 'Celular',
+                              keyboardType: TextInputType.phone,
+                              iconData: Icons.phone_android,
+                              formatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                TelefoneInputFormatter(),
+                              ],
+                              validator: (value) =>
+                                  DSInputValidators.isValidPhone(value),
+                              onChange: (value) {
+                                controller.formModel.phone = value;
+                              },
+                            ),
+                            DSTextField(
+                              labelText: 'E-mail',
+                              keyboardType: TextInputType.emailAddress,
+                              iconData: Icons.email_outlined,
+                              validator: (value) =>
+                                  DSInputValidators.isValidEmail(value),
+                              onChange: (value) {
+                                controller.formModel.email = value;
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                       isActive: controller.currentStep >= 0,
                       state: controller.currentStep >= 2
@@ -138,29 +147,32 @@ class AddUsersPage extends StatelessWidget {
                     ),
                     Step(
                       title: DSText.base('Dados adicionais'),
-                      content: Column(
-                        children: <Widget>[
-                          DSTextField(
-                            labelText: 'Apartamento',
-                            iconData: Icons.apartment_outlined,
-                            keyboardType: TextInputType.number,
-                            validator: (value) =>
-                                DSInputValidators.isValidApartment(value),
-                            onChange: (value) {
-                              controller.formModel.apto = value;
-                            },
-                          ),
-                          DSTextField(
-                            labelText: 'Complemento (bloco, torre, etc)',
-                            iconData: Icons.domain_outlined,
-                            validator: (value) =>
-                                DSInputValidators.isValidApartmentComplement(
-                                    value),
-                            onChange: (value) {
-                              controller.formModel.tower = value;
-                            },
-                          ),
-                        ],
+                      content: Form(
+                        key: controller.formKeys[3],
+                        child: Column(
+                          children: <Widget>[
+                            DSTextField(
+                              labelText: 'Apartamento',
+                              iconData: Icons.apartment_outlined,
+                              keyboardType: TextInputType.number,
+                              validator: (value) =>
+                                  DSInputValidators.isValidApartment(value),
+                              onChange: (value) {
+                                controller.formModel.apto = value;
+                              },
+                            ),
+                            DSTextField(
+                              labelText: 'Complemento (bloco, torre, etc)',
+                              iconData: Icons.domain_outlined,
+                              validator: (value) =>
+                                  DSInputValidators.isValidApartmentComplement(
+                                      value),
+                              onChange: (value) {
+                                controller.formModel.tower = value;
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                       isActive: controller.currentStep >= 0,
                       state: controller.currentStep >= 3
