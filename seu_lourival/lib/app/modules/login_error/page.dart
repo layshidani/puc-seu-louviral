@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/app/pages/login/page.dart';
+import 'package:get/get.dart';
+import 'package:seu_lourival/app/modules/login/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
+import 'package:seu_lourival/routes/routes.dart';
 
 class LoginErrorPage extends StatelessWidget {
   const LoginErrorPage({Key? key}) : super(key: key);
@@ -43,9 +45,7 @@ class LoginErrorPage extends StatelessWidget {
             buttonText: 'Tentar novamente',
             iconData: Icons.refresh_outlined,
             onPressAction: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => LoginPage()),
-              );
+              Get.toNamed(Routes.login);
             },
           ),
         ],

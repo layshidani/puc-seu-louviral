@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:seu_lourival/app/modules/login/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
 import 'package:seu_lourival/core/theme/text_style.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/login_strings.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
 
@@ -13,6 +14,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: DSColors.primary,
         title: const Text(LoginStrings.scaffoldTitle),
       ),
       body: Obx(() {

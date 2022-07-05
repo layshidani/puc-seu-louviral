@@ -5,7 +5,7 @@ import 'package:seu_lourival/routes/routes.dart';
 
 class LoginController extends GetxController {
   final _phoneNumber = "".obs;
-  final _isLoading = true.obs;
+  final RxBool _isLoading = false.obs;
 
   bool get isLoading => _isLoading.value;
 
