@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/app/modules/users_manager/pre-register/form/page.dart';
+import 'package:get/get.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
+import 'package:seu_lourival/routes/routes.dart';
 
-class PreRegisterListPage extends StatelessWidget {
-  PreRegisterListPage({Key? key}) : super(key: key);
+class AddUsersListPage extends StatelessWidget {
+  AddUsersListPage({Key? key}) : super(key: key);
 
   List<String> userTypes = [
     'Todos',
@@ -48,9 +49,7 @@ class PreRegisterListPage extends StatelessWidget {
               backgroundColor: DSColors.primary,
               child: const Icon(Icons.add),
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => PreRegisterFormPage()),
-                );
+                Get.toNamed(Routes.preRegister);
               },
             ),
           ],

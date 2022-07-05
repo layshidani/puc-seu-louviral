@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/app/modules/users_manager/pre-register/list/page.dart';
+import 'package:seu_lourival/app/modules/users_manager/add_users/list/page.dart';
 import 'package:seu_lourival/app/modules/users_manager/registered/list/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 
@@ -12,7 +12,7 @@ class UsersManagerTabbar extends StatelessWidget {
   ];
 
   List<Widget> tabPages = [
-    PreRegisterListPage(),
+    AddUsersListPage(),
     RegisteredPage(),
   ];
 

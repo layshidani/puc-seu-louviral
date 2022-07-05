@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/app/modules/billboard/page.dart';
-import 'package:seu_lourival/app/modules/finance/page.dart';
-import 'package:seu_lourival/app/modules/reports/page.dart';
+import 'package:get/get.dart';
+
 import 'package:seu_lourival/core/values/text_size.dart';
+import 'package:seu_lourival/routes/routes.dart';
 
 class DSDrawer extends StatelessWidget {
   const DSDrawer({Key? key}) : super(key: key);
@@ -51,27 +51,21 @@ class DSDrawer extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text('Manifestos'),
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => ReportPage()),
-                );
+                Get.toNamed(Routes.reportList);
               },
             ),
             ListTile(
               leading: const Icon(Icons.comment_bank_sharp),
               title: const Text('Comunicados'),
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => BillboardPage()),
-                );
+                Get.toNamed(Routes.billboard);
               },
             ),
             ListTile(
               leading: const Icon(Icons.payments_outlined),
               title: const Text('Financeiro'),
               onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => FinancePage()),
-                );
+                Get.toNamed(Routes.financial);
               },
             ),
             // ListTile(
