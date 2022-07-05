@@ -8,7 +8,8 @@ import 'package:seu_lourival/app/modules/login/page.dart';
 import 'package:seu_lourival/app/modules/login_error/page.dart';
 import 'package:seu_lourival/app/modules/sms_validation/binding.dart';
 import 'package:seu_lourival/app/modules/sms_validation/page.dart';
-import 'package:seu_lourival/app/modules/users_manager/add_users/form/page.dart';
+import 'package:seu_lourival/app/modules/users_manager/add_users/binding.dart';
+import 'package:seu_lourival/app/modules/users_manager/add_users/page.dart';
 import 'package:seu_lourival/app/modules/users_manager/binding.dart';
 import 'package:seu_lourival/app/modules/users_manager/page.dart';
 import 'package:seu_lourival/routes/routes.dart';
@@ -32,11 +33,6 @@ class Pages {
       page: () => ReportListPage(),
     ),
     GetPage(
-      name: Routes.usersManager,
-      page: () => const UsersManagerPage(),
-      binding: UsersManagerBinding(),
-    ),
-    GetPage(
       name: Routes.loginError,
       page: () => const LoginErrorPage(),
     ),
@@ -49,15 +45,22 @@ class Pages {
       page: () => const FinancePage(),
     ),
     GetPage(
-      name: Routes.addUsers,
-      page: () => AddUsersFormPage(),
+      name: Routes.usersManager,
+      page: () => const UsersManagerPage(),
+      binding: UsersManagerBinding(),
+    ),
+    GetPage(
+      name: Routes.addUsersForm,
+      page: () => AddUsersPage(),
+      binding: AddUsersBinding(),
     ),
 
+
+    // Theme Catalog / Debug
     GetPage(
       name: Routes.themeCatalog,
       page: () => const ThemesCatalogPage(),
     ),
-    // Theme Catalog / Debug
     GetPage(
       name: Routes.debug,
       page: () => const DebugHomePage(),

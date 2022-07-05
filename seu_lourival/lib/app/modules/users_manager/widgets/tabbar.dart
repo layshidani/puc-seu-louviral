@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seu_lourival/app/modules/users_manager/add_users/list/page.dart';
-import 'package:seu_lourival/app/modules/users_manager/registered/list/page.dart';
+import 'package:seu_lourival/app/modules/users_manager/widgets/add_users_list.dart';
+import 'package:seu_lourival/app/modules/users_manager/widgets/registered_list.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 
 class UsersManagerTabbar extends StatelessWidget {
@@ -11,9 +11,9 @@ class UsersManagerTabbar extends StatelessWidget {
     const Tab(text: 'Cadastrados'),
   ];
 
-  List<Widget> tabPages = [
-    AddUsersListPage(),
-    RegisteredPage(),
+  List<Widget> tabList = [
+    AddUsersList(),
+    RegisteredList(),
   ];
 
   @override
@@ -32,7 +32,7 @@ class UsersManagerTabbar extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: TabBarView(
-                children: tabPages,
+                children: tabList,
               ),
             ),
           ),

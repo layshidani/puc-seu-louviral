@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 
-class RegisteredPage extends StatelessWidget {
-  RegisteredPage({Key? key}) : super(key: key);
+class RegisteredList extends StatelessWidget {
+  RegisteredList({Key? key}) : super(key: key);
 
   List<String> userTypes = [
     'Todos',

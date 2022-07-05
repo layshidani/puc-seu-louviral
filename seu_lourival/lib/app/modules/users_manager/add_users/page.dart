@@ -4,17 +4,17 @@ import 'package:flutter/services.dart';
 
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:seu_lourival/app/modules/users_manager/add_users/form/controller.dart';
+import 'package:seu_lourival/app/modules/users_manager/add_users/controller.dart';
 
 import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 
-class AddUsersFormPage extends StatelessWidget {
-  AddUsersFormPage({Key? key}) : super(key: key);
+class AddUsersPage extends StatelessWidget {
+  AddUsersPage({Key? key}) : super(key: key);
 
-  var controller = Get.put(AddUsersFormController());
+  var controller = Get.put(AddUsersController());
   List<String> userTypes = [
     "Morador",
     "Zelador",

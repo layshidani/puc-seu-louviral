@@ -1,5 +1,5 @@
 class MyStrings {
-  static AddUsersFormPage() {
+  static AddUsersPage() {
     return 'Cadastro de usuário';
   }
 }

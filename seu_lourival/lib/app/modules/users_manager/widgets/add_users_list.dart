@@ -4,8 +4,8 @@ import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/routes/routes.dart';
 
-class AddUsersListPage extends StatelessWidget {
-  AddUsersListPage({Key? key}) : super(key: key);
+class AddUsersList extends StatelessWidget {
+  AddUsersList({Key? key}) : super(key: key);
 
   List<String> userTypes = [
     'Todos',
@@ -49,7 +49,7 @@ class AddUsersListPage extends StatelessWidget {
               backgroundColor: DSColors.primary,
               child: const Icon(Icons.add),
               onPressed: () {
-                Get.toNamed(Routes.addUsers);
+                Get.toNamed(Routes.addUsersForm);
               },
             ),
           ],
