@@ -39,9 +39,9 @@ class AddUsersPage extends StatelessWidget {
                 return Stepper(
                   physics: const ScrollPhysics(),
                   currentStep: controller.currentStep,
-                  onStepTapped: (step) => controller.tapped(step),
-                  onStepContinue: controller.continued,
-                  onStepCancel: controller.cancel,
+                  onStepTapped: (step) => controller.onTapped(step),
+                  onStepContinue: controller.onContinued,
+                  onStepCancel: controller.onCancel,
                   steps: <Step>[
                     Step(
                       title: DSText.base('Qual o tipo de usuário?'),
@@ -60,7 +60,7 @@ class AddUsersPage extends StatelessWidget {
                             labelText: 'Selecione um tipo de usuário',
                           ),
                           onChanged: (value) {
-                            controller.formModel.type = value ?? '';
+                            controller.addUserForm.type = value ?? '';
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
@@ -82,7 +82,7 @@ class AddUsersPage extends StatelessWidget {
                               validator: (value) =>
                                   DSInputValidators.isValidName(value),
                               onChange: (value) {
-                                controller.formModel.name = value;
+                                controller.addUserForm.name = value;
                               },
                             ),
                             DSTextField(
@@ -96,7 +96,7 @@ class AddUsersPage extends StatelessWidget {
                               validator: (value) =>
                                   DSInputValidators.isValidCPF(value),
                               onChange: (value) {
-                                controller.formModel.cpf = value;
+                                controller.addUserForm.cpf = value;
                               },
                             ),
                           ],
@@ -124,7 +124,7 @@ class AddUsersPage extends StatelessWidget {
                               validator: (value) =>
                                   DSInputValidators.isValidPhone(value),
                               onChange: (value) {
-                                controller.formModel.phone = value;
+                                controller.addUserForm.phone = value;
                               },
                             ),
                             DSTextField(
@@ -134,7 +134,7 @@ class AddUsersPage extends StatelessWidget {
                               validator: (value) =>
                                   DSInputValidators.isValidEmail(value),
                               onChange: (value) {
-                                controller.formModel.email = value;
+                                controller.addUserForm.email = value;
                               },
                             ),
                           ],
@@ -158,7 +158,7 @@ class AddUsersPage extends StatelessWidget {
                               validator: (value) =>
                                   DSInputValidators.isValidApartment(value),
                               onChange: (value) {
-                                controller.formModel.apto = value;
+                                controller.addUserForm.apto = value;
                               },
                             ),
                             DSTextField(
@@ -168,7 +168,7 @@ class AddUsersPage extends StatelessWidget {
                                   DSInputValidators.isValidApartmentComplement(
                                       value),
                               onChange: (value) {
-                                controller.formModel.tower = value;
+                                controller.addUserForm.tower = value;
                               },
                             ),
                           ],
@@ -201,14 +201,4 @@ class AddUsersPage extends StatelessWidget {
       ),
     );
   }
-}
-
-class AddUserFormModel {
-  String type = '';
-  String name = '';
-  String cpf = '';
-  String phone = '';
-  String email = '';
-  String apto = '';
-  String tower = '';
 }
