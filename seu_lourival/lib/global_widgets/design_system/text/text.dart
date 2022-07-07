@@ -5,9 +5,15 @@ class DSText {
   static Text base(String text) {
     return getWidget(text, DSTextStyle.textBase);
   }
+
+  static Text xsm(String text) {
+    return getWidget(text, DSTextStyle.textXSm);
+  }
+
   static Text sm(String text) {
     return getWidget(text, DSTextStyle.textSm);
   }
+
   static Text lg(String text) {
     return getWidget(text, DSTextStyle.textLg);
   }
