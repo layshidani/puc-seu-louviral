@@ -30,17 +30,42 @@ class AddUsersPage extends StatelessWidget {
         title: DSText.base('Cadastro de usuário'),
         backgroundColor: DSColors.primary,
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Expanded(
-              child: Obx(() {
-                return Stepper(
+      body: Column(
+        children: [
+          Expanded(
+            child: Obx(() {
+              return Theme(
+                data: ThemeData(
+                    colorScheme: const ColorScheme.light(primary: DSColors.primary)),
+                child: Stepper(
                   physics: const ScrollPhysics(),
                   currentStep: controller.currentStep,
                   onStepTapped: (step) => controller.onTapped(step),
-                  onStepContinue: controller.onContinued,
+                  onStepContinue: controller.onContinue,
                   onStepCancel: controller.onCancel,
+                  controlsBuilder:
+                      (BuildContext context, ControlsDetails controls) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Row(
+                        children: <Widget>[
+                          ElevatedButton(
+                            onPressed: () => controller.onContinue(),
+                            style: ElevatedButton.styleFrom(primary: DSColors.primary),
+                            child: Text(controller.isLastStep() ? 'Ok' : 'Continuar'),
+                          ),
+                          controller.shouldShowCancelButton() ? Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: ElevatedButton(
+                              onPressed: () =>  controller.onCancel(),
+                              style: ElevatedButton.styleFrom(primary: Colors.white),
+                              child: const Text('Cancelar', style: TextStyle(color: DSColors.primary),),
+                            ),
+                          ) : Container(),
+                        ],
+                      ),
+                    );
+                  },
                   steps: <Step>[
                     Step(
                       title: DSText.base('Qual o tipo de usuário?'),
@@ -192,11 +217,11 @@ class AddUsersPage extends StatelessWidget {
                           : StepState.disabled,
                     ),
                   ],
-                );
-              }),
-            ),
-          ],
-        ),
+                ),
+              );
+            }),
+          ),
+        ],
       ),
     );
   }

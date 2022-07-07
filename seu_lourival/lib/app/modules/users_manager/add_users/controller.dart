@@ -21,6 +21,8 @@ class AddUsersController extends GetxController {
   ];
 
   int get currentStep => _currentStep.value;
+  int get fisrtStep => _fisrtStep;
+  int get lastStep => _lastStep;
   List<GlobalKey<FormState>> get formKeys => _formKeys;
 
   void _addStep() {
@@ -35,12 +37,12 @@ class AddUsersController extends GetxController {
     return _formKeys[currentStep].currentState!.validate();
   }
 
-  onTapped(int step) {
+  void onTapped(int step) {
     _currentStep.value = step;
   }
 
-  onContinued() async {
-    switch (_currentStep.value) {
+  onContinue() async {
+    switch (currentStep) {
       case _lastStep:
         Get.back();
         break;
@@ -52,14 +54,22 @@ class AddUsersController extends GetxController {
         break;
       default:
         if (_isValidForm()) {
-          _currentStep.value < _lastStep ? _addStep() : null;
+          currentStep < _lastStep ? _addStep() : null;
         }
         break;
     }
   }
 
-  onCancel() {
-    _currentStep.value > _fisrtStep ? _takeStep() : null;
+  void onCancel() {
+    currentStep > _fisrtStep ? _takeStep() : null;
+  }
+
+  bool isLastStep() {
+    return currentStep == _lastStep;
+  }
+
+  bool shouldShowCancelButton() {
+    return currentStep != fisrtStep && currentStep != lastStep;
   }
 
   _showSnackBar(
