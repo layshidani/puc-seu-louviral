@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 
-class AddUsersController extends GetxController {
+class AddUsersFormController extends GetxController {
   static const int _fisrtStep = 0;
   static const int _lastFormStep = 3;
   static const int _lastStep = 4;
