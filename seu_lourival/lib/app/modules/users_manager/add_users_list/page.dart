@@ -44,9 +44,9 @@ class AddUsersList extends StatelessWidget {
                       side: const BorderSide(color: Colors.grey),
                     ),
                   ),
-                  onPressed: () => controller.getPreRegisteredUsersList(),
+                  onPressed: () => controller.clearFilter(),
                   child: const Icon(
-                    Icons.refresh,
+                    Icons.filter_alt_off_outlined,
                     color: Color.fromARGB(255, 66, 65, 65),
                   ),
                 ),
@@ -54,76 +54,71 @@ class AddUsersList extends StatelessWidget {
               Row(
                 children: [
                   DSText.sm('Tipo:  '),
-                  DropdownButton(
-                    items: userTypes.map((String item) {
-                      return DropdownMenuItem(
-                        value: item,
-                        child: Text(item),
-                      );
-                    }).toList(),
-                    onChanged: (item) {
-                      // print('>>>>>>>> $item');
-                      // print('>>>>>>>>>>> ${item is String}');
-                      // controller.onFilterPreRegisterUsers(type: item!);
-                    },
-                    // TODO change value
-                    value: userTypes[0],
-                    // value: controller.filter as String,
+                  Obx(
+                    () => DropdownButton(
+                      items: userTypes.map((String item) {
+                        return DropdownMenuItem(
+                          value: item,
+                          child: Text(item),
+                        );
+                      }).toList(),
+                      value: controller.selectedFilter,
+                      onChanged: (item) {
+                        controller.onFilterPreRegisterUsers(item as String);
+                      },
+                    ),
                   ),
-                  Text(controller.filter),
                 ],
               ),
             ],
           ),
         ),
-        Obx(() {
-          return controller.isLoading
-              ? CustomLoading()
-              : Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      controller.getPreRegisteredUsersList();
-                    },
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: controller.preRegisteredList.length,
-                      itemBuilder: (context, index) {
-                        final user = controller.preRegisteredList[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  DSTitle.xsm('${user['name']}'),
-                                  Chip(
-                                    label: DSText.xsm('${user['type']}'),
-                                  ),
-                                ],
-                              ),
-                              const Text(
-                                'Data de inclusão: ',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(top: 8.0),
-                                child: Divider(),
-                              ),
-                            ],
+        Obx(() => 
+          //controller.isLoading ? CustomLoading() :
+            Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                controller.getPreRegisteredUsersList();
+              },
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: controller.preRegisteredListFiltered.length,
+                itemBuilder: (context, index) {
+                  final user = controller.preRegisteredListFiltered[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            DSTitle.xsm('${user['name']}'),
+                            Chip(
+                              label: DSText.xsm('${user['type']}'),
+                            ),
+                          ],
+                        ),
+                        const Text(
+                          'Data de inclusão: ',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontStyle: FontStyle.italic,
                           ),
-                        );
-                      },
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 8.0),
+                          child: Divider(),
+                        ),
+                      ],
                     ),
-                  ),
-                );
-        }),
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
