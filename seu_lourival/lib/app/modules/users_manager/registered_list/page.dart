@@ -2,23 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/modules/users_manager/registered_list/controller.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
+import 'package:seu_lourival/core/values/user_types.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 
 class RegisteredList extends StatelessWidget {
   RegisteredList({Key? key}) : super(key: key);
   var controller = Get.put(RegisteredListController());
-
-  List<String> userTypes = [
-    'Todos',
-    'Morador',
-    'Porteiro',
-    'Manutenção',
-    'Zelador',
-    'Financeiro',
-    'Admin',
-    'Outros',
-  ];
 
   @override
   Widget build(BuildContext context) {

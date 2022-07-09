@@ -7,21 +7,13 @@ import 'package:seu_lourival/app/modules/users_manager/add_users_form/controller
 
 import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/core/values/colors.dart';
+import 'package:seu_lourival/core/values/user_types.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 
 class AddUsersFormPage extends StatelessWidget {
   AddUsersFormPage({Key? key}) : super(key: key);
   var controller = Get.put(AddUsersFormController());
-
-  List<String> userTypes = [
-    'Morador',
-    'Zelador',
-    'Porteiro',
-    'Manutenção',
-    'Financeiro',
-    'Outros',
-  ];
 
   @override
   Widget build(BuildContext context) {

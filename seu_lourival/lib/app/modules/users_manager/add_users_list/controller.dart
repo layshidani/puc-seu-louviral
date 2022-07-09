@@ -11,15 +11,6 @@ class AddUsersListController extends GetxController {
     super.onInit();
   }
 
-  List<String> userTypes = [
-    'Todos',
-    'Morador',
-    'Porteiro',
-    'Manutenção',
-    'Zelador',
-    'Financeiro',
-    'Outros',
-  ];
   static const String defaultFilter = 'Todos';
   final RxBool _isLoading = false.obs;
   final _preRegisteredList = [].obs;
@@ -33,9 +24,9 @@ class AddUsersListController extends GetxController {
 
   Future<void> getPreRegisteredList() async {
     _setLoading(true);
-    
+
     try {
-      final data = await UserService().getPreRegisteredUsersList();
+      final data = await UserService.getPreRegisteredUsersList();
       _setListValue(data);
       _setLoading(false);
     } catch (e) {

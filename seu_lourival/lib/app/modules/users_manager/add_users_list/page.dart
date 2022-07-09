@@ -5,6 +5,7 @@ import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
 import 'package:seu_lourival/core/values/colors.dart';
+import 'package:seu_lourival/core/values/user_types.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 import 'package:seu_lourival/routes/routes.dart';
@@ -12,16 +13,6 @@ import 'package:seu_lourival/routes/routes.dart';
 class AddUsersList extends StatelessWidget {
   AddUsersList({Key? key}) : super(key: key);
   var controller = Get.put(AddUsersListController());
-
-  List<String> userTypes = [
-    'Todos',
-    'Morador',
-    'Porteiro',
-    'Manutenção',
-    'Zelador',
-    'Financeiro',
-    'Outros',
-  ];
 
   @override
   Widget build(BuildContext context) {

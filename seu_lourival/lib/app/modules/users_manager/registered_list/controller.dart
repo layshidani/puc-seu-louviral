@@ -11,15 +11,6 @@ class RegisteredListController extends GetxController {
     super.onInit();
   }
 
-  List<String> userTypes = [
-    'Todos',
-    'Morador',
-    'Porteiro',
-    'Manutenção',
-    'Zelador',
-    'Financeiro',
-    'Outros',
-  ];
   static const String defaultFilter = 'Todos';
   final RxBool _isLoading = false.obs;
   final _usersList = [].obs;
@@ -35,7 +26,7 @@ class RegisteredListController extends GetxController {
     _setLoading(true);
 
     try {
-      final data = await UserService().getUsersList();
+      final data = await UserService.getUsersList();
       _setListValue(data);
       _setLoading(false);
     } catch (e) {
