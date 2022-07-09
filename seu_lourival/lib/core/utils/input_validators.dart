@@ -1,0 +1,50 @@
+import 'package:get/utils.dart';
+
+class DSInputValidators {
+  static String? isValidName(String? value) {
+    return (value != null && value.isValidName())
+        ? null
+        : 'Ops! Informe o nome completo';
+  }
+
+  static String? isValidCPF(String? value) {
+    return (GetUtils.isCpf(value!)) ? null : 'Ops! CPF inválido';
+  }
+
+  static String? isValidPhone(String? value) {
+    return (GetUtils.isPhoneNumber(value!))
+        ? null
+        : 'Ops! Informe um telefone válido';
+  }
+
+  static String? isValidEmail(String? value) {
+    return (GetUtils.isEmail(value!)) ? null : 'Ops! Informe um e-mail válido';
+  }
+
+  static String? isValidApartment(String? value) {
+    return GetUtils.isLengthBetween(value, 1, 10)
+        ? null
+        : 'Ops! Informe qual o nº do apartamento';
+  }
+
+  static String? isValidApartmentComplement(String? value) {
+    return GetUtils.isLengthBetween(value, 4, 10)
+        ? null
+        : 'Ops! Informe qual o complemento. (Ex: Bloco A)';
+  }
+
+  static String? isUserTypeSelected(String? value) {
+    return (GetUtils.isLengthGreaterOrEqual(value, 1))
+        ? null
+        : 'Ops! Selecione um tipo de usuário';
+  }
+
+}
+
+extension StringRegex on String {
+  bool isValidName() {
+    return RegExp(
+            r'^[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+\s([A-ZÀ-ŸA-zÀ-ÿ]\s?)*[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+$')
+        .hasMatch(this);
+  }
+}
