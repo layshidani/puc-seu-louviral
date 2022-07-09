@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/modules/users_manager/registered_list/controller.dart';
+import 'package:seu_lourival/core/utils/datetime_helper.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 
@@ -99,9 +100,9 @@ class RegisteredList extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Text(
-                          'Data de inclusão: ',
-                          style: TextStyle(
+                        Text(
+                          'Data de inclusão: ${(user['createdAt'] != null) ? DateTimeHelper.fromTimeStamp(user['createdAt']) : '-'}',
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontStyle: FontStyle.italic,
                           ),

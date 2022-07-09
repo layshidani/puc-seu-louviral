@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 
 class RegisteredListController extends GetxController {
-  @override
+ @override
   void onInit() async {
     _selectedFilter = defaultFilter.obs;
     await getUsersList();
@@ -20,9 +21,9 @@ class RegisteredListController extends GetxController {
     'Outros',
   ];
   static const String defaultFilter = 'Todos';
-  RxBool _isLoading = false.obs;
-  var _usersList = [].obs;
-  var _usersListFiltered = [].obs;
+  final RxBool _isLoading = false.obs;
+  final _usersList = [].obs;
+  final _usersListFiltered = [].obs;
   var _selectedFilter = defaultFilter.obs;
 
   get usersList => _usersList.value;
@@ -30,14 +31,23 @@ class RegisteredListController extends GetxController {
   get selectedFilter => _selectedFilter.value;
   get isLoading => _isLoading.value;
 
-  clearFilter() {
-    _selectedFilter = defaultFilter.obs;
-    _usersListFiltered.value = _usersList.value;
+  Future<void> getUsersList() async {
+    _setLoading(true);
+
+    try {
+      final data = await UserService().getUsersList();
+      _setListValue(data);
+      _setLoading(false);
+    } catch (e) {
+      _setLoading(false);
+      _showSnackBar(
+          style: SnackbarStyle.error,
+          message: 'Ops. Ocorreu um erro ao recuperar os dados');
+    }
   }
 
-  onFilterUsers(String filter) async {
+  void onFilterUsers(String filter) async {
     _selectedFilter.value = filter;
-
     var result =
         usersList.where((user) => user['type'] == filter).toList();
 
@@ -55,11 +65,12 @@ class RegisteredListController extends GetxController {
     return;
   }
 
-  setLoading(bool isLoading) {
-    _isLoading.value = isLoading;
+  void clearFilter() {
+    _selectedFilter = defaultFilter.obs;
+    _usersListFiltered.value = _usersList.value;
   }
 
-  _showSnackBar(
+  void _showSnackBar(
       {SnackbarStyle style = SnackbarStyle.info, String message = ''}) {
     final snackbar = CustomSnackBar(
       title: message,
@@ -69,26 +80,12 @@ class RegisteredListController extends GetxController {
     Get.showSnackbar(snackbar);
   }
 
-  Future<void> getUsersList() async {
-    setLoading(true);
-    try {
-      final result =
-          await FirebaseFirestore.instance.collection('users').get();
+  void _setListValue(List<Map<String, dynamic>> data) {
+    _usersList.value = data;
+    _usersListFiltered.value = data;
+  }
 
-      final data = result.docs.map((doc) {
-        return doc.data();
-      }).toList();
-
-      _usersList.value = data;
-      _usersListFiltered.value = data;
-
-      setLoading(false);
-    } catch (e) {
-      setLoading(false);
-
-      _showSnackBar(
-          style: SnackbarStyle.error,
-          message: 'Ops. Ocorreu um erro ao recuperar os dados');
-    }
+  void _setLoading(bool isLoading) {
+    _isLoading.value = isLoading;
   }
 }

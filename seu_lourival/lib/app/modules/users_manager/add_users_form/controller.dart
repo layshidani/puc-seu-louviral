@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -97,7 +98,7 @@ class AddUsersFormController extends GetxController {
     }
   }
 
-  Map<String, String> getFormData() {
+  Map<String, dynamic> getFormData() {
     return {
       'type': addUserForm.type,
       'name': addUserForm.name,
@@ -106,6 +107,7 @@ class AddUsersFormController extends GetxController {
       'email': addUserForm.email,
       'apto': addUserForm.apto,
       'tower': addUserForm.tower,
+      'createdAt': DateTime.now(),
     };
   }
 }

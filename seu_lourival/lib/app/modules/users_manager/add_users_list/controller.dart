@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 
 class AddUsersListController extends GetxController {
   @override
   void onInit() async {
     _selectedFilter = defaultFilter.obs;
-    await getPreRegisteredUsersList();
+    await getPreRegisteredList();
     super.onInit();
   }
 
@@ -20,9 +21,9 @@ class AddUsersListController extends GetxController {
     'Outros',
   ];
   static const String defaultFilter = 'Todos';
-  RxBool _isLoading = false.obs;
-  var _preRegisteredList = [].obs;
-  var _preRegisteredListFiltered = [].obs;
+  final RxBool _isLoading = false.obs;
+  final _preRegisteredList = [].obs;
+  final _preRegisteredListFiltered = [].obs;
   var _selectedFilter = defaultFilter.obs;
 
   get preRegisteredList => _preRegisteredList.value;
@@ -30,16 +31,24 @@ class AddUsersListController extends GetxController {
   get selectedFilter => _selectedFilter.value;
   get isLoading => _isLoading.value;
 
-  clearFilter() {
-    _selectedFilter = defaultFilter.obs;
-    _preRegisteredListFiltered.value = _preRegisteredList.value;
+  Future<void> getPreRegisteredList() async {
+    _setLoading(true);
+    
+    try {
+      final data = await UserService().getPreRegisteredUsersList();
+      _setListValue(data);
+      _setLoading(false);
+    } catch (e) {
+      _setLoading(false);
+      _showSnackBar(
+          style: SnackbarStyle.error,
+          message: 'Ops. Ocorreu um erro ao recuperar os dados');
+    }
   }
 
-  onFilterPreRegisterUsers(String filter) async {
+  void onFilterPreRegisterUsers(String filter) async {
     _selectedFilter.value = filter;
-
-    print('>>>> ${selectedFilter}');
-    var result =
+     var result =
         preRegisteredList.where((user) => user['type'] == filter).toList();
 
     if (filter == defaultFilter) {
@@ -56,11 +65,12 @@ class AddUsersListController extends GetxController {
     return;
   }
 
-  setLoading(bool isLoading) {
-    _isLoading.value = isLoading;
+  void clearFilter() {
+    _selectedFilter = defaultFilter.obs;
+    _preRegisteredListFiltered.value = _preRegisteredList.value;
   }
 
-  _showSnackBar(
+  void _showSnackBar(
       {SnackbarStyle style = SnackbarStyle.info, String message = ''}) {
     final snackbar = CustomSnackBar(
       title: message,
@@ -70,26 +80,12 @@ class AddUsersListController extends GetxController {
     Get.showSnackbar(snackbar);
   }
 
-  Future<void> getPreRegisteredUsersList() async {
-    setLoading(true);
-    try {
-      final result =
-          await FirebaseFirestore.instance.collection('pre-registered').get();
+  void _setListValue(List<Map<String, dynamic>> data) {
+    _preRegisteredList.value = data;
+    _preRegisteredListFiltered.value = data;
+  }
 
-      final data = result.docs.map((doc) {
-        return doc.data();
-      }).toList();
-
-      _preRegisteredList.value = data;
-      _preRegisteredListFiltered.value = data;
-
-      setLoading(false);
-    } catch (e) {
-      setLoading(false);
-
-      _showSnackBar(
-          style: SnackbarStyle.error,
-          message: 'Ops. Ocorreu um erro ao recuperar os dados');
-    }
+  void _setLoading(bool isLoading) {
+    _isLoading.value = isLoading;
   }
 }

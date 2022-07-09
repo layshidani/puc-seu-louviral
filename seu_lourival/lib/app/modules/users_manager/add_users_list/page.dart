@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
+import 'package:seu_lourival/core/utils/datetime_helper.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
@@ -78,7 +80,7 @@ class AddUsersList extends StatelessWidget {
             Expanded(
             child: RefreshIndicator(
               onRefresh: () async {
-                controller.getPreRegisteredUsersList();
+                controller.getPreRegisteredList();
               },
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
@@ -100,9 +102,9 @@ class AddUsersList extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Text(
-                          'Data de inclusão: ',
-                          style: TextStyle(
+                        Text(
+                          'Data de inclusão: ${(user['createdAt'] != null) ? DateTimeHelper.fromTimeStamp(user['createdAt']) : '-'}',
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontStyle: FontStyle.italic,
                           ),
