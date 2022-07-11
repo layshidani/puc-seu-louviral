@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
+import 'package:seu_lourival/global_widgets/dialog/confirm_dialog.dart';
 
 class RegisteredListController extends GetxController {
  @override
@@ -15,7 +16,8 @@ class RegisteredListController extends GetxController {
   final RxBool _isLoading = false.obs;
   final _usersList = [].obs;
   final _usersListFiltered = [].obs;
-  var _selectedFilter = defaultFilter.obs;
+  RxString _selectedFilter = defaultFilter.obs;
+  var _userToDelete;
 
   get usersList => _usersList.value;
   get usersListFiltered => _usersListFiltered.value;
@@ -55,10 +57,48 @@ class RegisteredListController extends GetxController {
     _showSnackBar(message: 'A busca não retornou nenhum resultado.');
     return;
   }
+  
+  Future<void> onConfirmDelete(context, user) async {
+    _setLoading(true);
+    _userToDelete = user;
+
+    DSConfirmDialog(
+            context: context,
+            title: 'Excluir usuário',
+            descriptionLine1: 'Essa ação não poderá ser desfeita.',
+            descriptionLine2:
+                'Você deseja excluir o usuário  ${_userToDelete['name']} (${_userToDelete['type']}) do sistema?',
+            onConfirmAction: _onDeleteUser)
+        .show();
+  }
+
+  Future<void> _onDeleteUser() async {
+    try {
+      final cpf = _userToDelete['cpf'];
+
+      await UserService.onDeleteUser(cpf: cpf);
+
+      _clearDelete();
+      getUsersList();
+
+      _showSnackBar(style: SnackbarStyle.success, message: 'Usuário excluído.');
+    } catch (e) {
+      _clearDelete();
+      _showSnackBar(
+          style: SnackbarStyle.error,
+          message: 'Ops. Ocorreu um erro, tente novamente.');
+    }
+  }
 
   void clearFilter() {
     _selectedFilter = defaultFilter.obs;
     _usersListFiltered.value = _usersList.value;
+  }
+
+  void _clearDelete() {
+    _userToDelete = {};
+    _setLoading(false);
+    Get.back();
   }
 
   void _showSnackBar(

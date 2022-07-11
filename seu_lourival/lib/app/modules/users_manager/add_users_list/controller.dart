@@ -16,7 +16,7 @@ class AddUsersListController extends GetxController {
   final RxBool _isLoading = false.obs;
   final _preRegisteredList = [].obs;
   final _preRegisteredListFiltered = [].obs;
-  var _selectedFilter = defaultFilter.obs;
+  RxString _selectedFilter = defaultFilter.obs;
   var _userToDelete;
 
   get preRegisteredList => _preRegisteredList.value;

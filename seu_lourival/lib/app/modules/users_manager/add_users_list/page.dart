@@ -23,26 +23,54 @@ class AddUsersList extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                height: 40,
-                width: 40,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.grey[300],
-                    side: const BorderSide(
-                      color: Colors.white70,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: const BorderSide(color: Colors.grey),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 40,
+                    width: 40,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.grey[300],
+                        side: const BorderSide(
+                          color: Colors.white70,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: const BorderSide(color: Colors.grey),
+                        ),
+                      ),
+                      onPressed: () => controller.clearFilter(),
+                      child: const Icon(
+                        Icons.filter_alt_off_outlined,
+                        color: Color.fromARGB(255, 66, 65, 65),
+                      ),
                     ),
                   ),
-                  onPressed: () => controller.clearFilter(),
-                  child: const Icon(
-                    Icons.filter_alt_off_outlined,
-                    color: Color.fromARGB(255, 66, 65, 65),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: SizedBox(
+                      height: 40,
+                      width: 40,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.grey[300],
+                          side: const BorderSide(
+                            color: Colors.white70,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: const BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                        onPressed: () => controller.getPreRegisteredList(),
+                        child: const Icon(
+                          Icons.refresh_rounded,
+                          color: Color.fromARGB(255, 66, 65, 65),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
               Row(
                 children: [
@@ -97,24 +125,31 @@ class AddUsersList extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Text(
-                          'Data de inclusão: ${(user['createdAt'] != null) ? DateTimeHelper.fromTimeStamp(user['createdAt']) : '-'}',
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                        Transform(
-                          transform: Matrix4.identity()..scale(0.8),
-                          child: Chip(
-                            label: DSText.xsm('${user['type']}'),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Transform(
+                              transform: Matrix4.identity()..scale(0.8),
+                              child: Chip(
+                                label: DSText.xsm('${user['type']}'),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                  ),
+                                ),
+                                backgroundColor: Color.fromARGB(46, 0, 155, 198),
                               ),
                             ),
-                          ),
+                            Text(
+                              'Data de inclusão: ${(user['createdAt'] != null) ? DateTimeHelper.fromTimeStamp(user['createdAt']) : '-'}',
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ],
                         ),
                         const Padding(
                           padding: EdgeInsets.only(top: 8.0),
