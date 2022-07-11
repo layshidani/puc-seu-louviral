@@ -70,7 +70,7 @@ class RegisteredList extends StatelessWidget {
               ),
               Row(
                 children: [
-                  DSText.sm('Tipo:  '),
+                  DSText.base('Tipo:  '),
                   Obx(
                     () => DropdownButton(
                       items: userTypes.map((String item) {
@@ -112,7 +112,7 @@ class RegisteredList extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            DSTitle.xsm('${user['name']}'),
+                            DSTitle.base('${user['name']}'),
                             IconButton(
                               onPressed: () {
                                 controller.onConfirmDelete(context, user);
@@ -128,7 +128,7 @@ class RegisteredList extends StatelessWidget {
                             Transform(
                               transform: Matrix4.identity()..scale(0.8),
                               child: Chip(
-                                label: DSText.xsm('${user['type']}'),
+                                label: DSText.sm('${user['type']}'),
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(20),

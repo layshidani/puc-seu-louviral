@@ -27,7 +27,7 @@ class LoginErrorPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                DSTitle.base(
+                DSTitle.lg(
                   'Ops, não encontramos seu cadastro 😔',
                 ),
                 Container(
@@ -40,13 +40,22 @@ class LoginErrorPage extends StatelessWidget {
             ),
           ),
           Spacer(),
-          DSIconButton(
-            buttonText: 'Tentar novamente',
-            iconData: Icons.refresh_outlined,
-            onPressAction: () {
-              Get.toNamed(Routes.login);
-            },
+          Padding(
+            padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+            child: ElevatedButton.icon(
+              onPressed: () => Get.toNamed(Routes.login),
+              icon: const Icon(Icons.add),
+              label: DSText.base('Tentar novamente'),
+              style: ElevatedButton.styleFrom(primary: DSColors.primary),
+            ),
           ),
+          // DSIconButton(
+          //   buttonText: 'Tentar novamente',
+          //   iconData: Icons.refresh_outlined,
+          //   onPressAction: () {
+          //     Get.toNamed(Routes.login);
+          //   },
+          // ),
         ],
       ),
     );

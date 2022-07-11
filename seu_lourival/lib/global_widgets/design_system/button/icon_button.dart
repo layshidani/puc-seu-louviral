@@ -21,26 +21,32 @@ class DSIconButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           SizedBox(
-            width: 250,
+            // width: 250,
+            // child: ElevatedButton.icon(
+            //   label: Padding(
+            //     padding: EdgeInsets.all(12),
+            //     child: DSText.base(
+            //       buttonText,
+            //     ),
+            //   ),
+            //   icon: Icon(iconData),
+            //   style: ButtonStyle(
+            //     backgroundColor:
+            //         MaterialStateProperty.all(DSColors.primary),
+            //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            //       RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(22),
+            //       ),
+            //     ),
+            //   ),
+            //   onPressed: onPressAction,
+            // ),
+            // width: 150,
             child: ElevatedButton.icon(
-              label: Padding(
-                padding: EdgeInsets.all(12),
-                child: DSText.base(
-                  buttonText,
-                ),
-              ),
-              icon: Icon(iconData),
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(DSColors.primary),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(22),
-                  ),
-                ),
-              ),
-              onPressed: onPressAction,
-            ),
+                onPressed: () => onPressAction,
+                icon: Icon(iconData),
+                label: DSText.base(buttonText),
+                style: ElevatedButton.styleFrom(primary: DSColors.primary)),
           ),
         ],
       ),

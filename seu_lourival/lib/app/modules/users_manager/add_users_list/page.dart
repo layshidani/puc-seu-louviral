@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
-import 'package:seu_lourival/app/widgets/custom_loading.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/user_types.dart';
+import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 import 'package:seu_lourival/routes/routes.dart';
@@ -74,7 +73,7 @@ class AddUsersList extends StatelessWidget {
               ),
               Row(
                 children: [
-                  DSText.sm('Tipo:  '),
+                  DSText.base('Tipo:  '),
                   Obx(
                     () => DropdownButton(
                       items: userTypes.map((String item) {
@@ -116,7 +115,7 @@ class AddUsersList extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            DSTitle.xsm('${user['name']}'),
+                            DSTitle.base('${user['name']}'),
                             IconButton(
                               onPressed: () {
                                 controller.onConfirmDelete(context, user);
@@ -132,7 +131,7 @@ class AddUsersList extends StatelessWidget {
                             Transform(
                               transform: Matrix4.identity()..scale(0.8),
                               child: Chip(
-                                label: DSText.xsm('${user['type']}'),
+                                label: DSText.sm('${user['type']}'),
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(20),
@@ -173,10 +172,11 @@ class AddUsersList extends StatelessWidget {
               //   child: const Icon(Icons.add),
               //   onPressed: () => Get.toNamed(Routes.addUsersForm),
               // ),
+              // DSIconButton(buttonText: 'Adicionar usuário', iconData: Icons.add, onPressAction: () => Get.toNamed(Routes.addUsersForm,),),
               ElevatedButton.icon(
                   onPressed: () => Get.toNamed(Routes.addUsersForm),
                   icon: const Icon(Icons.add),
-                  label: const Text('Adicionar usuário'),
+                  label: DSText.base('Adicionar usuário'),
                   style: ElevatedButton.styleFrom(primary: DSColors.primary)),
             ],
           ),
