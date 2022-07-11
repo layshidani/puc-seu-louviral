@@ -8,5 +8,4 @@ class AddUsersFormBinding extends Bindings {
     Get.put(AddUsersFormController());
     Get.put(AddUsersListController());
   }
-  
 }

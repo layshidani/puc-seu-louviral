@@ -11,7 +11,7 @@ class AddUsersFormController extends GetxController {
   static const int _lastFormStep = 3;
   static const int _lastStep = 4;
 
-  final addUsersListController = AddUsersListController();
+  final _addUsersListController = Get.find<AddUsersListController>();
   final _currentStep = 0.obs;
   final addUserForm = AddUserFormModel();
   TextEditingController userType = TextEditingController();
@@ -47,13 +47,12 @@ class AddUsersFormController extends GetxController {
   onContinue() async {
     switch (currentStep) {
       case _lastStep:
-        // TODO: Atualizar lista de usuários ao criar novo user
-        // addUsersListController.getPreRegisteredList();
         Get.back();
         break;
       case _lastFormStep:
         if (_isValidForm()) {
           await _onSaveUser();
+          await _addUsersListController.getPreRegisteredList();
           _addStep();
         }
         break;

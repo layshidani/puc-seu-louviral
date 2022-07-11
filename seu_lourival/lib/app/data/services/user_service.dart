@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
-import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 
 class UserService {
   static Future<List<Map<String, dynamic>>> getUsersList() async {

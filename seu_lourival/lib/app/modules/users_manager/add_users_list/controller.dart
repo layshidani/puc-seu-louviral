@@ -24,6 +24,7 @@ class AddUsersListController extends GetxController {
   get isLoading => _isLoading.value;
 
   Future<void> getPreRegisteredList() async {
+    _selectedFilter = defaultFilter.obs;
     _setLoading(true);
 
     try {
