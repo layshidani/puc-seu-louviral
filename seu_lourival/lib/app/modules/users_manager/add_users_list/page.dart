@@ -138,7 +138,8 @@ class AddUsersList extends StatelessWidget {
                                     bottomRight: Radius.circular(20),
                                   ),
                                 ),
-                                backgroundColor: Color.fromARGB(46, 0, 155, 198),
+                                backgroundColor:
+                                    Color.fromARGB(46, 0, 155, 198),
                               ),
                             ),
                             Text(
@@ -172,12 +173,11 @@ class AddUsersList extends StatelessWidget {
               //   child: const Icon(Icons.add),
               //   onPressed: () => Get.toNamed(Routes.addUsersForm),
               // ),
-              // DSIconButton(buttonText: 'Adicionar usuário', iconData: Icons.add, onPressAction: () => Get.toNamed(Routes.addUsersForm,),),
-              ElevatedButton.icon(
-                  onPressed: () => Get.toNamed(Routes.addUsersForm),
-                  icon: const Icon(Icons.add),
-                  label: DSText.base('Adicionar usuário'),
-                  style: ElevatedButton.styleFrom(primary: DSColors.primary)),
+              DSIconButton(
+                buttonText: 'Adicionar usuário',
+                iconData: Icons.add,
+                onPressAction: () => Get.toNamed(Routes.addUsersForm),
+              ),
             ],
           ),
         ),

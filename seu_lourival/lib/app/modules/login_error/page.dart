@@ -40,22 +40,11 @@ class LoginErrorPage extends StatelessWidget {
             ),
           ),
           Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-            child: ElevatedButton.icon(
-              onPressed: () => Get.toNamed(Routes.login),
-              icon: const Icon(Icons.add),
-              label: DSText.base('Tentar novamente'),
-              style: ElevatedButton.styleFrom(primary: DSColors.primary),
-            ),
+          DSIconButton(
+            buttonText: 'Tentar novamente',
+            iconData: Icons.refresh_outlined,
+            onPressAction: () => Get.toNamed(Routes.login),
           ),
-          // DSIconButton(
-          //   buttonText: 'Tentar novamente',
-          //   iconData: Icons.refresh_outlined,
-          //   onPressAction: () {
-          //     Get.toNamed(Routes.login);
-          //   },
-          // ),
         ],
       ),
     );
