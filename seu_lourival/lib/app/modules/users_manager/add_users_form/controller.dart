@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
 
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 
@@ -10,6 +11,7 @@ class AddUsersFormController extends GetxController {
   static const int _lastFormStep = 3;
   static const int _lastStep = 4;
 
+  final addUsersListController = AddUsersListController();
   final _currentStep = 0.obs;
   final addUserForm = AddUserFormModel();
   TextEditingController userType = TextEditingController();
@@ -45,6 +47,8 @@ class AddUsersFormController extends GetxController {
   onContinue() async {
     switch (currentStep) {
       case _lastStep:
+        // TODO: Atualizar lista de usuários ao criar novo user
+        // addUsersListController.getPreRegisteredList();
         Get.back();
         break;
       case _lastFormStep:
