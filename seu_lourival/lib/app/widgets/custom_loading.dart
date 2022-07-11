@@ -16,7 +16,7 @@ class CustomLoading extends StatelessWidget {
             height: 20,
           ),
           const Text(
-            "Loading",
+            'Loading',
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w300,

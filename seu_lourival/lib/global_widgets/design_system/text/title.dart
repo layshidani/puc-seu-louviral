@@ -6,6 +6,10 @@ class DSTitle {
     return getWidget(title, DSTextStyle.titleBase);
   }
 
+  static Text xsm(String title) {
+    return getWidget(title, DSTextStyle.titleXSm);
+  }
+
   static Text sm(String title) {
     return getWidget(title, DSTextStyle.titleSm);
   }

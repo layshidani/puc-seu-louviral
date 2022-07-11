@@ -16,8 +16,8 @@ import 'package:seu_lourival/app/modules/login_error/page.dart';
 
 import 'package:seu_lourival/app/modules/sms_validation/binding.dart';
 import 'package:seu_lourival/app/modules/sms_validation/page.dart';
-import 'package:seu_lourival/app/modules/users_manager/add_users/binding.dart';
-import 'package:seu_lourival/app/modules/users_manager/add_users/page.dart';
+import 'package:seu_lourival/app/modules/users_manager/add_users_form/binding.dart';
+import 'package:seu_lourival/app/modules/users_manager/add_users_form/page.dart';
 import 'package:seu_lourival/app/modules/users_manager/binding.dart';
 import 'package:seu_lourival/app/modules/users_manager/page.dart';
 import 'package:seu_lourival/routes/routes.dart';
@@ -62,8 +62,8 @@ class Pages {
     ),
     GetPage(
       name: Routes.addUsersForm,
-      page: () => AddUsersPage(),
-      binding: AddUsersBinding(),
+      page: () => AddUsersFormPage(),
+      binding: AddUsersFormBinding(),
     ),
 
 

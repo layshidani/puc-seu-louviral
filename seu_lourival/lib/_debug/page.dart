@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 
 import 'package:image_picker/image_picker.dart';
 
-import 'package:seu_lourival/_debug/DS_catalog/page.dart';
-import 'package:seu_lourival/app/modules/report/new_report/page.dart';
-import 'package:seu_lourival/app/pages/login/page.dart';
-import 'package:seu_lourival/app/pages/login_error/page.dart';
-import 'package:seu_lourival/app/pages/reports/page.dart';
+// import 'package:seu_lourival/_debug/DS_catalog/page.dart';
+// import 'package:seu_lourival/app/modules/report/new_report/page.dart';
+// import 'package:seu_lourival/app/pages/login/page.dart';
+// import 'package:seu_lourival/app/pages/login_error/page.dart';
+// import 'package:seu_lourival/app/pages/reports/page.dart';
 
 import 'package:seu_lourival/routes/routes.dart';
 
@@ -27,7 +27,8 @@ class DebugHomePage extends StatelessWidget {
               onPressed: () => Get.toNamed(Routes.login),
             ),
             ElevatedButton(
-              child: const Text('Aplicação >> Home Page (ReportList): Usuário cadastrado'),
+              child: const Text(
+                  'Aplicação >> Home Page (ReportList): Usuário cadastrado'),
               onPressed: () => Get.toNamed(Routes.reportList),
             ),
             ElevatedButton(
