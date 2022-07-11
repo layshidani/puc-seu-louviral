@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "478852115396-ubfh9hr9o10gdmhju7vjd4rpqkle16ro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.seu_lourival",
+            "certificate_hash": "2c041d2a96e5ae614f0fb475993035eaaf1e98be"
+          }
+        },
+        {
           "client_id": "478852115396-8ag30kmr5pcvliuta38qu0s9lde402s3.apps.googleusercontent.com",
           "client_type": 3
         }

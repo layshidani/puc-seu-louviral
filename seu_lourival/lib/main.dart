@@ -1,4 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:seu_lourival/routes/pages.dart';
+import 'package:seu_lourival/routes/routes.dart';
+
+import 'firebase_options.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:seu_lourival/core/values/colors.dart';
@@ -19,6 +28,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDebugMode = false;
+
     return GetMaterialApp(
       title: 'Seu Lourival',
       debugShowCheckedModeBanner: true,
@@ -30,5 +41,12 @@ class MyApp extends StatelessWidget {
       // initialBinding: InitialBinding(),
       getPages: Pages.pages,
     );
+  }
+}
+
+class InitialBinding implements Bindings {
+  @override
+  void dependencies() {
+    // TODO: implement dependencies
   }
 }
