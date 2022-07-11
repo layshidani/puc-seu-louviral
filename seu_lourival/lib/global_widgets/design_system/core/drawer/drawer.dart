@@ -41,7 +41,7 @@ class DSDrawer extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(bottom: 64.0),
                   child: const Text(
-                    'Morador - Apto 231, Bloco 3',
+                    'Morador - apartmentNumber 231, Bloco 3',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

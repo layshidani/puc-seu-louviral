@@ -8,12 +8,15 @@ class DSConfirmDialog {
   final String descriptionLine1;
   final String descriptionLine2;
   final BuildContext context;
-  final Future<void> Function()? onConfirmAction;
+  final bool shouldHideCancel;
+  final Function()? onConfirmAction;
 
   DSConfirmDialog({
     required this.context,
     required this.title,
     required this.descriptionLine1,
+
+    this.shouldHideCancel = false,
     this.descriptionLine2 = '',
     this.onConfirmAction,
   });
@@ -34,15 +37,15 @@ class DSConfirmDialog {
             ),
           ),
           actions: <Widget>[
-            TextButton(
-              child: DSText.base('Cancelar'),
-              onPressed: () {
-                Get.back();
-              },
-            ),
+            shouldHideCancel ? Container() : TextButton(
+                    child: DSText.base('Cancelar'),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
             TextButton(
               onPressed: onConfirmAction,
-              child: DSText.base('Confirmar'),
+              child: DSText.base('Ok'),
             ),
           ],
         );

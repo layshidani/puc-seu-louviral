@@ -105,7 +105,7 @@ class AddUsersFormController extends GetxController {
       'cpf': addUserForm.cpf,
       'phone': addUserForm.phone,
       'email': addUserForm.email,
-      'apto': addUserForm.apto,
+      'apartmentNumber': addUserForm.apartmentNumber,
       'tower': addUserForm.tower,
       'createdAt': DateTime.now(),
     };
@@ -118,6 +118,6 @@ class AddUserFormModel {
   String cpf = '';
   String phone = '';
   String email = '';
-  String apto = '';
+  String apartmentNumber = '';
   String tower = '';
 }
