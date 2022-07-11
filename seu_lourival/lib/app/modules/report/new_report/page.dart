@@ -141,7 +141,7 @@ class NewReportPage extends StatelessWidget {
                       },
                     ),
                     Padding(
-                      padding: EdgeInsets.all(Spacing.s3),
+                      padding: EdgeInsets.symmetric(vertical: Spacing.s4),
                       child: DropdownButtonFormField<String>(
                         isExpanded: true,
                         value: _controller.selectedCategory.value,
