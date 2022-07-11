@@ -66,9 +66,10 @@ class AddUsersList extends StatelessWidget {
             ],
           ),
         ),
-        Obx(() => 
-          //controller.isLoading ? CustomLoading() :
-            Expanded(
+        Obx(
+          () =>
+              //controller.isLoading ? CustomLoading() :
+              Expanded(
             child: RefreshIndicator(
               onRefresh: () async {
                 controller.getPreRegisteredList();
@@ -88,8 +89,11 @@ class AddUsersList extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             DSTitle.xsm('${user['name']}'),
-                            Chip(
-                              label: DSText.xsm('${user['type']}'),
+                            IconButton(
+                              onPressed: () {
+                                controller.onConfirmDelete(context, user);
+                              },
+                              icon: const Icon(Icons.delete_outline_rounded),
                             ),
                           ],
                         ),
@@ -98,6 +102,18 @@ class AddUsersList extends StatelessWidget {
                           style: const TextStyle(
                             color: Colors.grey,
                             fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                        Transform(
+                          transform: Matrix4.identity()..scale(0.8),
+                          child: Chip(
+                            label: DSText.xsm('${user['type']}'),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                              ),
+                            ),
                           ),
                         ),
                         const Padding(

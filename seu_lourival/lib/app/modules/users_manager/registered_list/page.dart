@@ -85,9 +85,6 @@ class RegisteredList extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             DSTitle.xsm('${user['name']}'),
-                            Chip(
-                              label: DSText.xsm('${user['type']}'),
-                            ),
                           ],
                         ),
                         Text(
@@ -95,6 +92,18 @@ class RegisteredList extends StatelessWidget {
                           style: const TextStyle(
                             color: Colors.grey,
                             fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                        Transform(
+                          transform: Matrix4.identity()..scale(0.8),
+                          child: Chip(
+                            label: DSText.xsm('${user['type']}'),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                              ),
+                            ),
                           ),
                         ),
                         const Padding(
