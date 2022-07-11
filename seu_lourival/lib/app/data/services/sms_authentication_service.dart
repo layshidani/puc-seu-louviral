@@ -1,5 +1,5 @@
 class SmsAuthenticationService {
-  String phone = "";
-  String id = "";
-  String token = "";
+  String phone = '';
+  String id = '';
+  String token = '';
 }

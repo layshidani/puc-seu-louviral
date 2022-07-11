@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
                       key: _key,
                       child: TextFormField(
                         onSaved: (text) {
-                          controller.phoneNumber = text ?? "";
+                          controller.phoneNumber = text ?? '';
                         },
                         // autovalidateMode: AutovalidateMode.onUserInteraction,
                         // validator: (value) {

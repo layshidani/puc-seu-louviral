@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:seu_lourival/app/modules/login/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
