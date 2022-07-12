@@ -27,6 +27,10 @@ class DebugHomePage extends StatelessWidget {
               onPressed: () => Get.toNamed(Routes.login),
             ),
             ElevatedButton(
+              child: const Text('Aplicação >> SMS'),
+              onPressed: () => Get.toNamed(Routes.smsValidation),
+            ),
+            ElevatedButton(
               child: const Text(
                   'Aplicação >> Home Page (ReportList): Usuário cadastrado'),
               onPressed: () => Get.toNamed(Routes.reportList),

@@ -9,6 +9,9 @@ import 'package:seu_lourival/routes/routes.dart';
 
 class SmsValidationController extends GetxController {
   var smsCode = ''.obs;
+  final _key = GlobalKey<FormState>();
+
+  GlobalKey<FormState> get key => _key;
 
   Future<void> authenticateUser() async {
     // try {
@@ -35,6 +38,10 @@ class SmsValidationController extends GetxController {
     //   Get.showSnackbar(snackbar);
     //   debugPrint('--> LOGIN FAILURE: ${e.toString()}');
     // }
+  }
+
+  bool isValidForm() {
+    return key.currentState!.validate();
   }
 
   void _validateUser() async {

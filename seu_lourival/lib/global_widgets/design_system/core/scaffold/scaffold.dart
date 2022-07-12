@@ -15,9 +15,14 @@ class DSScaffold extends StatefulWidget {
   final String title;
   final Widget body;
   final Widget? floatButton;
+  final bool hasDrawer;
 
   const DSScaffold(
-      {required this.title, required this.body, this.floatButton});
+      {required this.title,
+      required this.body,
+      this.floatButton,
+      this.hasDrawer = false
+      });
 
   @override
   _DSScaffoldState createState() => _DSScaffoldState();
