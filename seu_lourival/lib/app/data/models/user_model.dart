@@ -2,13 +2,19 @@ class UserModel {
   String? uuid;
   final String name;
   final HomeData homeData;
-  final String userType;
+  final String type;
+  final String cpf;
+  final String phone;
+  final String email;
 
   UserModel({
     this.uuid,
     required this.name,
     required this.homeData,
-    required this.userType,
+    required this.type,
+    required this.cpf,
+    required this.phone,
+    required this.email,
   });
 }
 

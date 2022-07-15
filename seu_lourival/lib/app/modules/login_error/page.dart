@@ -27,7 +27,7 @@ class LoginErrorPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                DSTitle.base(
+                DSTitle.lg(
                   'Ops, não encontramos seu cadastro 😔',
                 ),
                 Container(
@@ -43,9 +43,7 @@ class LoginErrorPage extends StatelessWidget {
           DSIconButton(
             buttonText: 'Tentar novamente',
             iconData: Icons.refresh_outlined,
-            onPressAction: () {
-              Get.toNamed(Routes.login);
-            },
+            onPressAction: () => Get.toNamed(Routes.login),
           ),
         ],
       ),

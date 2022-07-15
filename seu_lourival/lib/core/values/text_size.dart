@@ -1,9 +1,9 @@
 class DSTextSize {
-  static const xxs = 12.0;
-  static const xs = 14.0;
-  static const sm = 16.0;
-  static const base = 18.0;
-  static const lg = 20.0;
+  static const xxs = 10.0;
+  static const xs = 12.0;
+  static const sm = 14.0;
+  static const base = 16.0;
+  static const lg = 18.0;
   static const xl = 22.0;
   static const xl2 = 24.0;
   static const xl3 = 26.0;

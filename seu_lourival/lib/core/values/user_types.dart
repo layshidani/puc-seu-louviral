@@ -2,7 +2,7 @@ List<String> userTypes = [
   'Todos',
   'Morador',
   'Limpeza',
-  'Porteiro',
+  'Portaria',
   'Manutenção',
   'Financeiro',
   'Zelador',
