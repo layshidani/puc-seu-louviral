@@ -23,7 +23,7 @@ class NewReportController extends GetxController {
   set isPrivateReport(bool value) => _isPrivateReport.value = value;
 
   //category list
-  List<Category> categories = [];
+  List<String> categories = [];
   Rx<String?> selectedCategory = null.obs;
 
   //image file path
@@ -67,6 +67,7 @@ class NewReportController extends GetxController {
       status: "Em aberto",
       author: author,
       isPrivate: formModel.isPrivate,
+      category: formModel.category,
     );
     await _repository.addReport(report);
     isLoading = false;

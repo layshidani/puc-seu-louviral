@@ -150,11 +150,10 @@ class NewReportPage extends StatelessWidget {
                           hint: Text("Selecione a categoria"),
                           items: _controller.categories.map((category) {
                             return DropdownMenuItem(
-                              value: category.title,
-                              child: category.title.trim().isEmpty
+                              value: category,
+                              child: category.trim().isEmpty
                                   ? Text("")
-                                  : Text(
-                                      "${category.icon} - ${category.title}"),
+                                  : Text(category),
                             );
                           }).toList(),
                           onChanged: (value) {

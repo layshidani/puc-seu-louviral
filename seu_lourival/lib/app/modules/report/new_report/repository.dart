@@ -11,11 +11,12 @@ class NewReportRepository {
   final categoryCollection = "categories";
   final reportCollection = "reports";
 
-  Future<List<Category>> getCategories() async {
+  Future<List<String>> getCategories() async {
     final result =
         await _firestore.collection(categoryCollection).orderBy("title").get();
     final categories = result.docs.map((doc) {
-      return Category.fromJson(doc.data());
+      // return Category.fromJson(doc.data());
+      return doc["title"] as String;
     }).toList();
     return categories;
   }
@@ -30,18 +31,25 @@ class NewReportRepository {
   }
 }
 
-class Category {
-  final String title;
-  final String icon;
-  Category({required this.title, required this.icon});
-
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
-      title: json["title"],
-      icon: json["icon"],
-    );
-  }
-}
+// class Category {
+//   final String title;
+//   final String icon;
+//   Category({required this.title, required this.icon});
+//
+//   factory Category.fromJson(Map<String, dynamic> json) {
+//     return Category(
+//       title: json["title"],
+//       icon: json["icon"],
+//     );
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       "title": this.title,
+//       "icon": this.icon,
+//     };
+//   }
+// }
 
 class Report {
   final String title;
@@ -52,6 +60,7 @@ class Report {
   final String status;
   final Author author;
   final bool isPrivate;
+  final String category;
 
   Report({
     required this.title,
@@ -62,6 +71,7 @@ class Report {
     required this.status,
     required this.author,
     required this.isPrivate,
+    required this.category,
   });
 
   Map<String, dynamic> toJson() {
