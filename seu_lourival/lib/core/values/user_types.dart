@@ -2,7 +2,7 @@ List<String> types = [
   'Todos',
   'Morador',
   'Limpeza',
-  'Porteiro',
+  'Portaria',
   'Manutenção',
   'Financeiro',
   'Zelador',

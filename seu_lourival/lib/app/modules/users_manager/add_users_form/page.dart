@@ -174,7 +174,7 @@ class AddUsersFormPage extends StatelessWidget {
                               validator: (value) =>
                                   DSInputValidators.isValidApartment(value),
                               onChange: (value) {
-                                controller.addUserForm.apto = value;
+                                controller.addUserForm.apartmentNumber = value;
                               },
                             ),
                             DSTextField(

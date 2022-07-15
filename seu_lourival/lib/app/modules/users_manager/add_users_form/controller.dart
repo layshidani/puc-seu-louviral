@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
 
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 
@@ -10,6 +11,7 @@ class AddUsersFormController extends GetxController {
   static const int _lastFormStep = 3;
   static const int _lastStep = 4;
 
+  final _addUsersListController = Get.find<AddUsersListController>();
   final _currentStep = 0.obs;
   final addUserForm = AddUserFormModel();
   TextEditingController type = TextEditingController();
@@ -50,6 +52,7 @@ class AddUsersFormController extends GetxController {
       case _lastFormStep:
         if (_isValidForm()) {
           await _onSaveUser();
+          await _addUsersListController.getPreRegisteredList();
           _addStep();
         }
         break;
@@ -105,7 +108,7 @@ class AddUsersFormController extends GetxController {
       'cpf': addUserForm.cpf,
       'phone': addUserForm.phone,
       'email': addUserForm.email,
-      'apto': addUserForm.apto,
+      'apartmentNumber': addUserForm.apartmentNumber,
       'tower': addUserForm.tower,
       'createdAt': DateTime.now(),
     };
@@ -118,6 +121,6 @@ class AddUserFormModel {
   String cpf = '';
   String phone = '';
   String email = '';
-  String apto = '';
+  String apartmentNumber = '';
   String tower = '';
 }
