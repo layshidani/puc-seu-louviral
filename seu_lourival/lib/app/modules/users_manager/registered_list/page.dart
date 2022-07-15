@@ -45,7 +45,7 @@ class RegisteredList extends StatelessWidget {
                   DSText.sm('Tipo:  '),
                   Obx(
                     () => DropdownButton(
-                      items: userTypes.map((String item) {
+                      items: types.map((String item) {
                         return DropdownMenuItem(
                           value: item,
                           child: Text(item),
