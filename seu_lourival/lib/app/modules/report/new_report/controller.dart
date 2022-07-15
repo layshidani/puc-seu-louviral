@@ -42,28 +42,33 @@ class NewReportController extends GetxController {
     super.onInit();
   }
 
-  Future<void> saveReport({required Function onSuccess}) async {
+  Future<void> saveReport(
+      {required Function onSuccess,
+      required Function(String) onFailure}) async {
+    if (path.isEmpty) {
+      onFailure("Escolha uma foto para este manifesto");
+      return;
+    }
     isLoading = true;
-    // final ref =
-    //     "reports/uuid_aleatorio_do_usuario_${Random().nextInt(999)}/${DateTime.now().toString()}";
-    // final uploadedURL = await _repository.uploadImage(
-    //     file: File(formModel.imagePath), ref: ref);
-    // final author = Author(
-    //     uuid: "a123ubl1j2hl2k3h4lkjh",
-    //     name: "Bryan Barreto",
-    //     phone: "5521912121212");
-    // final report = Report(
-    //   title: formModel.title,
-    //   description: formModel.description,
-    //   photoURL: uploadedURL,
-    //   createdAt: DateTime.now(),
-    //   updatedAt: DateTime.now(),
-    //   status: "Em aberto",
-    //   author: author,
-    //   isPrivate: formModel.isPrivate,
-    // );
-    // await _repository.addReport(report);
-    await Future.delayed(3.seconds);
+    final ref =
+        "reports/uuid_aleatorio_do_usuario_${Random().nextInt(999)}/${DateTime.now().toString()}";
+    final uploadedURL = await _repository.uploadImage(
+        file: File(formModel.imagePath), ref: ref);
+    final author = Author(
+        uuid: "a123ubl1j2hl2k3h4lkjh",
+        name: "Bryan Barreto",
+        phone: "5521912121212");
+    final report = Report(
+      title: formModel.title,
+      description: formModel.description,
+      photoURL: uploadedURL,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      status: "Em aberto",
+      author: author,
+      isPrivate: formModel.isPrivate,
+    );
+    await _repository.addReport(report);
     isLoading = false;
     onSuccess();
   }
