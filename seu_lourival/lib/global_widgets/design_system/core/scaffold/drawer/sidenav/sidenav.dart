@@ -5,8 +5,8 @@ import 'package:seu_lourival/core/values/text_size.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/routes/routes.dart';
 
-class DSDrawer extends StatelessWidget {
-  const DSDrawer({Key? key}) : super(key: key);
+class DSDrawerSidenav extends StatelessWidget {
+  const DSDrawerSidenav({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

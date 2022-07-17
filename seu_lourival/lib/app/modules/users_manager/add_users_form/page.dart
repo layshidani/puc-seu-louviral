@@ -8,6 +8,7 @@ import 'package:seu_lourival/app/modules/users_manager/add_users_form/controller
 import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/user_types.dart';
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 
@@ -17,18 +18,16 @@ class AddUsersFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: DSText.base('Cadastro de usuário'),
-        backgroundColor: DSColors.primary,
-      ),
+    return DSScaffold(
+      title: 'Cadastro de usuário',
       body: Column(
         children: [
           Expanded(
             child: Obx(() {
               return Theme(
                 data: ThemeData(
-                    colorScheme: const ColorScheme.light(primary: DSColors.primary)),
+                    colorScheme:
+                        const ColorScheme.light(primary: DSColors.primary)),
                 child: Stepper(
                   physics: const ScrollPhysics(),
                   currentStep: controller.currentStep,
@@ -43,17 +42,25 @@ class AddUsersFormPage extends StatelessWidget {
                         children: <Widget>[
                           ElevatedButton(
                             onPressed: () => controller.onContinue(),
-                            style: ElevatedButton.styleFrom(primary: DSColors.primary),
-                            child: Text(controller.isLastStep() ? 'Ok' : 'Continuar'),
+                            style: ElevatedButton.styleFrom(
+                                primary: DSColors.primary),
+                            child: Text(
+                                controller.isLastStep() ? 'Ok' : 'Continuar'),
                           ),
-                          controller.shouldShowCancelButton() ? Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: ElevatedButton(
-                              onPressed: () =>  controller.onCancel(),
-                              style: ElevatedButton.styleFrom(primary: Colors.white),
-                              child: const Text('Cancelar', style: TextStyle(color: DSColors.primary),),
-                            ),
-                          ) : Container(),
+                          controller.shouldShowCancelButton()
+                              ? Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: ElevatedButton(
+                                    onPressed: () => controller.onCancel(),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.white),
+                                    child: const Text(
+                                      'Cancelar',
+                                      style: TextStyle(color: DSColors.primary),
+                                    ),
+                                  ),
+                                )
+                              : Container(),
                         ],
                       ),
                     );

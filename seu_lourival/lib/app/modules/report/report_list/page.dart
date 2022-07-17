@@ -16,6 +16,7 @@ class ReportListPage extends StatelessWidget {
     final _controller = Get.find<ReportListController>();
 
     return DSScaffold(
+      hasDrawer: true,
       title: 'Manifestos',
       body: RefreshIndicator(
         onRefresh: () async {

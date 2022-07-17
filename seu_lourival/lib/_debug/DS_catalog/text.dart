@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 
@@ -7,8 +8,8 @@ class TextCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Catálogo de temas')),
+    return DSScaffold(
+      title: 'Catálogo de temas',
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,8 +54,8 @@ class TextCalatalogExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Catálogo de temas')),
+    return DSScaffold(
+      title: 'Catálogo de temas',
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(

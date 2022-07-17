@@ -5,24 +5,20 @@ import 'package:brasil_fields/brasil_fields.dart';
 
 import 'package:seu_lourival/app/modules/login/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
-import 'package:seu_lourival/core/theme/text_style.dart';
 import 'package:seu_lourival/core/utils/input_validators.dart';
-import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/login_strings.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 
 class LoginPage extends StatelessWidget {
   final controller = Get.find<LoginController>();
   final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: DSColors.primary,
-        title: const Text(LoginStrings.scaffoldTitle),
-      ),
+    return DSScaffold(
+      title: LoginStrings.scaffoldTitle,
       body: Obx(() {
         return controller.isLoading
             ? CustomLoading()

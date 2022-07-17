@@ -8,6 +8,7 @@ class UsersManagerPage extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
     return DSScaffold(
+      hasDrawer: true,
       title: 'Gerenciamento de usuários',
       body: UsersManagerTabbar(),
     );
