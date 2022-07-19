@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Spacer(),
-                    DSTitle.base(
+                    DSTitle.lg(
                       LoginStrings.title,
                     ),
                     const SizedBox(height: 60),

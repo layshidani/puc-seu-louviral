@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
+import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 
 class DSScaffoldWidet extends StatelessWidget {
   final String title;
@@ -15,7 +16,7 @@ class DSScaffoldWidet extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: DSColors.primary,
-        title: DSText.base(title),
+        title: DSTitle.base(title),
         leading: leading,
       ),
       floatingActionButton: floatingActionButton,

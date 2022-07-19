@@ -7,6 +7,7 @@ import 'package:seu_lourival/app/modules/users_manager/add_users_form/controller
 
 import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/core/values/colors.dart';
+import 'package:seu_lourival/core/values/strings.dart';
 import 'package:seu_lourival/core/values/user_types.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
@@ -19,7 +20,7 @@ class AddUsersFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DSScaffold(
-      title: 'Cadastro de usuário',
+      title: AddUsersFormStrings.scaffoldTitle,
       body: Column(
         children: [
           Expanded(

@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
 
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
+import 'package:seu_lourival/core/values/strings.dart';
 
 class AddUsersFormController extends GetxController {
   static const int _fisrtStep = 0;
@@ -94,10 +95,10 @@ class AddUsersFormController extends GetxController {
 
       _showSnackBar(
           style: SnackbarStyle.success,
-          message: 'Usuário pré cadastrado com sucesso');
+          message: AddUsersFormStrings.onSaveUserSuccess);
     } catch (e) {
       _showSnackBar(
-          style: SnackbarStyle.error, message: 'Erro ao salvar os dados');
+          style: SnackbarStyle.error, message: AddUsersFormStrings.onSaveUserError);
     }
   }
 

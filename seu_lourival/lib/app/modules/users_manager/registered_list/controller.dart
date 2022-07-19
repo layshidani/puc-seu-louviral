@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:seu_lourival/global_widgets/dialog/confirm_dialog.dart';
+import 'package:seu_lourival/core/values/strings.dart';
 
 class RegisteredListController extends GetxController {
   @override
@@ -35,7 +35,7 @@ class RegisteredListController extends GetxController {
       _setLoading(false);
       _showSnackBar(
           style: SnackbarStyle.error,
-          message: 'Ops. Ocorreu um erro ao recuperar os dados');
+          message: UsersManagerStrings.getDataError);
     }
   }
 
@@ -53,7 +53,7 @@ class RegisteredListController extends GetxController {
       return;
     }
 
-    _showSnackBar(message: 'A busca não retornou nenhum resultado.');
+    _showSnackBar(message: UsersManagerStrings.emptySearch);
     return;
   }
 
