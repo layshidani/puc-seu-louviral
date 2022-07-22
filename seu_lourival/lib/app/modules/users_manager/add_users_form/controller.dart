@@ -14,7 +14,7 @@ class AddUsersFormController extends GetxController {
   final _addUsersListController = Get.find<AddUsersListController>();
   final _currentStep = 0.obs;
   final addUserForm = AddUserFormModel();
-  TextEditingController userType = TextEditingController();
+  TextEditingController type = TextEditingController();
 
   final List<GlobalKey<FormState>> _formKeys = [
     GlobalKey<FormState>(),

@@ -64,7 +64,7 @@ class AddUsersFormPage extends StatelessWidget {
                       content: Form(
                         key: controller.formKeys[0],
                         child: DropdownButtonFormField<String>(
-                          items: userTypes.map((String dropDownStringItem) {
+                          items: types.map((String dropDownStringItem) {
                             return DropdownMenuItem<String>(
                               value: dropDownStringItem,
                               child: Text(dropDownStringItem),

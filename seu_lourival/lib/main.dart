@@ -1,19 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
-
-import 'package:flutter/foundation.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:seu_lourival/routes/pages.dart';
 import 'package:seu_lourival/routes/routes.dart';
-
-import 'firebase_options.dart';
-
-import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/firebase_options.dart';
-import 'package:seu_lourival/routes/pages.dart';
-import 'package:seu_lourival/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +25,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Seu Lourival',
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: DSColors.primary,
       ),

@@ -32,7 +32,7 @@ class DebugHomePage extends StatelessWidget {
             ),
             ElevatedButton(
               child: const Text(
-                  'Aplicação >> Home Page (ReportList): Usuário cadastrado'),
+                  'Aplicação >> ReportList'),
               onPressed: () => Get.toNamed(Routes.reportList),
             ),
             ElevatedButton(

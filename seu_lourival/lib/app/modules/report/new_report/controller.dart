@@ -63,9 +63,9 @@ class NewReportController extends GetxController {
     //   isPrivate: formModel.isPrivate,
     // );
     // await _repository.addReport(report);
-    await Future.delayed(3.seconds);
+    // await Future.delayed(3.seconds);
     isLoading = false;
-    onSuccess();
+    // onSuccess();
   }
 }
 
