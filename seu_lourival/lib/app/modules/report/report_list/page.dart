@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/modules/report/report_list/controller.dart';
 import 'package:seu_lourival/core/values/colors.dart';
+import 'package:seu_lourival/core/values/strings.dart';
 import 'package:seu_lourival/core/values/text_size.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
@@ -16,7 +17,8 @@ class ReportListPage extends StatelessWidget {
     final _controller = Get.find<ReportListController>();
 
     return DSScaffold(
-      title: 'Manifestos',
+      hasDrawer: true,
+      title: ReportListStrings.scaffoldTitle,
       body: RefreshIndicator(
         onRefresh: () async {
           _controller.getReports();

@@ -9,6 +9,7 @@ class FinancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DSScaffold(
+      hasDrawer: true,
       title: 'Financeiro',
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

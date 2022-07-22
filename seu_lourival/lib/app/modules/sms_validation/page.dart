@@ -3,6 +3,8 @@ import 'package:get/instance_manager.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:seu_lourival/app/modules/sms_validation/controller.dart';
 import 'package:seu_lourival/core/utils/input_validators.dart';
+import 'package:seu_lourival/core/values/strings.dart';
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 
 import '../../../global_widgets/design_system/button/icon_button.dart';
@@ -12,17 +14,17 @@ class SmsValidationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('SMS code validation'),
-      ),
+    return DSScaffold(
+      title: SmsValidationStrings.scaffoldTitle,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(),
-            DSTitle.base('Digite o código recebido no seu celular'),
+            Spacer()
+            ,
+
+            DSTitle.lg(SmsValidationStrings.title),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Form(
@@ -46,7 +48,7 @@ class SmsValidationPage extends StatelessWidget {
             ),
             const Spacer(),
             DSIconButton(
-                buttonText: 'Validar',
+                buttonText: SmsValidationStrings.nextBtn,
                 onPressAction: () {
                   if (controller.isValidForm()) {
                     controller.authenticateUser();

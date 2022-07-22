@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/services/sms_authentication_service.dart';
-import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
-import 'package:seu_lourival/routes/routes.dart';
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 
 class SmsValidationController extends GetxController {
   var smsCode = ''.obs;
@@ -95,10 +93,9 @@ class DummyPage extends StatelessWidget {
   DummyPage(this.title);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+    return DSScaffold(
+      title: title,
+      body: Text(title),
     );
   }
 }

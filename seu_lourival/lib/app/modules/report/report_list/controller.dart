@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/data/services/report_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
+import 'package:seu_lourival/core/values/strings.dart';
 
 class ReportListController extends GetxController {
   @override
@@ -29,7 +29,7 @@ class ReportListController extends GetxController {
       _setLoading(false);
       _showSnackBar(
           style: SnackbarStyle.error,
-          message: 'Ops. Ocorreu um erro ao recuperar os dados');
+          message: ReportListStrings.getReportsError);
     }
   }
 
