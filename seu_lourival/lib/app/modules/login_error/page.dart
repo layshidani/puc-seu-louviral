@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 import 'package:seu_lourival/routes/routes.dart';
@@ -11,12 +12,9 @@ class LoginErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: (AppBar(
-        title: const Text('Seu Lourival'),
-        backgroundColor: DSColors.primary,
-        automaticallyImplyLeading: false,
-      )),
+    return DSScaffold(
+      title: 'Seu Lourival',
+      // automaticallyImplyLeading: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,7 +25,7 @@ class LoginErrorPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                DSTitle.base(
+                DSTitle.lg(
                   'Ops, não encontramos seu cadastro 😔',
                 ),
                 Container(
@@ -43,9 +41,7 @@ class LoginErrorPage extends StatelessWidget {
           DSIconButton(
             buttonText: 'Tentar novamente',
             iconData: Icons.refresh_outlined,
-            onPressAction: () {
-              Get.toNamed(Routes.login);
-            },
+            onPressAction: () => Get.toNamed(Routes.login),
           ),
         ],
       ),

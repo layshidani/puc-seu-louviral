@@ -1,7 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
+import 'package:seu_lourival/global_widgets/dialog/confirm_dialog.dart';
+import 'package:seu_lourival/core/values/strings.dart';
 
 class AddUsersListController extends GetxController {
   @override
@@ -15,7 +16,8 @@ class AddUsersListController extends GetxController {
   final RxBool _isLoading = false.obs;
   final _preRegisteredList = [].obs;
   final _preRegisteredListFiltered = [].obs;
-  var _selectedFilter = defaultFilter.obs;
+  RxString _selectedFilter = defaultFilter.obs;
+  var _userToDelete;
 
   get preRegisteredList => _preRegisteredList.value;
   get preRegisteredListFiltered => _preRegisteredListFiltered.value;
@@ -23,6 +25,7 @@ class AddUsersListController extends GetxController {
   get isLoading => _isLoading.value;
 
   Future<void> getPreRegisteredList() async {
+    _selectedFilter = defaultFilter.obs;
     _setLoading(true);
 
     try {
@@ -33,13 +36,13 @@ class AddUsersListController extends GetxController {
       _setLoading(false);
       _showSnackBar(
           style: SnackbarStyle.error,
-          message: 'Ops. Ocorreu um erro ao recuperar os dados');
+          message: UsersManagerStrings.getDataError);
     }
   }
 
   void onFilterPreRegisterUsers(String filter) async {
     _selectedFilter.value = filter;
-     var result =
+    var result =
         preRegisteredList.where((user) => user['type'] == filter).toList();
 
     if (filter == defaultFilter) {
@@ -52,13 +55,50 @@ class AddUsersListController extends GetxController {
       return;
     }
 
-    _showSnackBar(message: 'A busca não retornou nenhum resultado.');
+    _showSnackBar(message: UsersManagerStrings.emptySearch);
     return;
   }
 
   void clearFilter() {
     _selectedFilter = defaultFilter.obs;
     _preRegisteredListFiltered.value = _preRegisteredList.value;
+  }
+
+  void _clearDelete() {
+    _userToDelete = {};
+    _setLoading(false);
+    Get.back();
+  }
+
+  Future<void> onConfirmDelete(context, user) async {
+    _setLoading(true);
+    _userToDelete = user;
+
+    DSConfirmDialog(
+            context: context,
+            title: 'Excluir usuário',
+            descriptionLine1: 'Essa ação não poderá ser desfeita.',
+            descriptionLine2: 'Você deseja excluir o usuário  ${_userToDelete['name']} (${_userToDelete['type']}) do pré registro?',
+            onConfirmAction: _onDeletePreregistered)
+        .show();
+  }
+
+  Future<void> _onDeletePreregistered() async {
+    try {
+      final cpf = _userToDelete['cpf'];
+
+      await UserService.onDeletePreRegistered(cpf: cpf);
+
+      _clearDelete();
+      getPreRegisteredList();
+
+      _showSnackBar(style: SnackbarStyle.success, message: 'Usuário excluído.');
+    } catch (e) {
+      _clearDelete();
+      _showSnackBar(
+          style: SnackbarStyle.error,
+          message: 'Ops. Ocorreu um erro, tente novamente.');
+    }
   }
 
   void _showSnackBar(

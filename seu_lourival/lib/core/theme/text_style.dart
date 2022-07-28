@@ -3,19 +3,19 @@ import 'package:seu_lourival/core/values/text_size.dart';
 
 class DSTextStyle {
   static const titleXSm = TextStyle(
-    fontSize: DSTextSize.base,
+    fontSize: DSTextSize.sm,
     fontWeight: FontWeight.w600,
   );
   static const titleSm = TextStyle(
-    fontSize: DSTextSize.xl2,
+    fontSize: DSTextSize.base,
     fontWeight: FontWeight.w600,
   );
   static const titleBase = TextStyle(
-    fontSize: DSTextSize.xl3,
+    fontSize: DSTextSize.lg,
     fontWeight: FontWeight.w600,
   );
   static const titleLg = TextStyle(
-    fontSize: DSTextSize.xl5,
+    fontSize: DSTextSize.xl,
     fontWeight: FontWeight.w600,
   );
   

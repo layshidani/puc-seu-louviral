@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:image_picker/image_picker.dart';
-
-// import 'package:seu_lourival/_debug/DS_catalog/page.dart';
-// import 'package:seu_lourival/app/modules/report/new_report/page.dart';
-// import 'package:seu_lourival/app/pages/login/page.dart';
-// import 'package:seu_lourival/app/pages/login_error/page.dart';
-// import 'package:seu_lourival/app/pages/reports/page.dart';
-
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/routes/routes.dart';
 
 class DebugHomePage extends StatelessWidget {
@@ -16,8 +9,8 @@ class DebugHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Debug')),
+    return DSScaffold(
+      title: 'Debug',
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -27,8 +20,12 @@ class DebugHomePage extends StatelessWidget {
               onPressed: () => Get.toNamed(Routes.login),
             ),
             ElevatedButton(
+              child: const Text('Aplicação >> SMS'),
+              onPressed: () => Get.toNamed(Routes.smsValidation),
+            ),
+            ElevatedButton(
               child: const Text(
-                  'Aplicação >> Home Page (ReportList): Usuário cadastrado'),
+                  'Aplicação >> ReportList'),
               onPressed: () => Get.toNamed(Routes.reportList),
             ),
             ElevatedButton(
