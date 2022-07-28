@@ -14,7 +14,13 @@ class DSInputValidators {
   static String? isValidPhone(String? value) {
     return (GetUtils.isPhoneNumber(value!))
         ? null
-        : 'Ops! Informe um telefone válido';
+        : 'Ops! Informe um número de celular válido';
+  }
+
+  static String? isValidSMS(String? value) {
+    return (GetUtils.isLengthGreaterOrEqual(value, 6))
+        ? null
+        : 'Ops! Preencha o código corretamente';
   }
 
   static String? isValidEmail(String? value) {

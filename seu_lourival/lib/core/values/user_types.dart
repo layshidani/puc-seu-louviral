@@ -1,8 +1,8 @@
-List<String> userTypes = [
+List<String> types = [
   'Todos',
   'Morador',
   'Limpeza',
-  'Porteiro',
+  'Portaria',
   'Manutenção',
   'Financeiro',
   'Zelador',

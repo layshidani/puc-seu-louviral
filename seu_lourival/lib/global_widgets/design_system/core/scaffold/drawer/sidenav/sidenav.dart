@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:seu_lourival/core/values/text_size.dart';
+import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/routes/routes.dart';
 
-class DSDrawer extends StatelessWidget {
-  const DSDrawer({Key? key}) : super(key: key);
+class DSDrawerSidenav extends StatelessWidget {
+  const DSDrawerSidenav({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +20,11 @@ class DSDrawer extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  width: 120.0,
+                  width: 120.0, 
                   height: 120.0,
                   margin: const EdgeInsets.only(
                     top: 24.0,
+                    bottom: 10,
                   ),
                   clipBehavior: Clip.antiAlias,
                   decoration: const BoxDecoration(
@@ -34,15 +36,22 @@ class DSDrawer extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  'Pedro Santos | pedro.santos@email.com',
+                  'Pedro Santos',
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w700),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: DSTextSize.base,
+                  ),
                 ),
                 Container(
-                  padding: const EdgeInsets.only(bottom: 64.0),
-                  child: const Text(
-                    'Morador - Apto 231, Bloco 3',
-                    style: TextStyle(color: Colors.white),
+                  padding: const EdgeInsets.only(bottom: 40.0),
+                  child: Column(
+                    children: [
+                      Chip(
+                        label: DSText.sm('Morador'),
+                        backgroundColor: const Color.fromARGB(46, 0, 155, 198),
+                      ),
+                    ],
                   ),
                 ),
               ],

@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:brasil_fields/brasil_fields.dart';
+
 import 'package:seu_lourival/app/modules/login/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
-import 'package:seu_lourival/core/theme/text_style.dart';
-import 'package:seu_lourival/core/values/colors.dart';
+import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/core/values/login_strings.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
+import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
+import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 
 class LoginPage extends StatelessWidget {
   final controller = Get.find<LoginController>();
   final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: DSColors.primary,
-        title: const Text(LoginStrings.scaffoldTitle),
-      ),
+    return DSScaffold(
+      title: LoginStrings.scaffoldTitle,
       body: Obx(() {
         return controller.isLoading
             ? CustomLoading()
@@ -28,36 +30,26 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Spacer(),
-                    const Text(
+                    DSTitle.lg(
                       LoginStrings.title,
-                      style: DSTextStyle.titleBase,
-                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 60),
                     Form(
                       key: _key,
-                      child: TextFormField(
-                        onSaved: (text) {
-                          controller.phoneNumber = text ?? '';
+                      child: DSTextField(
+                        labelText: LoginStrings.phoneLabel,
+                        keyboardType: TextInputType.phone,
+                        iconData: Icons.phone_android,
+                        prefix: LoginStrings.phonePrefix,
+                        formatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          TelefoneInputFormatter(),
+                        ],
+                        validator: (value) =>
+                            DSInputValidators.isValidPhone(value),
+                        onChange: (value) {
+                          controller.phoneNumber = value;
                         },
-                        // autovalidateMode: AutovalidateMode.onUserInteraction,
-                        // validator: (value) {
-                        // if (value != null && value.length > 14) {
-                        //   return null;
-                        // }
-                        // return LoginStrings.phoneError;
-                        // },
-                        // inputFormatters: [controller.phoneMaskConfig],
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          prefix: const Text(LoginStrings.phonePrefix),
-                          suffixIcon: const Icon(Icons.phone_android_outlined),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          labelText: LoginStrings.phoneLabel,
-                        ),
-                        style: const TextStyle(fontSize: 18),
                       ),
                     ),
                     const SizedBox(height: 60),

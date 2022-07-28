@@ -2,17 +2,20 @@ import 'package:get/get.dart';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
 
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
+import 'package:seu_lourival/core/values/strings.dart';
 
 class AddUsersFormController extends GetxController {
   static const int _fisrtStep = 0;
   static const int _lastFormStep = 3;
   static const int _lastStep = 4;
 
+  final _addUsersListController = Get.find<AddUsersListController>();
   final _currentStep = 0.obs;
   final addUserForm = AddUserFormModel();
-  TextEditingController userType = TextEditingController();
+  TextEditingController type = TextEditingController();
 
   final List<GlobalKey<FormState>> _formKeys = [
     GlobalKey<FormState>(),
@@ -50,6 +53,7 @@ class AddUsersFormController extends GetxController {
       case _lastFormStep:
         if (_isValidForm()) {
           await _onSaveUser();
+          await _addUsersListController.getPreRegisteredList();
           _addStep();
         }
         break;
@@ -91,10 +95,10 @@ class AddUsersFormController extends GetxController {
 
       _showSnackBar(
           style: SnackbarStyle.success,
-          message: 'Usuário pré cadastrado com sucesso');
+          message: AddUsersFormStrings.onSaveUserSuccess);
     } catch (e) {
       _showSnackBar(
-          style: SnackbarStyle.error, message: 'Erro ao salvar os dados');
+          style: SnackbarStyle.error, message: AddUsersFormStrings.onSaveUserError);
     }
   }
 
@@ -105,7 +109,7 @@ class AddUsersFormController extends GetxController {
       'cpf': addUserForm.cpf,
       'phone': addUserForm.phone,
       'email': addUserForm.email,
-      'apto': addUserForm.apto,
+      'apartmentNumber': addUserForm.apartmentNumber,
       'tower': addUserForm.tower,
       'createdAt': DateTime.now(),
     };
@@ -118,6 +122,6 @@ class AddUserFormModel {
   String cpf = '';
   String phone = '';
   String email = '';
-  String apto = '';
+  String apartmentNumber = '';
   String tower = '';
 }

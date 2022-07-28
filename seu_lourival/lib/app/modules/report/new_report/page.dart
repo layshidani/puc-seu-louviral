@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seu_lourival/app/modules/report/new_report/strings.dart';
 import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/core/values/spacing.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'controller.dart';
 
@@ -57,10 +57,8 @@ class NewReportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(NewReportStrings.title),
-      ),
+    return DSScaffold(
+      title: NewReportStrings.title,
       body: Obx(
         () => _controller.isLoading
             ? Center(
