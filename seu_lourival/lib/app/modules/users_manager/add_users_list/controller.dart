@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/data/providers/user_provider.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 
@@ -26,7 +27,7 @@ class AddUsersListController extends GetxController {
     _setLoading(true);
 
     try {
-      final data = await UserService.getPreRegisteredUsersList();
+      final data = await UserProvider.getPreRegisteredUsersList();
       _setListValue(data);
       _setLoading(false);
     } catch (e) {
@@ -39,7 +40,7 @@ class AddUsersListController extends GetxController {
 
   void onFilterPreRegisterUsers(String filter) async {
     _selectedFilter.value = filter;
-     var result =
+    var result =
         preRegisteredList.where((user) => user['type'] == filter).toList();
 
     if (filter == defaultFilter) {

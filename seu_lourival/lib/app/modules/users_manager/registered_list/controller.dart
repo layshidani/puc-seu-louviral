@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/data/providers/user_provider.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 
 class RegisteredListController extends GetxController {
- @override
+  @override
   void onInit() async {
     _selectedFilter = defaultFilter.obs;
     await getUsersList();
@@ -26,7 +27,7 @@ class RegisteredListController extends GetxController {
     _setLoading(true);
 
     try {
-      final data = await UserService.getUsersList();
+      final data = await UserProvider.getUsersList();
       _setListValue(data);
       _setLoading(false);
     } catch (e) {
@@ -39,8 +40,7 @@ class RegisteredListController extends GetxController {
 
   void onFilterUsers(String filter) async {
     _selectedFilter.value = filter;
-    var result =
-        usersList.where((user) => user['type'] == filter).toList();
+    var result = usersList.where((user) => user['type'] == filter).toList();
 
     if (filter == defaultFilter) {
       _usersListFiltered.value = _usersList.value;

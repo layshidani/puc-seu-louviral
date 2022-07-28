@@ -15,7 +15,6 @@ class NewReportRepository {
     final result =
         await _firestore.collection(categoryCollection).orderBy("title").get();
     final categories = result.docs.map((doc) {
-      // return Category.fromJson(doc.data());
       return doc["title"] as String;
     }).toList();
     return categories;
