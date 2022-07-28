@@ -10,6 +10,16 @@ class UserModel {
     required this.homeData,
     required this.userType,
   });
+
+  factory UserModel.fromJson(Map<String, dynamic> json,
+      {required String uuid}) {
+    return UserModel(
+      name: json["name"],
+      homeData: json["homeData"],
+      userType: json["userType"],
+      uuid: uuid,
+    );
+  }
 }
 
 class HomeData {
