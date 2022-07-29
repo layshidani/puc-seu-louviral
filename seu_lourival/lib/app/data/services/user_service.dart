@@ -5,16 +5,18 @@ import 'package:seu_lourival/app/data/models/user_model.dart';
 class UserService {
   UserModel? user;
 
-  bool get isLoggedIn => user != null;
+  bool get isLoggedIn => FirebaseAuth.instance.currentUser != null;
 
-  Future<void> loadCurrentUser() async {
+  Future<bool> loadCurrentUser() async {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null) {
       final id = currentUser.uid;
       final result =
           await FirebaseFirestore.instance.collection("users").doc(id).get();
       user = UserModel.fromJson(result.data(), uuid: id);
+      return true;
     }
+    return false;
   }
 
   static onDeletePreRegistered({required String cpf}) async {

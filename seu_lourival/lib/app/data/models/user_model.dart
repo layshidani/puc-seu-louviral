@@ -15,11 +15,25 @@ class UserModel {
     required this.userType,
   });
 
+  @override
+  String toString() {
+    return "{uuid: $uuid, "
+        "name: $name, "
+        " email: $email, "
+        " phoneNumber: $phoneNumber, "
+        "homeData: { "
+        "apartmentNumber: ${homeData.apartmentNumber}, "
+        " tower: ${homeData.tower}, "
+        "}, "
+        "userType: $userType"
+        "}";
+  }
+
   factory UserModel.fromJson(Map<String, dynamic>? json,
       {required String uuid}) {
     return UserModel(
       name: json?["name"],
-      homeData: json?["homeData"],
+      homeData: HomeData.fromJson(json?["homeData"]),
       email: json?["email"],
       phoneNumber: json?["phoneNumber"],
       userType: json?["userType"],
@@ -33,4 +47,11 @@ class HomeData {
   final String tower;
 
   HomeData({required this.apartmentNumber, required this.tower});
+
+  factory HomeData.fromJson(Map<String, dynamic>? json) {
+    return HomeData(
+      apartmentNumber: json?["apartmentNumber"],
+      tower: json?["tower"],
+    );
+  }
 }
