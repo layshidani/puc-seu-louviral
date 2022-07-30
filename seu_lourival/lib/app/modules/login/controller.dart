@@ -1,17 +1,32 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/services/sms_authentication_service.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/routes/routes.dart';
 
 class LoginController extends GetxController {
   final _phoneNumber = ''.obs;
   final RxBool _isLoading = false.obs;
+  final UserService _service;
 
   bool get isLoading => _isLoading.value;
 
   String get phoneNumber => '+55${_phoneNumber.value}';
 
   set phoneNumber(String number) => _phoneNumber.value = number;
+
+  LoginController(this._service);
+
+  @override
+  void onInit() async {
+    if (_service.isLoggedIn) {
+      final success = await _service.loadCurrentUser();
+      if (success) {
+        Get.offAllNamed(Routes.reportList);
+      }
+    }
+    super.onInit();
+  }
 
   Future<void> sendToken() async {
     // SendTokenData? data;

@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,9 +30,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: DSColors.primary,
       ),
-      initialRoute: Routes.debug,
-      // initialRoute: isDebugMode ? Routes.login : Routes.debug,
-      // initialBinding: InitialBinding(),
+      // initialRoute: Routes.debug,
+      initialRoute: isDebugMode ? Routes.debug : Routes.login,
+      initialBinding: InitialBinding(),
       getPages: Pages.pages,
     );
   }
@@ -40,6 +41,6 @@ class MyApp extends StatelessWidget {
 class InitialBinding implements Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
+    Get.put(UserService());
   }
 }
