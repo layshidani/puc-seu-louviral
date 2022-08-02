@@ -6,12 +6,14 @@ import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
 
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
+import 'package:seu_lourival/core/utils/string_formater_helper.dart';
 import 'package:seu_lourival/core/values/strings.dart';
 
 class AddUsersFormController extends GetxController {
-  static const int _fisrtStep = 0;
+  static const int _firstStep = 0;
   static const int _lastFormStep = 3;
   static const int _lastStep = 4;
+  static const String _brazilDDI = '+55';
 
   final _addUsersListController = Get.find<AddUsersListController>();
   final _currentStep = 0.obs;
@@ -26,7 +28,7 @@ class AddUsersFormController extends GetxController {
   ];
 
   int get currentStep => _currentStep.value;
-  int get fisrtStep => _fisrtStep;
+  int get fisrtStep => _firstStep;
   int get lastStep => _lastStep;
   List<GlobalKey<FormState>> get formKeys => _formKeys;
 
@@ -67,7 +69,7 @@ class AddUsersFormController extends GetxController {
   }
 
   void onCancel() {
-    currentStep > _fisrtStep ? _takeStep() : null;
+    currentStep > _firstStep ? _takeStep() : null;
   }
 
   bool isLastStep() {
@@ -108,7 +110,7 @@ class AddUsersFormController extends GetxController {
       'type': addUserForm.type,
       'name': addUserForm.name,
       'cpf': addUserForm.cpf,
-      'phone': addUserForm.phone,
+      'phone': StringFormater.getOnlyNumbers('$_brazilDDI${addUserForm.phone}'),
       'email': addUserForm.email,
       'homeData': {
         'number': addUserForm.number,
