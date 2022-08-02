@@ -5,10 +5,8 @@ class UserModel {
   final String email;
   final String phone;
   final String type;
-  final String apartmentNumber;
-  final String tower;
   final DateTime createdAt;
-  // final HomeData homeData;
+  final HomeData homeData;
 
   UserModel({
     this.uuid,
@@ -17,10 +15,8 @@ class UserModel {
     required this.email,
     required this.phone,
     required this.type,
-    required this.apartmentNumber,
-    required this.tower,
     required this.createdAt,
-    // required this.homeData,
+    required this.homeData,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -30,8 +26,7 @@ class UserModel {
       email: json['email'],
       phone: json['phone'],
       type: json['type'],
-      apartmentNumber: json['apartmentNumber'],
-      tower: json['tower'],
+      homeData: HomeData.fromJson(json['homeData']),
       createdAt: json['createdAt'],
     );
   }
@@ -43,18 +38,24 @@ class UserModel {
       'email': this.email,
       'phone': this.phone,
       'type': this.type,
-      'apartmentNumber': this.apartmentNumber,
-      'tower': this.tower,
       'createdAt': this.createdAt,
+      'homeData': this.homeData,
     };
   }
 }
 
 class HomeData {
-  final int apartmentNumber;
+  final String number;
   final String tower;
 
-  HomeData({required this.apartmentNumber, required this.tower});
+  HomeData({required this.number, required this.tower});
+
+  factory HomeData.fromJson(Map<String, dynamic> json) {
+    return HomeData(
+      number: json['homeData']['number'],
+      tower: json['homeData']['tower'],
+    );
+  }
 }
 
 class UserContactInfo {

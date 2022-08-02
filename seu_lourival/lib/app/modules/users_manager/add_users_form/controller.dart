@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
 
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
@@ -109,8 +110,10 @@ class AddUsersFormController extends GetxController {
       'cpf': addUserForm.cpf,
       'phone': addUserForm.phone,
       'email': addUserForm.email,
-      'apartmentNumber': addUserForm.apartmentNumber,
-      'tower': addUserForm.tower,
+      'homeData': {
+        'number': addUserForm.number,
+        'tower': addUserForm.tower,
+      },
       'createdAt': DateTime.now(),
     };
   }
@@ -122,6 +125,6 @@ class AddUserFormModel {
   String cpf = '';
   String phone = '';
   String email = '';
-  String apartmentNumber = '';
+  String number = '';
   String tower = '';
 }

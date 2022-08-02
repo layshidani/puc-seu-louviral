@@ -8,7 +8,6 @@ import 'package:seu_lourival/app/modules/users_manager/add_users_form/controller
 import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/strings.dart';
-import 'package:seu_lourival/core/values/user_types.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
@@ -72,7 +71,8 @@ class AddUsersFormPage extends StatelessWidget {
                       content: Form(
                         key: controller.formKeys[0],
                         child: DropdownButtonFormField<String>(
-                          items: types.map((String dropDownStringItem) {
+                          // TODO Add types no lugar de morador após tornar os dados adicionais dinâmicos
+                          items: ['Morador'].map((String dropDownStringItem) {
                             return DropdownMenuItem<String>(
                               value: dropDownStringItem,
                               child: Text(dropDownStringItem),
@@ -169,6 +169,7 @@ class AddUsersFormPage extends StatelessWidget {
                           ? StepState.complete
                           : StepState.disabled,
                     ),
+                    // TODO Tornar step dinamico de acordo com o usertype
                     Step(
                       title: DSText.base('Dados adicionais'),
                       content: Form(
@@ -182,7 +183,7 @@ class AddUsersFormPage extends StatelessWidget {
                               validator: (value) =>
                                   DSInputValidators.isValidApartment(value),
                               onChange: (value) {
-                                controller.addUserForm.apartmentNumber = value;
+                                controller.addUserForm.number = value;
                               },
                             ),
                             DSTextField(
