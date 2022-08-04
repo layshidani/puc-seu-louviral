@@ -79,7 +79,7 @@ class AddUsersFormPage extends StatelessWidget {
                             );
                           }).toList(),
                           validator: (value) =>
-                              DSInputValidators.isUserTypeSelected(value),
+                              DSInputValidators.istypeSelected(value),
                           decoration: const InputDecoration(
                             labelText: 'Selecione um tipo de usuário',
                           ),
@@ -169,7 +169,7 @@ class AddUsersFormPage extends StatelessWidget {
                           ? StepState.complete
                           : StepState.disabled,
                     ),
-                    // TODO Tornar step dinamico de acordo com o usertype
+                    // TODO Tornar step dinamico de acordo com o type
                     Step(
                       title: DSText.base('Dados adicionais'),
                       content: Form(

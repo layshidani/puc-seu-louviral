@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                         validator: (value) =>
                             DSInputValidators.isValidPhone(value),
                         onChange: (value) {
-                          controller.phoneNumber = value;
+                          controller.phone = value;
                         },
                       ),
                     ),
