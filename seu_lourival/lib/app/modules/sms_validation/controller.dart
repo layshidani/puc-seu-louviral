@@ -2,40 +2,47 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/data/services/sms_authentication_service.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
+
+import '../../widgets/custom_snack_bar.dart';
 
 class SmsValidationController extends GetxController {
   var smsCode = ''.obs;
   final _key = GlobalKey<FormState>();
+  final UserService _service;
 
   GlobalKey<FormState> get key => _key;
 
+  SmsValidationController(this._service);
+
   Future<void> authenticateUser() async {
-    // try {
-    //   final service = Get.find<SmsAuthenticationService>();
-    //   final credential = PhoneAuthProvider.credential(
-    //     verificationId: service.id,
-    //     smsCode: smsCode.value,
-    //   );
-    //   final result =
-    //       await FirebaseAuth.instance.signInWithCredential(credential);
-    //   debugPrint('--> login result: $result');
-    //
-    //   if (result.user?.uid != null) {
-    //     _validateUser();
-    //   } else {
-    //     debugPrint('--> result user is null');
-    //   }
-    // } catch (e) {
-    //   final snackbar = CustomSnackBar(
-    //     title: 'Erro ao validar código SMS',
-    //     style: SnackbarStyle.error,
-    //     duration: const Duration(seconds: 10),
-    //   ).build();
-    //   Get.showSnackbar(snackbar);
-    //   debugPrint('--> LOGIN FAILURE: ${e.toString()}');
-    // }
+    try {
+      final service = Get.find<SmsAuthenticationService>();
+      final credential = PhoneAuthProvider.credential(
+        verificationId: service.id,
+        smsCode: smsCode.value,
+      );
+      final result =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      debugPrint('--> login result: $result');
+
+      if (result.user?.uid != null) {
+        _validateUser();
+      } else {
+        debugPrint('--> result user is null');
+      }
+    } catch (e) {
+      final snackbar = CustomSnackBar(
+        title: 'Erro ao validar código SMS',
+        style: SnackbarStyle.error,
+        duration: const Duration(seconds: 10),
+      ).build();
+      Get.showSnackbar(snackbar);
+      debugPrint('--> LOGIN FAILURE: ${e.toString()}');
+    }
   }
 
   bool isValidForm() {
@@ -73,18 +80,26 @@ class SmsValidationController extends GetxController {
   }
 
   Future<bool> _validateTrustedUser() async {
+    print("--> _validateTrustedUser");
     try {
       final uuid = FirebaseAuth.instance.currentUser?.uid ?? '';
+      print("--> USER ID: ${uuid}");
       final result =
           await FirebaseFirestore.instance.collection('users').doc(uuid).get();
-      return result.exists;
+      if (result.exists) {
+        _service.user = UserModel.fromJson(result.data(), uuid: result.id);
+        return true;
+      }
+      return false;
     } catch (e) {
+      print("--> _validateTrustedUser catch error: ${e}");
       return false;
     }
   }
 
   Future<void> _deleteUser() async {
-    await FirebaseAuth.instance.currentUser?.delete();
+    //todo: descomentar essa função para deletar automaticamente usuarios que nao devem acessar o sistema
+    // await FirebaseAuth.instance.currentUser?.delete();
   }
 }
 
@@ -95,7 +110,14 @@ class DummyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DSScaffold(
       title: title,
-      body: Text(title),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            print(Get.find<UserService>().user.toString());
+          },
+          child: Text("print user"),
+        ),
+      ),
     );
   }
 }

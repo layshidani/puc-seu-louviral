@@ -1,25 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:seu_lourival/app/data/models/user_model.dart';
 
 class UserService {
-  static Future<List<Map<String, dynamic>>> getUsersList() async {
-    try {
-      final result = await FirebaseFirestore.instance.collection('users').get();
+  UserModel? user;
 
-      return _prepareData(result);
-    } catch (e) {
-      return throw Exception('Ops. Ocorreu um erro ao recuperar os dados');
-    }
-  }
+  bool get isLoggedIn => FirebaseAuth.instance.currentUser != null;
 
-  static Future<List<Map<String, dynamic>>> getPreRegisteredUsersList() async {
-    try {
+  Future<bool> loadCurrentUser() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      final id = currentUser.uid;
       final result =
-          await FirebaseFirestore.instance.collection('pre-registered').get();
-
-      return _prepareData(result);
-    } catch (e) {
-      return throw Exception('Ops. Ocorreu um erro ao recuperar os dados');
+          await FirebaseFirestore.instance.collection("users").doc(id).get();
+      user = UserModel.fromJson(result.data(), uuid: id);
+      return true;
     }
+    return false;
   }
 
   static onDeletePreRegistered({required String cpf}) async {

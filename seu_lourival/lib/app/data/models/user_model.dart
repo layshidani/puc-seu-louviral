@@ -1,7 +1,6 @@
 class UserModel {
   String? uuid;
   final String name;
-  final String cpf;
   final String email;
   final String phone;
   final String type;
@@ -11,7 +10,6 @@ class UserModel {
   UserModel({
     this.uuid,
     required this.name,
-    required this.cpf,
     required this.email,
     required this.phone,
     required this.type,
@@ -21,13 +19,13 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      name: json['name'],
-      cpf: json['cpf'],
-      email: json['email'],
-      phone: json['phone'],
-      type: json['type'],
-      homeData: HomeData.fromJson(json['homeData']),
-      createdAt: json['createdAt'],
+      name: json?['name'],
+      cpf: json?['cpf'],
+      email: json?['email'],
+      phone: json?['phone'],
+      type: json?['type'],
+      homeData: HomeData.fromJson(json?['homeData']),
+      createdAt: json?['createdAt'],
     );
   }
 
@@ -41,6 +39,21 @@ class UserModel {
       'createdAt': this.createdAt,
       'homeData': this.homeData,
     };
+  });
+
+  @override
+  String toString() {
+    return "{uuid: $uuid,"
+        "name: $name,"
+        "email: $email,"
+        "phoneNumber: $phoneNumber,"
+        "homeData: { "
+        "apartmentNumber: ${homeData.apartmentNumber},"
+        "tower: ${homeData.tower},"
+        "number: ${homeData.number},"
+        "}, "
+        "userType: $userType"
+        "}";
   }
 }
 
@@ -61,6 +74,5 @@ class HomeData {
 class UserContactInfo {
   final String email;
   final String phoneNumber;
-
-  UserContactInfo({required this.email, required this.phoneNumber});
+  }
 }

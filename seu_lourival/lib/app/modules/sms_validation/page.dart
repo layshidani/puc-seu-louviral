@@ -21,9 +21,7 @@ class SmsValidationPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer()
-            ,
-
+            Spacer(),
             DSTitle.lg(SmsValidationStrings.title),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
