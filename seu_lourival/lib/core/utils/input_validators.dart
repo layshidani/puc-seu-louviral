@@ -39,7 +39,7 @@ class DSInputValidators {
         : 'Ops! Informe qual o complemento. (Ex: Bloco A)';
   }
 
-  static String? isUserTypeSelected(String? value) {
+  static String? istypeSelected(String? value) {
     return (GetUtils.isLengthGreaterOrEqual(value, 1))
         ? null
         : 'Ops! Selecione um tipo de usuário';

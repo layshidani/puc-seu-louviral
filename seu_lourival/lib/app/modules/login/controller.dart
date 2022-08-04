@@ -5,15 +5,15 @@ import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/routes/routes.dart';
 
 class LoginController extends GetxController {
-  final _phoneNumber = ''.obs;
+  final _phone = ''.obs;
   final RxBool _isLoading = false.obs;
   final UserService _service;
 
   bool get isLoading => _isLoading.value;
 
-  String get phoneNumber => '+55${_phoneNumber.value}';
+  String get phone => '+55${_phone.value}';
 
-  set phoneNumber(String number) => _phoneNumber.value = number;
+  set phone(String number) => _phone.value = number;
 
   LoginController(this._service);
 
@@ -32,7 +32,7 @@ class LoginController extends GetxController {
     // SendTokenData? data;
     await FirebaseAuth.instance.verifyPhoneNumber(
       // timeout: Duration(minutes: 2),
-      phoneNumber: phoneNumber,
+      phoneNumber: phone,
       // se o android ler o sms automaticamente
       verificationCompleted: (PhoneAuthCredential credential) {
         // final service = Get.find<AuthenticationService>();
@@ -58,7 +58,7 @@ class LoginController extends GetxController {
         // data?.credentials = Credentials(id: verificationId, token: '');
         print('--> codeSent');
         Get.find<SmsAuthenticationService>().id = verificationId;
-        Get.find<SmsAuthenticationService>().phone = phoneNumber;
+        Get.find<SmsAuthenticationService>().phone = phone;
         Get.toNamed(Routes.smsValidation);
         // codeSent(verificationId);
       },
