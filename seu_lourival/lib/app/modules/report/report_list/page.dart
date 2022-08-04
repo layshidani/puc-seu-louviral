@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/report/report_list/controller.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/strings.dart';
@@ -52,9 +53,7 @@ class ReportListPage extends StatelessWidget {
                             children: <Widget>[
                               DSText.base('${report.title} - ${report.author}'),
                               Row(
-                                children: [
-                                  DSText.xsm(report.createdAt)
-                                ],
+                                children: [DSText.xsm(report.createdAt)],
                               ),
                               Row(
                                 children: [

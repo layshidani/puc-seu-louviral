@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/data/providers/user_provider.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:seu_lourival/global_widgets/dialog/confirm_dialog.dart';
@@ -28,7 +29,7 @@ class RegisteredListController extends GetxController {
     _setLoading(true);
 
     try {
-      final data = await UserService.getUsersList();
+      final data = await UserProvider.getUsersList();
       _setListValue(data);
       _setLoading(false);
     } catch (e) {

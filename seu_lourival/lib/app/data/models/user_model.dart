@@ -1,52 +1,44 @@
 class UserModel {
   String? uuid;
   final String name;
-  final String cpf;
   final String email;
-  final String phone;
-  final String type;
-  final String apartmentNumber;
-  final String tower;
-  final DateTime createdAt;
-  // final HomeData homeData;
+  final String phoneNumber;
+  final HomeData homeData;
+  final String userType;
 
   UserModel({
     this.uuid,
     required this.name,
-    required this.cpf,
     required this.email,
-    required this.phone,
-    required this.type,
-    required this.apartmentNumber,
-    required this.tower,
-    required this.createdAt,
-    // required this.homeData,
+    required this.phoneNumber,
+    required this.homeData,
+    required this.userType,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      name: json['name'],
-      cpf: json['cpf'],
-      email: json['email'],
-      phone: json['phone'],
-      type: json['type'],
-      apartmentNumber: json['apartmentNumber'],
-      tower: json['tower'],
-      createdAt: json['createdAt'],
-    );
+  @override
+  String toString() {
+    return "{uuid: $uuid, "
+        "name: $name, "
+        " email: $email, "
+        " phoneNumber: $phoneNumber, "
+        "homeData: { "
+        "apartmentNumber: ${homeData.apartmentNumber}, "
+        " tower: ${homeData.tower}, "
+        "}, "
+        "userType: $userType"
+        "}";
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'name': this.name,
-      'cpf': this.cpf,
-      'email': this.email,
-      'phone': this.phone,
-      'type': this.type,
-      'apartmentNumber': this.apartmentNumber,
-      'tower': this.tower,
-      'createdAt': this.createdAt,
-    };
+  factory UserModel.fromJson(Map<String, dynamic>? json,
+      {required String uuid}) {
+    return UserModel(
+      name: json?["name"],
+      homeData: HomeData.fromJson(json?["homeData"]),
+      email: json?["email"],
+      phoneNumber: json?["phoneNumber"],
+      userType: json?["userType"],
+      uuid: uuid,
+    );
   }
 }
 
@@ -55,11 +47,11 @@ class HomeData {
   final String tower;
 
   HomeData({required this.apartmentNumber, required this.tower});
-}
 
-class UserContactInfo {
-  final String email;
-  final String phoneNumber;
-
-  UserContactInfo({required this.email, required this.phoneNumber});
+  factory HomeData.fromJson(Map<String, dynamic>? json) {
+    return HomeData(
+      apartmentNumber: json?["apartmentNumber"],
+      tower: json?["tower"],
+    );
+  }
 }
