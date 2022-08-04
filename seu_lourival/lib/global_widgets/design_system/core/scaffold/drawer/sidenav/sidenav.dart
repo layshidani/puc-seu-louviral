@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/modules/users_manager/page.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 
 import 'package:seu_lourival/core/values/text_size.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
@@ -32,7 +34,7 @@ class DSDrawerSidenav extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Image.network(
-                    'https://viverdeblog.com/wp-content/uploads/2017/03/persona-topo.png',
+                    'https://www.pragmatismopolitico.com.br/wp-content/uploads/2022/04/predio.jpg',
                   ),
                 ),
                 const Text(
@@ -49,7 +51,7 @@ class DSDrawerSidenav extends StatelessWidget {
                     children: [
                       Chip(
                         label: DSText.sm('Morador'),
-                        backgroundColor: const Color.fromARGB(46, 0, 155, 198),
+                        backgroundColor: DSColors.tertiary,
                       ),
                     ],
                   ),
@@ -71,6 +73,13 @@ class DSDrawerSidenav extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: const Icon(Icons.people),
+              title: const Text('Visitantes'),
+              onTap: () {
+                Get.toNamed(Routes.financial);
+              },
+            ),
+            ListTile(
               leading: const Icon(Icons.payments_outlined),
               title: const Text('Financeiro'),
               onTap: () {
@@ -78,8 +87,8 @@ class DSDrawerSidenav extends StatelessWidget {
               },
             ),
             // ListTile(
-            //   leading: const Icon(Icons.people),
-            //   title: const Text('Gerenciamento de usuários'),
+            //   leading: const Icon(Icons.person_add),
+            //   title: const Text('Gerenciar usuários'),
             //   onTap: () {
             //     Navigator.of(context).pushReplacement(
             //       // Go to ReportPage

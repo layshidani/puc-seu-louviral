@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/modules/users_manager/registered_list/controller.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/user_types.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
@@ -26,13 +27,13 @@ class RegisteredList extends StatelessWidget {
                     width: 40,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
+                        backgroundColor: DSColors.secondary,
                         side: const BorderSide(
                           color: Colors.white70,
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.grey),
+                          side: BorderSide(color: DSColors.secondary),
                         ),
                       ),
                       onPressed: () => controller.clearFilter(),
@@ -49,13 +50,13 @@ class RegisteredList extends StatelessWidget {
                       width: 40,
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.grey[300],
+                          backgroundColor: DSColors.secondary,
                           side: const BorderSide(
                             color: Colors.white70,
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
-                            side: const BorderSide(color: Colors.grey),
+                            side: BorderSide(color: DSColors.secondary),
                           ),
                         ),
                         onPressed: () => controller.getUsersList(),
@@ -136,7 +137,7 @@ class RegisteredList extends StatelessWidget {
                                   ),
                                 ),
                                 backgroundColor:
-                                    Color.fromARGB(46, 0, 155, 198),
+                                    DSColors.tertiary,
                               ),
                             ),
                             Text(

@@ -27,7 +27,7 @@ class _DSDrawerState extends State<DSDrawer> {
   @override
   Widget build(BuildContext context) {
     return AdvancedDrawer(
-      backdropColor: DSColors.primaryDark,
+      backdropColor: DSColors.primary900,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
