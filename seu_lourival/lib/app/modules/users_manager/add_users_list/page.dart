@@ -29,13 +29,13 @@ class AddUsersList extends StatelessWidget {
                     width: 40,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
-                        side: const BorderSide(
-                          color: Colors.white70,
+                        backgroundColor: DSColors.secondary,
+                        side: BorderSide(
+                          color: DSColors.white70,
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.grey),
+                          side: BorderSide(color: DSColors.secondary),
                         ),
                       ),
                       onPressed: () => controller.clearFilter(),
@@ -52,13 +52,13 @@ class AddUsersList extends StatelessWidget {
                       width: 40,
                       child: TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.grey[300],
-                          side: const BorderSide(
-                            color: Colors.white70,
+                          backgroundColor: DSColors.secondary,
+                          side: BorderSide(
+                            color: DSColors.white70,
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
-                            side: const BorderSide(color: Colors.grey),
+                            side: BorderSide(color: DSColors.secondary),
                           ),
                         ),
                         onPressed: () => controller.getPreRegisteredList(),
@@ -139,7 +139,7 @@ class AddUsersList extends StatelessWidget {
                                   ),
                                 ),
                                 backgroundColor:
-                                    Color.fromARGB(46, 0, 155, 198),
+                                    DSColors.tertiary,
                               ),
                             ),
                             Text(

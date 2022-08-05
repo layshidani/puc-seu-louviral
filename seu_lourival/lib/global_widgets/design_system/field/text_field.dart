@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:seu_lourival/core/theme/text_style.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/login_strings.dart';
 import 'package:seu_lourival/core/values/spacing.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
@@ -39,12 +40,19 @@ class DSTextField extends StatelessWidget {
         maxLines: maxLines,
         keyboardType: keyboardType,
         decoration: InputDecoration(
-          suffixIcon: Icon(iconData),
+          suffixIcon: Icon(iconData, color: DSColors.primary,),
           prefix: DSText.base(prefix),
           // border: OutlineInputBorder(
           //   borderRadius: BorderRadius.circular(Spacing.s5),
           // ),
           labelText: labelText,
+          labelStyle: const TextStyle(color: DSColors.primary),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: DSColors.primary),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: DSColors.primary),
+          ),
         ),
         style: DSTextStyle.textBase,
         autovalidateMode: autovalidateMode,

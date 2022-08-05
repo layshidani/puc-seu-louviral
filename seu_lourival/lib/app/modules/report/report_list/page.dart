@@ -63,12 +63,12 @@ class ReportListPage extends StatelessWidget {
                                             ? Icons.lock
                                             : Icons.lock_open_sharp,
                                         size: DSTextSize.sm,
-                                        color: Colors.grey[800]),
+                                        color: DSColors.grey800),
                                   ),
                                   Chip(
                                     label: DSText.xsm(report.status),
                                     labelStyle:
-                                        TextStyle(color: Colors.grey[800]),
+                                        TextStyle(color: DSColors.grey800),
                                   ),
                                 ],
                               ),

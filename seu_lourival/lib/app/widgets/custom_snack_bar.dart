@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 
 class CustomSnackBar {
   final String title;
@@ -36,11 +37,11 @@ enum SnackbarStyle {
   Color? get backgroundColor {
     switch (this) {
       case SnackbarStyle.success:
-        return Colors.green[700];
+        return DSColors.success;
       case SnackbarStyle.error:
-        return Colors.red[700];
+        return DSColors.error;
       case SnackbarStyle.info:
-        return Colors.blue[700];
+        return DSColors.info;
     }
   }
 
