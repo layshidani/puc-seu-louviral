@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:seu_lourival/app/modules/sms_validation/controller.dart';
 import 'package:seu_lourival/core/utils/input_validators.dart';
@@ -21,10 +22,15 @@ class SmsValidationPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(),
+            Lottie.asset(
+              'assets/loading/89621-rooms.json',
+              fit: BoxFit.fill,
+              height: 200,
+            ),
+            const SizedBox(height: 30),
             DSTitle.lg(SmsValidationStrings.title),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               child: Form(
                 key: controller.key,
                 child: PinCodeTextField(

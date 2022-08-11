@@ -8,15 +8,15 @@ class CustomLoading extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Lottie.asset(
-          //   'assets/loading/24209-house-ou-apartment.json',
-          //   fit: BoxFit.fill,
-          // ),
+          Lottie.asset(
+            'assets/loading/24209-house-ou-apartment.json',
+            fit: BoxFit.fill,
+          ),
           const SizedBox(
             height: 20,
           ),
           const Text(
-            'Loading',
+            'Carregando',
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w300,

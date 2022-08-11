@@ -47,7 +47,7 @@ class UserModel {
 }
 
 class HomeData {
-  final int number;
+  final String number;
   final String tower;
 
   HomeData({required this.number, required this.tower});

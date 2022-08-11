@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
@@ -20,6 +21,12 @@ class ReportListPage extends StatelessWidget {
     return DSScaffold(
       hasDrawer: true,
       title: ReportListStrings.scaffoldTitle,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          FirebaseAuth.instance.signOut();
+        },
+        child: Icon(Icons.add),
+      ),
       body: RefreshIndicator(
         onRefresh: () async {
           _controller.getReports();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:seu_lourival/app/modules/login/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
@@ -28,12 +29,18 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Spacer(),
+                    Lottie.asset(
+                      'assets/loading/89621-rooms.json',
+                      fit: BoxFit.fill,
+                      height: 200,
+                    ),
+                    const SizedBox(height: 30),
                     DSTitle.lg(
                       LoginStrings.title,
                     ),
-                    const SizedBox(height: 60),
+                    const SizedBox(height: 30),
                     Form(
                       key: _key,
                       child: DSTextField(
@@ -52,7 +59,6 @@ class LoginPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    const SizedBox(height: 60),
                     const Spacer(),
                     DSIconButton(
                       buttonText: LoginStrings.submitButton,
