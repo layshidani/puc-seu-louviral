@@ -5,12 +5,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/routes/routes.dart';
 import 'repository.dart';
 
 class NewReportController extends GetxController {
   //repository
   final NewReportRepository _repository;
+  final UserService _service;
 
   //loading
   final _isLoading = false.obs;
@@ -32,7 +34,7 @@ class NewReportController extends GetxController {
   //form model
   final formModel = AddReportFormModel();
 
-  NewReportController(this._repository);
+  NewReportController(this._repository, this._service);
 
   @override
   void onInit() async {
@@ -51,13 +53,13 @@ class NewReportController extends GetxController {
     }
     isLoading = true;
     final ref =
-        "reports/uuid_aleatorio_do_usuario_${Random().nextInt(999)}/${DateTime.now().toString()}";
+        "reports/${_service.user?.uuid ?? "error"}/${DateTime.now().toString()}";
     final uploadedURL = await _repository.uploadImage(
         file: File(formModel.imagePath), ref: ref);
     final author = Author(
-        uuid: "a123ubl1j2hl2k3h4lkjh",
-        name: "Bryan Barreto",
-        phone: "5521912121212");
+        uuid: _service.user?.uuid ?? "error",
+        name: _service.user?.name ?? "error",
+        phone: _service.user?.phone ?? "error");
     final report = Report(
       title: formModel.title,
       description: formModel.description,
