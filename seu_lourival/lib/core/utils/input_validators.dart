@@ -12,7 +12,8 @@ class DSInputValidators {
   }
 
   static String? isValidPhone(String? value) {
-    return (GetUtils.isPhoneNumber(value!))
+    return (GetUtils.isPhoneNumber(value!)) &&
+            (GetUtils.isEqual(value.length, 15))
         ? null
         : 'Ops! Informe um número de celular válido';
   }

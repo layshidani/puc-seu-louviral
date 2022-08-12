@@ -6,6 +6,7 @@ import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/data/services/sms_authentication_service.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
+import 'package:seu_lourival/routes/routes.dart';
 
 import '../../widgets/custom_snack_bar.dart';
 
@@ -53,10 +54,10 @@ class SmsValidationController extends GetxController {
     if (await _validatePreRegister()) {
       Get.to(DummyPage('PRÉ REGISTER'));
     } else if (await _validateTrustedUser()) {
-      Get.to(DummyPage('Usuário confirmado'));
+      Get.offAllNamed(Routes.reportList);
     } else {
       await _deleteUser();
-      Get.to(DummyPage('Não autorizado'));
+      Get.offNamed(Routes.loginError);
     }
   }
 

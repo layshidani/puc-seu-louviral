@@ -8,8 +8,8 @@ class ReportModel {
   final String title;
   final String description;
   final String photoURL;
-  final createdAt;
-  final updatedAt;
+  final String createdAt;
+  final String updatedAt;
   final bool isPrivate;
   String category;
   String status;
@@ -193,30 +193,35 @@ Color? getReportCategoryColor(String category) {
     case ReportCategory.ELECTRIC:
       return Colors.amber[900];
     case ReportCategory.HYDRAULIC:
-        return Colors.blue[800];
+      return Colors.blue[800];
     case ReportCategory.KEYCHAIN:
-        return Colors.brown[900];
+      return Colors.brown[900];
     case ReportCategory.PAINTING:
-        return Colors.purple[800];
+      return Colors.purple[800];
     case ReportCategory.ELEVATOR:
-        return Colors.grey[800];
+      return Colors.grey[800];
     case ReportCategory.COMPLAINT:
-        return Colors.pink[800];
+      return Colors.pink[800];
     default:
-        return Colors.green[900];
+      return Colors.green[900];
   }
 }
 
 class ReportStatusHelper {
   static ReportStatus fromString(String status) {
-    return ReportStatus.values
-        .firstWhere((status) => status == status);
+    return ReportStatus.values.firstWhere((status) => status == status);
   }
 }
 
 class ReportCategoryHelper {
   static ReportCategory fromString(String status) {
-    return ReportCategory.values
-        .firstWhere((reportCategory) => reportCategory.description == status);
+    try {
+      final cat = ReportCategory.values
+          .firstWhere((reportCategory) => reportCategory.description == status);
+      print("--> CAAAAAAT: ${cat}");
+      return cat;
+    } catch (e) {
+      return ReportCategory.DEFAULT;
+    }
   }
 }

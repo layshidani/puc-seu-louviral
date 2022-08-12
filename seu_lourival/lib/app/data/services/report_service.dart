@@ -12,16 +12,17 @@ class ReportService {
       }
 
       return result.map((json) {
+        print("--> JSOOOOOOON: ${json}");
         return ReportModel.fromJson(json);
       }).toList();
-
     } catch (e) {
       print('🚩 $e');
       return throw Exception('Ops. Ocorreu um erro ao recuperar os dados');
     }
   }
 
-  static List<Map<String, dynamic>> _prepareData(QuerySnapshot<Map<String, dynamic>> data) {
+  static List<Map<String, dynamic>> _prepareData(
+      QuerySnapshot<Map<String, dynamic>> data) {
     return data.docs.map((doc) {
       return doc.data();
     }).toList();

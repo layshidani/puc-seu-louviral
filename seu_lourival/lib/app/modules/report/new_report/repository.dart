@@ -75,15 +75,17 @@ class Report {
 
   Map<String, dynamic> toJson() {
     return {
-      "title": this.title,
-      "description": this.description,
-      "photoURL": this.photoURL,
-      "createdAt": this.createdAt,
-      "updatedAt": this.updatedAt,
-      "status": this.status,
-      "name": this.author.name,
-      "phone": this.author.phone,
-      "isPrivate": this.isPrivate,
+      "title": title,
+      "description": description,
+      "photoURL": photoURL,
+      "createdAt": createdAt,
+      "updatedAt": updatedAt,
+      "status": status,
+      "isPrivate": isPrivate,
+      "author": author.name,
+      "phone": author.phone,
+      "id": author.uuid,
+      "category": category,
     };
   }
 }

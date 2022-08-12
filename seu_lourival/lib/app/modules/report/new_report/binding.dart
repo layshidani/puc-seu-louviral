@@ -6,6 +6,10 @@ import 'repository.dart';
 class NewReportBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(NewReportController(NewReportRepository()));
+    Get.put(NewReportController(
+      NewReportRepository(),
+      Get.find(),
+      Get.find(),
+    ));
   }
 }

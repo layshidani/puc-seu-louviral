@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/data/services/report_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:seu_lourival/core/values/strings.dart';
@@ -15,6 +16,8 @@ class ReportListController extends GetxController {
 
   final RxBool _isLoading = false.obs;
   get isLoading => _isLoading.value;
+
+  bool get isReportListEmpty => _reportList.length <= 0;
 
   _setLoading(bool isLoading) {
     _isLoading.value = isLoading;
@@ -37,7 +40,11 @@ class ReportListController extends GetxController {
     _reportList.value = data;
   }
 
-   void _showSnackBar(
+  void setReport(ReportModel model) {
+    _reportList.insert(0, model);
+  }
+
+  void _showSnackBar(
       {SnackbarStyle style = SnackbarStyle.info, String message = ''}) {
     final snackbar = CustomSnackBar(
       title: message,
