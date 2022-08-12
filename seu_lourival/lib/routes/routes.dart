@@ -6,6 +6,7 @@ class Routes {
   static const addUsersForm = '/add-usersform';
   static const billboard = '/billboard';
   static const financial = '/financial';
+  static const visitors = '/visitors';
   static const reportList = '/report-list';
   static const newReport = '/new-report';
   static const reportDetail = '/report-detail';

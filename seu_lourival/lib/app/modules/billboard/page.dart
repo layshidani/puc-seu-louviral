@@ -8,15 +8,11 @@ class BillboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return DSScaffold(
+    return DSScaffold(
       hasDrawer: true,
       title: 'Comunicados',
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          DSText.lg('Comunicados - Em Construção'),
-        ],
+      body: Center(
+        child: DSText.lg('Comunicados - Em Construção'),
       ),
     );
   }
