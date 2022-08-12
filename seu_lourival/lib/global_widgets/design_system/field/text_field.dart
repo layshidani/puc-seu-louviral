@@ -13,6 +13,8 @@ class DSTextField extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final int? maxLines;
   final String prefix;
+  final bool enabled;
+  final String? initialValue;
   final IconData? iconData;
   final Function(String)? onChange;
   final String? Function(String?)? validator;
@@ -27,7 +29,9 @@ class DSTextField extends StatelessWidget {
     this.maxLines = 1,
     this.onChange,
     this.prefix = '',
+    this.initialValue = '',
     this.textCapitalization = TextCapitalization.sentences,
+    this.enabled = true,
     required this.labelText,
   });
 
@@ -36,6 +40,8 @@ class DSTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: Spacing.s5),
       child: TextFormField(
+        enabled: enabled,
+        initialValue: initialValue,
         textCapitalization: textCapitalization,
         maxLines: maxLines,
         keyboardType: keyboardType,

@@ -25,6 +25,7 @@ class ReportListController extends GetxController {
 
   Future<void> getReports() async {
     try {
+      _setLoading(true);
       final data = await ReportService.getReports();
       _setListValue(data);
       _setLoading(false);

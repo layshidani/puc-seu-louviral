@@ -23,3 +23,14 @@ class SmsValidationStrings {
   static const String title = 'Digite o código recebido no seu celular';
   static const String nextBtn = 'Validar';
 }
+
+class ReportDetailsStrings {
+  //page
+  static const title = "Detalhe do manifesto";
+
+  //form
+  static const privateReport = "Manifesto privado";
+  static const reportTitle = "Título";
+  static const reportDescription = "Descrição";
+}
+

@@ -19,6 +19,14 @@ class UserService {
     return false;
   }
 
+  static onSignOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+       return throw Exception('Ops, ocorreu um erro. Tente novamente');
+    }
+  }
+
   static onDeletePreRegistered({required String cpf}) async {
     try {
       await FirebaseFirestore.instance
@@ -53,7 +61,7 @@ class UserService {
                 })
               });
     } catch (e) {
-      return throw Exception('Ops. Ocorreu um erro ao recuperar os dados');
+      return throw Exception('Ops, ocorreu um erro. Tente novamente.');
     }
   }
 

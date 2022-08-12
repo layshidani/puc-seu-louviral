@@ -21,6 +21,7 @@ import 'package:seu_lourival/app/modules/users_manager/add_users_form/binding.da
 import 'package:seu_lourival/app/modules/users_manager/add_users_form/page.dart';
 import 'package:seu_lourival/app/modules/users_manager/binding.dart';
 import 'package:seu_lourival/app/modules/users_manager/page.dart';
+import 'package:seu_lourival/app/modules/visitors/page.dart';
 import 'package:seu_lourival/routes/routes.dart';
 
 class Pages {
@@ -65,6 +66,10 @@ class Pages {
     GetPage(
       name: Routes.financial,
       page: () => const FinancePage(),
+    ),
+    GetPage(
+      name: Routes.visitors,
+      page: () => const VisitorsPage(),
     ),
     GetPage(
       name: Routes.usersManager,

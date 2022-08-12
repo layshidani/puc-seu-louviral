@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/users_manager/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 
@@ -76,7 +77,7 @@ class DSDrawerSidenav extends StatelessWidget {
               leading: const Icon(Icons.people),
               title: const Text('Visitantes'),
               onTap: () {
-                Get.toNamed(Routes.financial);
+                Get.toNamed(Routes.visitors);
               },
             ),
             ListTile(
@@ -96,6 +97,15 @@ class DSDrawerSidenav extends StatelessWidget {
             //     );
             //   },
             // ),
+            const Spacer(),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Sair'),
+              onTap: () async {
+                await UserService.onSignOut();
+                Get.offAllNamed(Routes.login);
+              },
+            ),
             const Spacer(),
             DefaultTextStyle(
               style: const TextStyle(
