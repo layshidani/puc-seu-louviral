@@ -9,6 +9,7 @@ class NewReportBinding implements Bindings {
     Get.put(NewReportController(
       NewReportRepository(),
       Get.find(),
+      Get.find(),
     ));
   }
 }

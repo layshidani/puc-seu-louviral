@@ -167,6 +167,7 @@ class NewReportPage extends StatelessWidget {
                       CheckboxListTile(
                         value: _controller.isPrivateReport,
                         onChanged: (value) {
+                          print("--> CHECKBOX VALUE: $value");
                           _controller.isPrivateReport = value ?? false;
                         },
                         title: Text(NewReportStrings.privateReport),

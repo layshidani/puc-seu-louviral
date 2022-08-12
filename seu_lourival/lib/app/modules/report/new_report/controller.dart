@@ -5,7 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
+import 'package:seu_lourival/app/modules/report/report_list/controller.dart';
+import 'package:seu_lourival/core/utils/datetime_helper.dart';
 import 'package:seu_lourival/routes/routes.dart';
 import 'repository.dart';
 
@@ -13,6 +16,7 @@ class NewReportController extends GetxController {
   //repository
   final NewReportRepository _repository;
   final UserService _service;
+  final ReportListController _reportListController;
 
   //loading
   final _isLoading = false.obs;
@@ -34,7 +38,8 @@ class NewReportController extends GetxController {
   //form model
   final formModel = AddReportFormModel();
 
-  NewReportController(this._repository, this._service);
+  NewReportController(
+      this._repository, this._service, this._reportListController);
 
   @override
   void onInit() async {
@@ -68,12 +73,29 @@ class NewReportController extends GetxController {
       updatedAt: DateTime.now(),
       status: "Em aberto",
       author: author,
-      isPrivate: formModel.isPrivate,
+      isPrivate: _isPrivateReport.value,
       category: formModel.category,
     );
     await _repository.addReport(report);
     isLoading = false;
+    _addReportToList(report);
     onSuccess();
+  }
+
+  void _addReportToList(Report report) {
+    final reportModel = ReportModel(
+      id: report.author.uuid,
+      isPrivate: report.isPrivate,
+      title: report.title,
+      category: report.category,
+      author: report.author.name,
+      createdAt: DateTimeHelper.fromTimeStamp(report.createdAt),
+      description: report.description,
+      photoURL: report.photoURL,
+      status: report.status,
+      updatedAt: DateTimeHelper.fromTimeStamp(report.updatedAt),
+    );
+    _reportListController.setReport(reportModel);
   }
 }
 
