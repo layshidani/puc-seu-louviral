@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/report/report_list/controller.dart';
+import 'package:seu_lourival/app/widgets/custom_loading.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/strings.dart';
 import 'package:seu_lourival/core/values/text_size.dart';
@@ -33,7 +34,7 @@ class ReportListPage extends StatelessWidget {
           _controller.getReports();
         },
         child: Obx(
-          () => _controller.isReportListEmpty
+          () => _controller.isLoading ? CustomLoading() : _controller.isReportListEmpty
               ? Center(
                   child: DSText.lg("Nenhum item a ser exibido"),
                 )

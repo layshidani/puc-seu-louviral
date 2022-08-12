@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDebugMode = false;
+    bool isDebugMode = true;
 
     return GetMaterialApp(
       title: 'Seu Lourival',
