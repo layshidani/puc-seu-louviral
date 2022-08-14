@@ -1,20 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/modules/report/report_detail/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
+import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/spacing.dart';
 import 'package:seu_lourival/core/values/strings.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
+import 'package:simple_speed_dial/simple_speed_dial.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReportDetailPage extends StatelessWidget {
   final _controller = Get.find<ReportDetailController>();
   final _formKey = GlobalKey<FormState>();
 
   final report = Get.arguments as ReportModel;
+
+  Widget _buildListTile(String title, String subtitle) {
+    return ListTile(
+      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 17,
+        ),
+      ),
+      subtitle: Text(subtitle),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +42,38 @@ class ReportDetailPage extends StatelessWidget {
 
     return DSScaffold(
       title: ReportDetailsStrings.title,
+      floatingActionButton: SpeedDial(
+        closedBackgroundColor: DSColors.primary,
+        openBackgroundColor: DSColors.primary,
+        child: Icon(Icons.warning),
+        speedDialChildren: [
+          SpeedDialChild(
+            child: Icon(Icons.phone),
+            backgroundColor: Colors.amber[700],
+            onPressed: () {
+              launchUrl(Uri.parse("tel:${report.phone}"));
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.whatsapp),
+            backgroundColor: Colors.green[700],
+            onPressed: () async {
+              try {
+                await FlutterLaunch.launchWhatsapp(
+                    phone: report.phone,
+                    message:
+                        "Olá, estou entrando em contato para falar sobre seu manifesto: *${report.title}*");
+              } catch (e) {
+                final snack = CustomSnackBar(
+                  title: "Erro ao abrir Whatsapp",
+                  style: SnackbarStyle.error,
+                ).build();
+                Get.showSnackbar(snack);
+              }
+            },
+          ),
+        ],
+      ),
       body: Obx(
         () => _controller.isLoading
             ? CustomLoading()
@@ -34,11 +85,12 @@ class ReportDetailPage extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () async {
-                          _controller.isLoading = true;
-                          await ImageDownloader.downloadImage(report.photoURL,
-                              destination:
-                                  AndroidDestinationType.directoryPictures);
-                          _controller.isLoading = false;
+                          // _controller.isLoading = true;
+                          // await ImageDownloader.downloadImage(report.photoURL,
+                          //     destination:
+                          //         AndroidDestinationType.directoryPictures);
+                          // _controller.isLoading = false;
+                          print("exibir tela com imagem");
                         },
                         child: Stack(
                           alignment: Alignment.bottomRight,
@@ -54,7 +106,10 @@ class ReportDetailPage extends StatelessWidget {
                                   width: 250,
                                   color: Colors.grey[200],
                                   child: report.photoURL.toString().length > 1
-                                      ? Image.network(report.photoURL)
+                                      ? Image(
+                                          image: NetworkImage(report.photoURL),
+                                          fit: BoxFit.cover,
+                                        )
                                       : Icon(Icons.image_outlined,
                                           size: 50, color: Colors.grey[500]),
                                 ),
@@ -68,12 +123,22 @@ class ReportDetailPage extends StatelessWidget {
                                 color: Colors.white,
                               ),
                               padding: const EdgeInsets.all(5),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey[200]),
-                                child: const Icon(
-                                  Icons.download,
+                              child: InkWell(
+                                onTap: () async {
+                                  _controller.isLoading = true;
+                                  await ImageDownloader.downloadImage(
+                                      report.photoURL,
+                                      destination: AndroidDestinationType
+                                          .directoryPictures);
+                                  _controller.isLoading = false;
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey[200]),
+                                  child: const Icon(
+                                    Icons.download,
+                                  ),
                                 ),
                               ),
                             ),
@@ -109,14 +174,17 @@ class ReportDetailPage extends StatelessWidget {
                           report.isPrivate ? Icons.lock : Icons.lock_open_sharp,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 0),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          DSText.sm('Autor (a): ${report.author}'),
-                          DSText.sm('Criado em: ${report.createdAt}'),
-                          DSText.sm(
-                              'Última atualização em: ${report.updatedAt}'),
+                          _buildListTile(
+                              "${report.author} - apto ${report.homeData.number} bloco ${report.homeData.tower}",
+                              "Autor"),
+                          _buildListTile(report.status, "Status"),
+                          _buildListTile(report.createdAt, "Data de criação"),
+                          _buildListTile(
+                              report.updatedAt, "Última modificação"),
                         ],
                       ),
                     ],
