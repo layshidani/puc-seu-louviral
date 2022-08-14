@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
-import 'package:image_downloader/image_downloader.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/modules/report/report_detail/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
@@ -16,7 +15,7 @@ import 'package:simple_speed_dial/simple_speed_dial.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReportDetailPage extends StatelessWidget {
-  final _controller = Get.find<ReportDetailController>();
+  final controller = Get.find<ReportDetailController>();
   final _formKey = GlobalKey<FormState>();
 
   final report = Get.arguments as ReportModel;
@@ -37,7 +36,7 @@ class ReportDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ReportDetailController _controller = Get.find();
+    final ReportDetailController controller = Get.find();
     final report = Get.arguments as ReportModel;
 
     return DSScaffold(
@@ -45,7 +44,7 @@ class ReportDetailPage extends StatelessWidget {
       floatingActionButton: SpeedDial(
         closedBackgroundColor: DSColors.primary,
         openBackgroundColor: DSColors.primary,
-        child: Icon(Icons.warning),
+        child: Icon(Icons.contact_phone),
         speedDialChildren: [
           SpeedDialChild(
             child: Icon(Icons.phone),
@@ -75,7 +74,7 @@ class ReportDetailPage extends StatelessWidget {
         ],
       ),
       body: Obx(
-        () => _controller.isLoading
+        () => controller.isLoading
             ? CustomLoading()
             : SingleChildScrollView(
                 padding: const EdgeInsets.all(Spacing.s4),
@@ -85,11 +84,9 @@ class ReportDetailPage extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () async {
-                          // _controller.isLoading = true;
-                          // await ImageDownloader.downloadImage(report.photoURL,
-                          //     destination:
-                          //         AndroidDestinationType.directoryPictures);
-                          // _controller.isLoading = false;
+                          controller.onDownloadImage(report);
+
+                          // TODO
                           print("exibir tela com imagem");
                         },
                         child: Stack(
@@ -125,12 +122,7 @@ class ReportDetailPage extends StatelessWidget {
                               padding: const EdgeInsets.all(5),
                               child: InkWell(
                                 onTap: () async {
-                                  _controller.isLoading = true;
-                                  await ImageDownloader.downloadImage(
-                                      report.photoURL,
-                                      destination: AndroidDestinationType
-                                          .directoryPictures);
-                                  _controller.isLoading = false;
+                                  controller.onDownloadImage(report);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

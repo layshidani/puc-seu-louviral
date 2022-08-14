@@ -32,5 +32,9 @@ class ReportDetailsStrings {
   static const privateReport = "Manifesto privado";
   static const reportTitle = "Título";
   static const reportDescription = "Descrição";
+
+  // snackbar
+  static const snackbarSuccess = 'Sucesso! O download da foto foi realizado';
+  static const snackbarError = 'Ops! Ocorreu um erro com o download, tente novamente';
 }
 
