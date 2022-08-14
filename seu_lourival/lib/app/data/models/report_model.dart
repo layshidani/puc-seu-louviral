@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
 import 'package:seu_lourival/core/values/text_size.dart';
 
@@ -11,8 +12,10 @@ class ReportModel {
   final String createdAt;
   final String updatedAt;
   final bool isPrivate;
+  final String phone;
   String category;
   String status;
+  HomeData homeData;
 
   ReportModel({
     this.id,
@@ -25,6 +28,8 @@ class ReportModel {
     this.isPrivate = true,
     this.status = '',
     this.category = '',
+    required this.phone,
+    required this.homeData,
   });
 
   void set setReportStatus(String status) {
@@ -33,17 +38,18 @@ class ReportModel {
 
   factory ReportModel.fromJson(Map<String, dynamic> json) {
     return ReportModel(
-      id: json['id'],
-      author: json['author'],
-      title: json['title'],
-      description: json['description'],
-      photoURL: json['photoURL'],
-      createdAt: DateTimeHelper.fromTimeStamp(json['createdAt']),
-      updatedAt: DateTimeHelper.fromTimeStamp(json['updatedAt']),
-      isPrivate: json['isPrivate'],
-      status: json['status'],
-      category: json['category'],
-    );
+        id: json['id'],
+        author: json['author'],
+        title: json['title'],
+        description: json['description'],
+        photoURL: json['photoURL'],
+        createdAt: DateTimeHelper.fromTimeStamp(json['createdAt']),
+        updatedAt: DateTimeHelper.fromTimeStamp(json['updatedAt']),
+        isPrivate: json['isPrivate'],
+        status: json['status'],
+        category: json['category'],
+        phone: json['phone'],
+        homeData: HomeData.fromJson(json['homeData']));
   }
 
   Map<String, dynamic> toJson() {
@@ -57,6 +63,8 @@ class ReportModel {
       'status': this.status,
       'author': this.author,
       'category': this.category,
+      'homeData': homeData,
+      'phone': phone,
     };
   }
 }

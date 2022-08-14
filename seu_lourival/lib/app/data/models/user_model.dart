@@ -58,4 +58,11 @@ class HomeData {
       tower: json?["tower"],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "number": number,
+      "tower": tower,
+    };
+  }
 }

@@ -5,6 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:seu_lourival/app/modules/report/new_report/controller.dart';
 
+import '../../../data/models/user_model.dart';
+
 class NewReportRepository {
   final _firestore = FirebaseFirestore.instance;
   final _storage = FirebaseStorage.instance;
@@ -86,6 +88,7 @@ class Report {
       "phone": author.phone,
       "id": author.uuid,
       "category": category,
+      "homeData": author.homeData.toJson(),
     };
   }
 }
@@ -94,10 +97,12 @@ class Author {
   final String uuid;
   final String name;
   final String phone;
+  final HomeData homeData;
 
   Author({
     required this.uuid,
     required this.name,
     required this.phone,
+    required this.homeData,
   });
 }

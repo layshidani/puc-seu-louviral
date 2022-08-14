@@ -64,7 +64,8 @@ class NewReportController extends GetxController {
     final author = Author(
         uuid: _service.user?.uuid ?? "error",
         name: _service.user?.name ?? "error",
-        phone: _service.user?.phone ?? "error");
+        phone: _service.user?.phone ?? "error",
+        homeData: _service.user!.homeData!);
     final report = Report(
       title: formModel.title,
       description: formModel.description,
@@ -84,6 +85,7 @@ class NewReportController extends GetxController {
 
   void _addReportToList(Report report) {
     final reportModel = ReportModel(
+      phone: report.author.phone,
       id: report.author.uuid,
       isPrivate: report.isPrivate,
       title: report.title,
@@ -94,6 +96,7 @@ class NewReportController extends GetxController {
       photoURL: report.photoURL,
       status: report.status,
       updatedAt: DateTimeHelper.fromTimeStamp(report.updatedAt),
+      homeData: report.author.homeData,
     );
     _reportListController.setReport(reportModel);
   }

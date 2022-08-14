@@ -25,6 +25,9 @@ dependencies:
 
   brasil_fields: ^1.4.5
   image_downloader: ^0.31.0
+  simple_speed_dial: ^0.1.7
+  url_launcher: ^6.1.5
+  flutter_launch: ^0.3.0
 
 
 dev_dependencies:
