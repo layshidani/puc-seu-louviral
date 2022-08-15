@@ -222,11 +222,13 @@ class ReportStatusHelper {
 }
 
 class ReportCategoryHelper {
-  static ReportCategory fromString(String status) {
+  static ReportCategory fromString(String category) {
+    print("--> CAAAAAATegory: ${category}");
     try {
-      final cat = ReportCategory.values
-          .firstWhere((reportCategory) => reportCategory.description == status);
-      print("--> CAAAAAAT: ${cat}");
+      final cat = ReportCategory.values.firstWhere((reportCategory) {
+        print("--> report category desc: ${reportCategory.description}");
+        return category.contains(reportCategory.description);
+      });
       return cat;
     } catch (e) {
       return ReportCategory.DEFAULT;

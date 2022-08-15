@@ -171,7 +171,7 @@ class ReportDetailPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _buildListTile(
-                              "${report.author} - apto ${report.homeData.number} bloco ${report.homeData.tower}",
+                              "${report.author}\nApto ${report.homeData.number} - ${report.homeData.tower}",
                               "Autor"),
                           _buildListTile(report.status, "Status"),
                           _buildListTile(report.createdAt, "Data de criação"),
