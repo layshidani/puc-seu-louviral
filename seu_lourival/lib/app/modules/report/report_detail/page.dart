@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
+import 'package:image_fade/image_fade.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/modules/report/report_detail/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
@@ -103,9 +104,48 @@ class ReportDetailPage extends StatelessWidget {
                                   width: 250,
                                   color: Colors.grey[200],
                                   child: report.photoURL.toString().length > 1
-                                      ? Image(
+                                      ? ImageFade(
+                                          // whenever the image changes, it will be loaded, and then faded in:
                                           image: NetworkImage(report.photoURL),
+
+                                          // slow fade for newly loaded images:
+                                          duration:
+                                              const Duration(milliseconds: 300),
+
+                                          // if the image is loaded synchronously (ex. from memory), fade in faster:
+                                          syncDuration:
+                                              const Duration(milliseconds: 150),
+
+                                          // supports most properties of Image:
+                                          alignment: Alignment.center,
                                           fit: BoxFit.cover,
+
+                                          // shown behind everything:
+                                          placeholder: Container(
+                                            color: const Color(0xFFCFCDCA),
+                                            alignment: Alignment.center,
+                                            child: const Icon(Icons.photo,
+                                                color: Colors.white30,
+                                                size: 128.0),
+                                          ),
+
+                                          // shows progress while loading an image:
+                                          loadingBuilder: (context, progress,
+                                                  chunkEvent) =>
+                                              Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                          value: progress)),
+
+                                          // displayed when an error occurs:
+                                          errorBuilder: (context, error) =>
+                                              Container(
+                                            color: const Color(0xFF6F6D6A),
+                                            alignment: Alignment.center,
+                                            child: const Icon(Icons.warning,
+                                                color: Colors.black26,
+                                                size: 128.0),
+                                          ),
                                         )
                                       : Icon(Icons.image_outlined,
                                           size: 50, color: Colors.grey[500]),

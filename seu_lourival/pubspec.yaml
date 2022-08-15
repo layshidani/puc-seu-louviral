@@ -28,6 +28,7 @@ dependencies:
   simple_speed_dial: ^0.1.7
   url_launcher: ^6.1.5
   flutter_launch: ^0.3.0
+  image_fade: ^0.6.1
 
 
 dev_dependencies:
