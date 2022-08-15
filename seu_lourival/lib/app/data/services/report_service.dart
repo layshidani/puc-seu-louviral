@@ -4,8 +4,11 @@ import 'package:seu_lourival/app/data/models/report_model.dart';
 class ReportService {
   static Future<List<ReportModel>> getReports() async {
     try {
-      final result = _prepareData(
-          await FirebaseFirestore.instance.collection('reports').get());
+      final result = _prepareData(await FirebaseFirestore.instance
+          .collection('reports')
+          // .orderBy("createdAt", descending: false)
+          .orderBy("createdAt", descending: true)
+          .get());
 
       if (result.isEmpty) {
         return [];
