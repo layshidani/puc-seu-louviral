@@ -43,6 +43,7 @@ class ReportListController extends GetxController {
 
   void setReport(ReportModel model) {
     _reportList.insert(0, model);
+    // _reportList.add(model);
   }
 
   void _showSnackBar(
