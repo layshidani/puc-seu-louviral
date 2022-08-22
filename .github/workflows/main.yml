@@ -13,13 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Flutter 🐥
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '2.17.1'
-          channel: 'stable'
-      - run: flutter build apk
-
       - name: Instalar dependências 📦
         run: flutter pub get
         
