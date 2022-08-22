@@ -10,8 +10,15 @@ jobs:
         working-directory: seu_lourival
         
     steps:
-      - name: Checkout code
+      - name: Checkout code 🎉
         uses: actions/checkout@v3
+
+      - name: Install Flutter 🐥
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.10.0'
+          channel: 'stable'
+      - run: flutter build apk
 
       - name: Instalar dependências 📦
         run: flutter pub get
@@ -19,7 +26,7 @@ jobs:
       - name: Analizar código ✨
         run: flutter analyze
 
-      # - name: Run unit tests
+      # - name: Run unit tests 🪲
       #  run: flutter test --coverage
 
       # - name: Upload to code coverage
