@@ -16,13 +16,21 @@ jobs:
       - name: Install Flutter 🐥
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.10.0'
+          flutter-version: '3.0.1'
           channel: 'stable'
       - run: flutter build apk
 
       - name: Instalar dependências 📦
         run: flutter pub get
         
+  check:
+    runs-on: macos-latest
+    
+    defaults:
+      run:
+        working-directory: seu_lourival
+        
+    steps:
       - name: Analizar código ✨
         run: flutter analyze
 
