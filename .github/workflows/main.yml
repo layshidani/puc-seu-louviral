@@ -3,7 +3,7 @@ name: Flutter Workflow
 on: [push, workflow_dispatch]
 jobs:
 
-  build:
+  check:
     runs-on: macos-latest
     defaults:
       run:
@@ -17,22 +17,8 @@ jobs:
           flutter-version: '3.0.1'
           channel: 'stable'
       - run: flutter build apk
-      
-  dependecies:
-      runs-on: macos-latest
-      defaults:
-        run:
-          working-directory: seu_lourival
-      steps:
       - name: Instalar dependências 📦
         run: flutter pub get
-        
-  analyze:
-    runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: seu_lourival
-    steps:
       - name: Analizar código ✨
         run: flutter analyze
 
