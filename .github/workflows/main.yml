@@ -2,34 +2,36 @@ name: Flutter Workflow
 
 on: [push, workflow_dispatch]
 jobs:
+
   build:
     runs-on: macos-latest
-    
     defaults:
       run:
         working-directory: seu_lourival
-        
     steps:
       - name: Checkout code 🎉
         uses: actions/checkout@v3
-
       - name: Install Flutter 🐥
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.0.1'
           channel: 'stable'
       - run: flutter build apk
-
+      
+  dependecies:
+      runs-on: macos-latest
+      defaults:
+        run:
+          working-directory: seu_lourival
+      steps:
       - name: Instalar dependências 📦
         run: flutter pub get
         
-  check:
+  analyze:
     runs-on: macos-latest
-    
     defaults:
       run:
         working-directory: seu_lourival
-        
     steps:
       - name: Analizar código ✨
         run: flutter analyze
