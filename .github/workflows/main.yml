@@ -11,15 +11,21 @@ jobs:
     steps:
       - name: Checkout code 🎉
         uses: actions/checkout@v3
-      - name: Install Flutter 🐥
+      - name: Setup JAVA 🟢
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name: Install Flutter 🎛
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.0.1'
           channel: 'stable'
-      # - run: flutter build apk
-      - name: Instalar dependências 📦
+      - name: Build apk 🐥
+        run: flutter build apk
+      - name: Install dependencies 📦
         run: flutter pub get
-      - name: Analizar código ✨
+      - name: Code analyze ✨
         run: flutter analyze
 
       # - name: Run unit tests 🪲
