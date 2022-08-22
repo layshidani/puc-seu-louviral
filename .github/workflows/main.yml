@@ -16,7 +16,7 @@ jobs:
         with:
           flutter-version: '3.0.1'
           channel: 'stable'
-      - run: flutter build apk
+      # - run: flutter build apk
       - name: Instalar dependências 📦
         run: flutter pub get
       - name: Analizar código ✨
