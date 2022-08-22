@@ -16,7 +16,7 @@ jobs:
       - name: Install Flutter 🐥
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '>=2.17.1 <3.0.0'
+          flutter-version: '2.17.1'
           channel: 'stable'
       - run: flutter build apk
 
