@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
@@ -19,7 +18,7 @@ class LoginErrorPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Spacer(),
+          const Spacer(),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
             child: Column(
@@ -37,7 +36,7 @@ class LoginErrorPage extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           DSIconButton(
             buttonText: 'Tentar novamente',
             iconData: Icons.refresh_outlined,

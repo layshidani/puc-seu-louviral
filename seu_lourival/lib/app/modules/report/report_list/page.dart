@@ -17,7 +17,7 @@ class ReportListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _controller = Get.find<ReportListController>();
+    final controller = Get.find<ReportListController>();
 
     return DSScaffold(
       hasDrawer: true,
@@ -31,22 +31,22 @@ class ReportListPage extends StatelessWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          _controller.getReports();
+          controller.getReports();
         },
         child: Obx(
-          () => _controller.isLoading
-              ? CustomLoading()
-              : _controller.isReportListEmpty
+          () => controller.isLoading
+              ? const CustomLoading()
+              : controller.isReportListEmpty
                   ? Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          DSText.lg("Nenhum item a ser exibido"),
+                          DSText.lg('Nenhum item a ser exibido'),
                           DSIconButton(
-                              buttonText: "Recarregar",
+                              buttonText: 'Recarregar',
                               onPressAction: () {
-                                _controller.getReports();
+                                controller.getReports();
                               }),
                         ],
                       ),
@@ -54,9 +54,9 @@ class ReportListPage extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: ListView.builder(
-                        itemCount: _controller.reportList.length,
+                        itemCount: controller.reportList.length,
                         itemBuilder: (context, index) {
-                          final report = _controller.reportList[index];
+                          final report = controller.reportList[index];
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 5.0, horizontal: 5.0),
@@ -139,8 +139,8 @@ class ReportListPage extends StatelessWidget {
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: [
-                                                  const Icon(
+                                                children: const [
+                                                  Icon(
                                                     Icons
                                                         .arrow_forward_ios_rounded,
                                                     color: DSColors.primary,

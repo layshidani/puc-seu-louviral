@@ -27,7 +27,7 @@ class AddUsersFormPage extends StatelessWidget {
               return Theme(
                 data: ThemeData(
                     colorScheme:
-                        ColorScheme.light(primary: DSColors.primary)),
+                        const ColorScheme.light(primary: DSColors.primary)),
                 child: Stepper(
                   physics: const ScrollPhysics(),
                   currentStep: controller.currentStep,

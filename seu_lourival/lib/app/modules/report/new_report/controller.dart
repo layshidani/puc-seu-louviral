@@ -1,15 +1,10 @@
 import 'dart:io';
-import 'dart:math';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/report/report_list/controller.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
-import 'package:seu_lourival/routes/routes.dart';
 import 'repository.dart';
 
 class NewReportController extends GetxController {
@@ -33,7 +28,7 @@ class NewReportController extends GetxController {
   Rx<String?> selectedCategory = null.obs;
 
   //image file path
-  var path = "".obs;
+  var path = ''.obs;
 
   //form model
   final formModel = AddReportFormModel();
@@ -53,7 +48,7 @@ class NewReportController extends GetxController {
       {required Function onSuccess,
       required Function(String) onFailure}) async {
     if (path.isEmpty) {
-      onFailure("Escolha uma foto para este manifesto");
+      onFailure('Escolha uma foto para este manifesto');
       return;
     }
     isLoading = true;
@@ -62,9 +57,9 @@ class NewReportController extends GetxController {
     final uploadedURL = await _repository.uploadImage(
         file: File(formModel.imagePath), ref: ref);
     final author = Author(
-        uuid: _service.user?.uuid ?? "error",
-        name: _service.user?.name ?? "error",
-        phone: _service.user?.phone ?? "error",
+        uuid: _service.user?.uuid ?? 'error',
+        name: _service.user?.name ?? 'error',
+        phone: _service.user?.phone ?? 'error',
         homeData: _service.user!.homeData!);
     final report = Report(
       title: formModel.title,
@@ -72,7 +67,7 @@ class NewReportController extends GetxController {
       photoURL: uploadedURL,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
-      status: "Em aberto",
+      status: 'Em aberto',
       author: author,
       isPrivate: _isPrivateReport.value,
       category: formModel.category,
@@ -103,20 +98,20 @@ class NewReportController extends GetxController {
 }
 
 class AddReportFormModel {
-  String title = "";
-  String description = "";
-  String category = "";
-  String imagePath = "";
+  String title = '';
+  String description = '';
+  String category = '';
+  String imagePath = '';
   bool isPrivate = false;
 
   @override
   String toString() {
-    return "{"
-        "title: $title,"
-        " description: $description, "
-        "category: $category,"
-        " imagePath: $imagePath,"
-        " isPrivate: $isPrivate"
-        "}";
+    return '{'
+        'title: $title,'
+        ' description: $description, '
+        'category: $category,'
+        ' imagePath: $imagePath,'
+        ' isPrivate: $isPrivate'
+        '}';
   }
 }

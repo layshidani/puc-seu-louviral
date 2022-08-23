@@ -52,7 +52,7 @@ class SmsValidationController extends GetxController {
 
   void _validateUser() async {
     if (await _validatePreRegister()) {
-      Get.to(DummyPage('PRÉ REGISTER'));
+      Get.to(const DummyPage('PRÉ REGISTER'));
     } else if (await _validateTrustedUser()) {
       Get.offAllNamed(Routes.reportList);
     } else {
@@ -81,10 +81,10 @@ class SmsValidationController extends GetxController {
   }
 
   Future<bool> _validateTrustedUser() async {
-    print("--> _validateTrustedUser");
+    print('--> _validateTrustedUser');
     try {
       final uuid = FirebaseAuth.instance.currentUser?.uid ?? '';
-      print("--> USER ID: ${uuid}");
+      print('--> USER ID: $uuid');
       final result =
           await FirebaseFirestore.instance.collection('users').doc(uuid).get();
       if (result.exists) {
@@ -93,7 +93,7 @@ class SmsValidationController extends GetxController {
       }
       return false;
     } catch (e) {
-      print("--> _validateTrustedUser catch error: ${e}");
+      print('--> _validateTrustedUser catch error: $e');
       return false;
     }
   }
@@ -106,7 +106,7 @@ class SmsValidationController extends GetxController {
 
 class DummyPage extends StatelessWidget {
   final String title;
-  DummyPage(this.title);
+  const DummyPage(this.title);
   @override
   Widget build(BuildContext context) {
     return DSScaffold(
@@ -116,7 +116,7 @@ class DummyPage extends StatelessWidget {
           onPressed: () {
             print(Get.find<UserService>().user.toString());
           },
-          child: Text("print user"),
+          child: const Text('print user'),
         ),
       ),
     );

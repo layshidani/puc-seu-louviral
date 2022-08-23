@@ -17,7 +17,7 @@ class ReportListController extends GetxController {
   final RxBool _isLoading = false.obs;
   get isLoading => _isLoading.value;
 
-  bool get isReportListEmpty => _reportList.length <= 0;
+  bool get isReportListEmpty => _reportList.isEmpty;
 
   _setLoading(bool isLoading) {
     _isLoading.value = isLoading;

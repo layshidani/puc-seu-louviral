@@ -7,7 +7,7 @@ class ReportService {
       final result = _prepareData(await FirebaseFirestore.instance
           .collection('reports')
           // .orderBy("createdAt", descending: false)
-          .orderBy("createdAt", descending: true)
+          .orderBy('createdAt', descending: true)
           .get());
 
       if (result.isEmpty) {
@@ -15,11 +15,9 @@ class ReportService {
       }
 
       return result.map((json) {
-        print("--> JSOOOOOOON: ${json}");
         return ReportModel.fromJson(json);
       }).toList();
     } catch (e) {
-      print('🚩 $e');
       return throw Exception('Ops. Ocorreu um erro ao recuperar os dados');
     }
   }

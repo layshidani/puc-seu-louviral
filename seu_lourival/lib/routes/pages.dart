@@ -38,7 +38,7 @@ class Pages {
     ),
     GetPage(
       name: Routes.reportList,
-      page: () => ReportListPage(),
+      page: () => const ReportListPage(),
       binding: ReportListBinding(),
     ),
     GetPage(
@@ -53,7 +53,7 @@ class Pages {
     ),
     GetPage(
       name: Routes.debug,
-      page: () => DebugHomePage(),
+      page: () => const DebugHomePage(),
     ),
     GetPage(
       name: Routes.loginError,
