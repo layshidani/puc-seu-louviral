@@ -7,11 +7,12 @@ class DSIconButton extends StatelessWidget {
   final IconData? iconData;
   final Function() onPressAction;
 
-  DSIconButton({
+  const DSIconButton({
+    Key? key,
     required this.buttonText,
     required this.onPressAction,
     this.iconData = Icons.check,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

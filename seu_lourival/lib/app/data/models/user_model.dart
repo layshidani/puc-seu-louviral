@@ -19,28 +19,28 @@ class UserModel {
 
   @override
   String toString() {
-    return "{uuid: $uuid, "
-        "name: $name, "
-        " email: $email, "
-        " phone: $phone, "
-        " phone: $cpf, "
-        "homeData: { "
-        "number: ${homeData?.number}, "
-        " tower: ${homeData?.tower}, "
-        "}, "
-        "type: $type"
-        "}";
+    return '{uuid: $uuid, '
+        'name: $name, '
+        ' email: $email, '
+        ' phone: $phone, '
+        ' phone: $cpf, '
+        'homeData: { '
+        'number: ${homeData?.number}, '
+        ' tower: ${homeData?.tower}, '
+        '}, '
+        'type: $type'
+        '}';
   }
 
   factory UserModel.fromJson(Map<String, dynamic>? json,
       {required String uuid}) {
     return UserModel(
-      name: json?["name"],
-      homeData: HomeData.fromJson(json?["homeData"]),
-      email: json?["email"],
-      phone: json?["phone"],
-      cpf: json?["cpf"],
-      type: json?["type"],
+      name: json?['name'],
+      homeData: HomeData.fromJson(json?['homeData']),
+      email: json?['email'],
+      phone: json?['phone'],
+      cpf: json?['cpf'],
+      type: json?['type'],
       uuid: uuid,
     );
   }
@@ -54,15 +54,15 @@ class HomeData {
 
   factory HomeData.fromJson(Map<String, dynamic>? json) {
     return HomeData(
-      number: json?["number"],
-      tower: json?["tower"],
+      number: json?['number'],
+      tower: json?['tower'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "number": number,
-      "tower": tower,
+      'number': number,
+      'tower': tower,
     };
   }
 }

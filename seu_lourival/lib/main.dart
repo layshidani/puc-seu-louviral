@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: DSColors.primary,
       ),
-      // initialRoute: Routes.debug,
+      // ignore: dead_code
       initialRoute: isDebugMode ? Routes.debug : Routes.login,
       initialBinding: InitialBinding(),
       getPages: Pages.pages,

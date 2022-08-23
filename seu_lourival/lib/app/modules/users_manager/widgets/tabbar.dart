@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:seu_lourival/app/modules/users_manager/add_users_list/page.dart';
 import 'package:seu_lourival/app/modules/users_manager/registered_list/page.dart';

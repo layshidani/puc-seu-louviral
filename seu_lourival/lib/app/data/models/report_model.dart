@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
@@ -32,7 +34,7 @@ class ReportModel {
     required this.homeData,
   });
 
-  void set setReportStatus(String status) {
+  set setReportStatus(String status) {
     this.status = status;
   }
 
@@ -54,15 +56,15 @@ class ReportModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'title': this.title,
-      'description': this.description,
-      'photoURL': this.photoURL,
-      'createdAt': this.createdAt,
-      'updatedAt': this.updatedAt,
-      'isPrivate': this.isPrivate,
-      'status': this.status,
-      'author': this.author,
-      'category': this.category,
+      'title': title,
+      'description': description,
+      'photoURL': photoURL,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+      'isPrivate': isPrivate,
+      'status': status,
+      'author': author,
+      'category': category,
       'homeData': homeData,
       'phone': phone,
     };
@@ -117,7 +119,6 @@ extension ReportCategoryExtension on ReportCategory {
 
 Icon getReportStatusColor(String status) {
   var st = ReportStatusHelper.fromString(status);
-  print('♥️ $status');
   switch (st) {
     case ReportStatus.OPEN:
       return Icon(
@@ -223,10 +224,8 @@ class ReportStatusHelper {
 
 class ReportCategoryHelper {
   static ReportCategory fromString(String category) {
-    print("--> CAAAAAATegory: ${category}");
     try {
       final cat = ReportCategory.values.firstWhere((reportCategory) {
-        print("--> report category desc: ${reportCategory.description}");
         return category.contains(reportCategory.description);
       });
       return cat;

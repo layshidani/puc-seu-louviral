@@ -33,7 +33,7 @@ class RegisteredList extends StatelessWidget {
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: DSColors.secondary),
+                          side: const BorderSide(color: DSColors.secondary),
                         ),
                       ),
                       onPressed: () => controller.clearFilter(),
@@ -56,7 +56,7 @@ class RegisteredList extends StatelessWidget {
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(color: DSColors.secondary),
+                            side: const BorderSide(color: DSColors.secondary),
                           ),
                         ),
                         onPressed: () => controller.getUsersList(),

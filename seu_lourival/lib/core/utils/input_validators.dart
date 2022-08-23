@@ -48,10 +48,10 @@ class DSInputValidators {
 
   static String? isFieldValid({required int minCharacters, String? value}) {
     if (value == null) {
-      print("--> ${value}, --> ${value?.length}");
-      return "Campo obrigatório";
+      print('--> $value, --> ${value?.length}');
+      return 'Campo obrigatório';
     } else if (value.length < minCharacters) {
-      return "Este campo deve ter pelo menos $minCharacters caracteres";
+      return 'Este campo deve ter pelo menos $minCharacters caracteres';
     }
     return null;
   }

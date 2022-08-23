@@ -3,7 +3,7 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/drawer/sidenav/sidenav.dart';
-import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold-widget/scaffold-widget.dart';
+import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold_widget/scaffold_widget.dart';
 
 // TODO: refatorar p/ nao precisar ser stateful
 // TODO: preencher c/ dados do usuário
@@ -15,13 +15,13 @@ class DSDrawer extends StatefulWidget {
   final Widget body;
   final Widget? floatButton;
 
-  DSDrawer({required this.title, required this.body, this.floatButton});
+  const DSDrawer({Key? key, required this.title, required this.body, this.floatButton}) : super(key: key);
 
   @override
-  _DSDrawerState createState() => _DSDrawerState();
+  DSDrawerState createState() => DSDrawerState();
 }
 
-class _DSDrawerState extends State<DSDrawer> {
+class DSDrawerState extends State<DSDrawer> {
   final _advancedDrawerController = AdvancedDrawerController();
 
   @override
