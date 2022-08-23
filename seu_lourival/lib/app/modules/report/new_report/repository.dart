@@ -2,22 +2,20 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
-import 'package:seu_lourival/app/modules/report/new_report/controller.dart';
 
 import '../../../data/models/user_model.dart';
 
 class NewReportRepository {
   final _firestore = FirebaseFirestore.instance;
   final _storage = FirebaseStorage.instance;
-  final categoryCollection = "categories";
-  final reportCollection = "reports";
+  final categoryCollection = 'categories';
+  final reportCollection = 'reports';
 
   Future<List<String>> getCategories() async {
     final result =
-        await _firestore.collection(categoryCollection).orderBy("title").get();
+        await _firestore.collection(categoryCollection).orderBy('title').get();
     final categories = result.docs.map((doc) {
-      return doc["title"] as String;
+      return doc['title'] as String;
     }).toList();
     return categories;
   }
@@ -77,18 +75,18 @@ class Report {
 
   Map<String, dynamic> toJson() {
     return {
-      "title": title,
-      "description": description,
-      "photoURL": photoURL,
-      "createdAt": createdAt,
-      "updatedAt": updatedAt,
-      "status": status,
-      "isPrivate": isPrivate,
-      "author": author.name,
-      "phone": author.phone,
-      "id": author.uuid,
-      "category": category,
-      "homeData": author.homeData.toJson(),
+      'title': title,
+      'description': description,
+      'photoURL': photoURL,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+      'status': status,
+      'isPrivate': isPrivate,
+      'author': author.name,
+      'phone': author.phone,
+      'id': author.uuid,
+      'category': category,
+      'homeData': author.homeData.toJson(),
     };
   }
 }

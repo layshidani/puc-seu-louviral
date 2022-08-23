@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:seu_lourival/core/theme/text_style.dart';
 import 'package:seu_lourival/core/values/colors.dart';
-import 'package:seu_lourival/core/values/login_strings.dart';
 import 'package:seu_lourival/core/values/spacing.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 
@@ -20,7 +19,7 @@ class DSTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? formatters;
 
-  DSTextField({
+  const DSTextField({Key? key, 
     this.iconData,
     this.keyboardType = TextInputType.text,
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
@@ -33,7 +32,7 @@ class DSTextField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.sentences,
     this.enabled = true,
     required this.labelText,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +63,7 @@ class DSTextField extends StatelessWidget {
         autovalidateMode: autovalidateMode,
         validator: validator,
         inputFormatters: formatters,
-        onChanged: this.onChange,
+        onChanged: onChange,
       ),
     );
   }

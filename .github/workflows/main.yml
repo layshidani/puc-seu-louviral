@@ -1,0 +1,56 @@
+name: Flutter Workflow
+
+on: [push, workflow_dispatch]
+jobs:
+
+  check:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: seu_lourival
+    steps:
+      - name: Checkout code 🎉
+        uses: actions/checkout@v3
+      - name: Setup JAVA 🟢
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name: Install Flutter 🎛
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.0.1'
+          channel: 'stable'
+      - name: Build apk 🐥
+        run: flutter build apk
+      - name: Install dependencies 📦
+        run: flutter pub get
+      - name: Code analyze ✨
+        run: flutter analyze
+
+      # - name: Run unit tests 🪲
+      #  run: flutter test --coverage
+
+      # - name: Upload to code coverage
+      #   uses: codecov/codecov-action@v1.2.2
+      #  with:
+      #    token: ${{secrets.CODECOV_TOKEN}}
+      #   file: coverage/lcov.info
+
+      # - name: Run integration tests
+       # uses: reactivecircus/android-emulator-runner@v1
+       # with:
+        #  api-level: 29
+        #  script: flutter test integration_test
+
+      # - name: Upload APK
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: release-apk
+      #    path: build/app/outputs/apk/release/app-release.apk
+
+     # - name: Upload Screenshoots
+     #   uses: actions/upload-artifact@v3
+     #   with:
+     #     name: Test result screenshots
+     #     path: screenshots/*.png

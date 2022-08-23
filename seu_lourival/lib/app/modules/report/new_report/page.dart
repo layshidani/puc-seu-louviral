@@ -12,10 +12,11 @@ import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart'
 import 'controller.dart';
 
 class NewReportPage extends StatelessWidget {
-  NewReportPage({Key? key}) : super(key: key);
   final _controller = Get.find<NewReportController>();
   final _picker = ImagePicker();
   final _formKey = GlobalKey<FormState>();
+  
+  NewReportPage({Key? key}) : super(key: key);
 
   void _showModalBottomSheet() {
     Get.bottomSheet(
@@ -23,20 +24,20 @@ class NewReportPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           BottomSheetOption(
-            title: "Câmera",
+            title: 'Câmera',
             onTap: () {
               _showImagePicker(ImageSource.camera);
             },
             iconData: Icons.camera_alt_outlined,
           ),
           BottomSheetOption(
-            title: "Galeria",
+            title: 'Galeria',
             onTap: () {
               _showImagePicker(ImageSource.gallery);
             },
             iconData: Icons.photo_album_outlined,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
       backgroundColor: Colors.white,
@@ -61,11 +62,11 @@ class NewReportPage extends StatelessWidget {
       title: NewReportStrings.title,
       body: Obx(
         () => _controller.isLoading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
-                padding: EdgeInsets.all(Spacing.s4),
+                padding: const EdgeInsets.all(Spacing.s4),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -80,7 +81,7 @@ class NewReportPage extends StatelessWidget {
                             Container(
                               height: 250,
                               width: 250,
-                              padding: EdgeInsets.only(top: 10),
+                              padding: const EdgeInsets.only(top: 10),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(150),
                                 child: Container(
@@ -141,22 +142,22 @@ class NewReportPage extends StatelessWidget {
                         },
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: Spacing.s4),
+                        padding: const EdgeInsets.symmetric(vertical: Spacing.s4),
                         child: DropdownButtonFormField<String>(
                           isExpanded: true,
                           value: _controller.selectedCategory.value,
-                          hint: Text("Selecione a categoria"),
+                          hint: const Text('Selecione a categoria'),
                           items: _controller.categories.map((category) {
                             return DropdownMenuItem(
                               value: category,
                               child: category.trim().isEmpty
-                                  ? Text("")
+                                  ? const Text('')
                                   : Text(category),
                             );
                           }).toList(),
                           onChanged: (value) {
                             print(value);
-                            _controller.formModel.category = value ?? "";
+                            _controller.formModel.category = value ?? '';
                           },
                           validator: (value) {
                             return DSInputValidators.isFieldValid(
@@ -167,27 +168,27 @@ class NewReportPage extends StatelessWidget {
                       CheckboxListTile(
                         value: _controller.isPrivateReport,
                         onChanged: (value) {
-                          print("--> CHECKBOX VALUE: $value");
+                          print('--> CHECKBOX VALUE: $value');
                           _controller.isPrivateReport = value ?? false;
                         },
-                        title: Text(NewReportStrings.privateReport),
+                        title: const Text(NewReportStrings.privateReport),
                         secondary: Icon(
                           _controller.isPrivateReport
                               ? Icons.lock
                               : Icons.lock_open_sharp,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       DSIconButton(
-                        buttonText: "Salvar",
+                        buttonText: 'Salvar',
                         onPressAction: () {
                           if (_formKey.currentState?.validate() ?? false) {
                             _controller.saveReport(onSuccess: () {
                               Get.back();
                               Get.showSnackbar(
                                 GetSnackBar(
-                                  title: "Sucesso",
-                                  message: "Seu manifesto foi cadastrado",
+                                  title: 'Sucesso',
+                                  message: 'Seu manifesto foi cadastrado',
                                   duration: 3.seconds,
                                 ),
                               );
@@ -216,7 +217,7 @@ class BottomSheetOption extends StatelessWidget {
   final VoidCallback onTap;
   final IconData iconData;
 
-  BottomSheetOption({
+  const BottomSheetOption({
     required this.title,
     required this.onTap,
     required this.iconData,
@@ -229,7 +230,7 @@ class BottomSheetOption extends StatelessWidget {
       leading: Icon(iconData),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.bold,
         ),

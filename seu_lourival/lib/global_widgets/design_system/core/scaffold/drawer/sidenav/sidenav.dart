@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
-import 'package:seu_lourival/app/modules/users_manager/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 
 import 'package:seu_lourival/core/values/text_size.dart';

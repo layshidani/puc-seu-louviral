@@ -13,6 +13,8 @@ import '../../../global_widgets/design_system/button/icon_button.dart';
 class SmsValidationPage extends StatelessWidget {
   final controller = Get.find<SmsValidationController>();
 
+  SmsValidationPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return DSScaffold(

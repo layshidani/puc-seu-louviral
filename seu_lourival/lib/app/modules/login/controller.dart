@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/services/sms_authentication_service.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
@@ -23,7 +22,7 @@ class LoginController extends GetxController {
   @override
   void onInit() async {
     if (_service.isLoggedIn) {
-      print("--> is logged in: ${FirebaseAuth.instance.currentUser}");
+      print('--> is logged in: ${FirebaseAuth.instance.currentUser}');
       _loading = true;
       final success = await _service.loadCurrentUser();
       if (success) {
@@ -52,7 +51,7 @@ class LoginController extends GetxController {
         print('--> verificationFailed: $error');
         _loading = false;
         final snackbar = CustomSnackBar(
-          title: "Erro ao enviar token SMS",
+          title: 'Erro ao enviar token SMS',
           style: SnackbarStyle.error,
           duration: const Duration(seconds: 5),
         ).build();

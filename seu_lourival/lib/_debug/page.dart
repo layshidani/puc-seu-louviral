@@ -55,15 +55,14 @@ class DebugHomePage extends StatelessWidget {
             ),
             const Divider(),
             ElevatedButton(
-              child: const Text('Feature >> Add Report'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.purple[400],
               ),
               onPressed: () => Get.toNamed(Routes.newReport),
+              child: const Text('Feature >> Add Report'),
             ),
             const Divider(),
             ElevatedButton(
-              child: const Text('Feature >> show camera'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.purple[400],
               ),
@@ -76,6 +75,7 @@ class DebugHomePage extends StatelessWidget {
                   print(e.toString());
                 }
               },
+              child: const Text('Feature >> show camera'),
             ),
           ],
         ),

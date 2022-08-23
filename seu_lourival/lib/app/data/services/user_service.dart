@@ -12,7 +12,7 @@ class UserService {
     if (currentUser != null) {
       final id = currentUser.uid;
       final result =
-          await FirebaseFirestore.instance.collection("users").doc(id).get();
+          await FirebaseFirestore.instance.collection('users').doc(id).get();
       user = UserModel.fromJson(result.data(), uuid: id);
       return true;
     }
@@ -34,6 +34,7 @@ class UserService {
           .where('cpf', isEqualTo: cpf)
           .get()
           .then((value) => {
+                // ignore: avoid_function_literals_in_foreach_calls
                 value.docs.forEach((element) {
                   FirebaseFirestore.instance
                       .collection('pre-registered')
@@ -53,6 +54,7 @@ class UserService {
           .where('cpf', isEqualTo: cpf)
           .get()
           .then((value) => {
+                // ignore: avoid_function_literals_in_foreach_calls
                 value.docs.forEach((element) {
                   FirebaseFirestore.instance
                       .collection('users')
@@ -63,12 +65,5 @@ class UserService {
     } catch (e) {
       return throw Exception('Ops, ocorreu um erro. Tente novamente.');
     }
-  }
-
-  static List<Map<String, dynamic>> _prepareData(
-      QuerySnapshot<Map<String, dynamic>> data) {
-    return data.docs.map((doc) {
-      return doc.data();
-    }).toList();
   }
 }

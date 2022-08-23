@@ -30,12 +30,12 @@ class AddUsersList extends StatelessWidget {
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: DSColors.secondary,
-                        side: BorderSide(
+                        side: const BorderSide(
                           color: DSColors.white70,
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: DSColors.secondary),
+                          side: const BorderSide(color: DSColors.secondary),
                         ),
                       ),
                       onPressed: () => controller.clearFilter(),
@@ -53,12 +53,12 @@ class AddUsersList extends StatelessWidget {
                       child: TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: DSColors.secondary,
-                          side: BorderSide(
+                          side: const BorderSide(
                             color: DSColors.white70,
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(color: DSColors.secondary),
+                            side: const BorderSide(color: DSColors.secondary),
                           ),
                         ),
                         onPressed: () => controller.getPreRegisteredList(),

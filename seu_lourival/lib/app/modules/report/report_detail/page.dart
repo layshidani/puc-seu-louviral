@@ -21,12 +21,14 @@ class ReportDetailPage extends StatelessWidget {
 
   final report = Get.arguments as ReportModel;
 
+  ReportDetailPage({Key? key}) : super(key: key);
+
   Widget _buildListTile(String title, String subtitle) {
     return ListTile(
-      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+      visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 17,
         ),
@@ -45,27 +47,26 @@ class ReportDetailPage extends StatelessWidget {
       floatingActionButton: SpeedDial(
         closedBackgroundColor: DSColors.primary,
         openBackgroundColor: DSColors.primary,
-        child: Icon(Icons.contact_phone),
         speedDialChildren: [
           SpeedDialChild(
-            child: Icon(Icons.phone),
+            child: const Icon(Icons.phone),
             backgroundColor: Colors.amber[700],
             onPressed: () {
-              launchUrl(Uri.parse("tel:${report.phone}"));
+              launchUrl(Uri.parse('tel:${report.phone}'));
             },
           ),
           SpeedDialChild(
-            child: Icon(Icons.whatsapp),
+            child: const Icon(Icons.whatsapp),
             backgroundColor: Colors.green[700],
             onPressed: () async {
               try {
                 await FlutterLaunch.launchWhatsapp(
                     phone: report.phone,
                     message:
-                        "Olá, estou entrando em contato para falar sobre seu manifesto: *${report.title}*");
+                        'Olá, estou entrando em contato para falar sobre seu manifesto: *${report.title}*');
               } catch (e) {
                 final snack = CustomSnackBar(
-                  title: "Erro ao abrir Whatsapp",
+                  title: 'Erro ao abrir Whatsapp',
                   style: SnackbarStyle.error,
                 ).build();
                 Get.showSnackbar(snack);
@@ -73,10 +74,11 @@ class ReportDetailPage extends StatelessWidget {
             },
           ),
         ],
+        child: const Icon(Icons.contact_phone),
       ),
       body: Obx(
         () => controller.isLoading
-            ? CustomLoading()
+            ? const CustomLoading()
             : SingleChildScrollView(
                 padding: const EdgeInsets.all(Spacing.s4),
                 child: Form(
@@ -88,7 +90,7 @@ class ReportDetailPage extends StatelessWidget {
                           controller.onDownloadImage(report);
 
                           // TODO
-                          print("exibir tela com imagem");
+                          print('exibir tela com imagem');
                         },
                         child: Stack(
                           alignment: Alignment.bottomRight,
@@ -193,7 +195,7 @@ class ReportDetailPage extends StatelessWidget {
                             const EdgeInsets.symmetric(vertical: Spacing.s4),
                         child: DropdownButtonFormField<String>(
                           isExpanded: true,
-                          hint: DSText.base('${report.category}'),
+                          hint: DSText.base(report.category),
                           items: const [],
                           onChanged: null,
                         ),
@@ -211,12 +213,12 @@ class ReportDetailPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _buildListTile(
-                              "${report.author}\nApto ${report.homeData.number} - ${report.homeData.tower}",
-                              "Autor"),
-                          _buildListTile(report.status, "Status"),
-                          _buildListTile(report.createdAt, "Data de criação"),
+                              '${report.author}\nApto ${report.homeData.number} - ${report.homeData.tower}',
+                              'Autor'),
+                          _buildListTile(report.status, 'Status'),
+                          _buildListTile(report.createdAt, 'Data de criação'),
                           _buildListTile(
-                              report.updatedAt, "Última modificação"),
+                              report.updatedAt, 'Última modificação'),
                         ],
                       ),
                     ],

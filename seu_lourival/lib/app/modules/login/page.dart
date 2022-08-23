@@ -16,13 +16,16 @@ import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold
 class LoginPage extends StatelessWidget {
   final controller = Get.find<LoginController>();
   final _key = GlobalKey<FormState>();
+
+  LoginPage({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return DSScaffold(
       title: LoginStrings.scaffoldTitle,
       body: Obx(() {
         return controller.isLoading
-            ? CustomLoading()
+            ? const CustomLoading()
             : Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
