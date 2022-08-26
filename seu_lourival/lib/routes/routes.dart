@@ -10,6 +10,7 @@ class Routes {
   static const reportList = '/report-list';
   static const newReport = '/new-report';
   static const reportDetail = '/report-detail';
+  static const maintenance = "/maintenance";
 
   // debug / theme catalog
   static const themeCatalog = '/theme-catalog';
