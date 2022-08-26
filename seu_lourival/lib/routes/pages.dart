@@ -3,6 +3,8 @@ import 'package:get/route_manager.dart';
 import 'package:seu_lourival/_debug/page.dart';
 import 'package:seu_lourival/app/modules/login/binding.dart';
 import 'package:seu_lourival/app/modules/login/page.dart';
+import 'package:seu_lourival/app/modules/maintenance/binding.dart';
+import 'package:seu_lourival/app/modules/maintenance/page.dart';
 import 'package:seu_lourival/app/modules/report/new_report/binding.dart';
 import 'package:seu_lourival/app/modules/report/new_report/page.dart';
 
@@ -81,7 +83,11 @@ class Pages {
       page: () => AddUsersFormPage(),
       binding: AddUsersFormBinding(),
     ),
-
+    GetPage(
+      name: Routes.maintenance,
+      page: () => MaintenancePage(),
+      binding: MaintenanceBinding(),
+    ),
 
     // Theme Catalog / Debug
     GetPage(
