@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/users_manager/page.dart';
 import 'package:seu_lourival/core/values/colors.dart';
@@ -13,6 +14,7 @@ class DSDrawerSidenav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loggedUser = Get.find<UserService>().user;
     return SafeArea(
       child: ListTileTheme(
         textColor: Colors.white,
@@ -23,7 +25,7 @@ class DSDrawerSidenav extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  width: 120.0, 
+                  width: 120.0,
                   height: 120.0,
                   margin: const EdgeInsets.only(
                     top: 24.0,
@@ -38,9 +40,9 @@ class DSDrawerSidenav extends StatelessWidget {
                     'https://www.pragmatismopolitico.com.br/wp-content/uploads/2022/04/predio.jpg',
                   ),
                 ),
-                const Text(
-                  'Pedro Santos',
-                  style: TextStyle(
+                Text(
+                  loggedUser?.name ?? "",
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                     fontSize: DSTextSize.base,
@@ -87,16 +89,18 @@ class DSDrawerSidenav extends StatelessWidget {
                 Get.toNamed(Routes.financial);
               },
             ),
-            // ListTile(
-            //   leading: const Icon(Icons.person_add),
-            //   title: const Text('Gerenciar usuários'),
-            //   onTap: () {
-            //     Navigator.of(context).pushReplacement(
-            //       // Go to ReportPage
-            //       MaterialPageRoute(builder: (_) => UsersManagerPage()),
-            //     );
-            //   },
-            // ),
+            loggedUser?.type == UserType.ADMIN
+                ? ListTile(
+                    leading: const Icon(Icons.person_add),
+                    title: const Text('Gerenciar usuários'),
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        // Go to ReportPage
+                        MaterialPageRoute(builder: (_) => UsersManagerPage()),
+                      );
+                    },
+                  )
+                : SizedBox(),
             const Spacer(),
             ListTile(
               leading: const Icon(Icons.logout),

@@ -5,7 +5,7 @@ class UserModel {
   final String phone;
   final String cpf;
   final HomeData? homeData;
-  final String type;
+  final UserType type;
 
   UserModel({
     this.uuid,
@@ -34,13 +34,15 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic>? json,
       {required String uuid}) {
+    final String userTypeString = json?['type'] ?? "morador";
+    final userType = UserType.values.byName(userTypeString.toUpperCase());
     return UserModel(
       name: json?["name"],
       homeData: HomeData.fromJson(json?["homeData"]),
       email: json?["email"],
       phone: json?["phone"],
       cpf: json?["cpf"],
-      type: json?["type"],
+      type: userType,
       uuid: uuid,
     );
   }
@@ -66,3 +68,5 @@ class HomeData {
     };
   }
 }
+
+enum UserType { MORADOR, ADMIN }
