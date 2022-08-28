@@ -29,6 +29,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: DSColors.primary,
+        scrollbarTheme: ScrollbarThemeData(),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: DSColors.primary,
+        ),
       ),
       // initialRoute: Routes.debug,
       initialRoute: isDebugMode ? Routes.debug : Routes.login,
