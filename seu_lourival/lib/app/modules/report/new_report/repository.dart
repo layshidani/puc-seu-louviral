@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:seu_lourival/app/data/providers/category_provider.dart';
 import 'package:seu_lourival/app/modules/report/new_report/controller.dart';
 
 import '../../../data/models/user_model.dart';
@@ -12,14 +13,10 @@ class NewReportRepository {
   final _storage = FirebaseStorage.instance;
   final categoryCollection = "categories";
   final reportCollection = "reports";
+  final _categoryProvider = CategoryProvider();
 
   Future<List<String>> getCategories() async {
-    final result =
-        await _firestore.collection(categoryCollection).orderBy("title").get();
-    final categories = result.docs.map((doc) {
-      return doc["title"] as String;
-    }).toList();
-    return categories;
+    return await _categoryProvider.getCategories();
   }
 
   Future<void> addReport(Report model) async {

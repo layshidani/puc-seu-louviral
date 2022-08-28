@@ -1,3 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:seu_lourival/app/data/providers/category_provider.dart';
+
 class MaintenanceRepository {
-//  todo: implement MaintenanceRepository methods;
+  final _categoryProvider = CategoryProvider();
+  final String maintenanceContactDatabase = "maintenance";
+  final _firestore = FirebaseFirestore.instance;
+
+  Future<List<String>> getCategories() async {
+    return await _categoryProvider.getCategories();
+  }
+
+  Future<String> saveMaintenanceContact(Map<String, dynamic> json) async {
+    try {
+      final result =
+          await _firestore.collection(maintenanceContactDatabase).add(json);
+      return result.id;
+    } catch (e) {
+      print("--> save maintenance contact error: ${e.toString()}");
+      throw Exception(e.toString());
+    }
+  }
 }
