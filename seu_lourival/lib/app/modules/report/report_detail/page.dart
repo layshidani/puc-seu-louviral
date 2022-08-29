@@ -3,6 +3,8 @@ import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
+import 'package:seu_lourival/app/data/models/user_model.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/report/report_detail/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
@@ -20,13 +22,14 @@ class ReportDetailPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   final report = Get.arguments as ReportModel;
+  final loggedUser = Get.find<UserService>().user;
 
   Widget _buildListTile(String title, String subtitle) {
     return ListTile(
-      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+      visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 17,
         ),
@@ -45,17 +48,17 @@ class ReportDetailPage extends StatelessWidget {
       floatingActionButton: SpeedDial(
         closedBackgroundColor: DSColors.primary,
         openBackgroundColor: DSColors.primary,
-        child: Icon(Icons.contact_phone),
+        child: const Icon(Icons.contact_phone),
         speedDialChildren: [
           SpeedDialChild(
-            child: Icon(Icons.phone),
+            child: const Icon(Icons.phone),
             backgroundColor: Colors.amber[700],
             onPressed: () {
               launchUrl(Uri.parse("tel:${report.phone}"));
             },
           ),
           SpeedDialChild(
-            child: Icon(Icons.whatsapp),
+            child: const Icon(Icons.whatsapp),
             backgroundColor: Colors.green[700],
             onPressed: () async {
               try {

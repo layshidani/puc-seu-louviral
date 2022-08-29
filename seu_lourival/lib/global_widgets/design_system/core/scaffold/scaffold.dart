@@ -8,12 +8,15 @@ class DSScaffold extends StatelessWidget {
   final Widget body;
   final bool? hasDrawer;
   final Widget? floatingActionButton;
+  final List<Widget>? actions;
 
-  DSScaffold(
-      {this.hasDrawer = false,
-      required this.title,
-      required this.body,
-      this.floatingActionButton});
+  DSScaffold({
+    required this.title,
+    required this.body,
+    this.hasDrawer = false,
+    this.floatingActionButton,
+    this.actions,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class DSScaffold extends StatelessWidget {
             title: title,
             body: body,
             floatingActionButton: floatingActionButton,
+            actions: actions,
           );
   }
 }

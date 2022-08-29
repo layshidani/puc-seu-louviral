@@ -8,8 +8,14 @@ class DSScaffoldWidet extends StatelessWidget {
   final Widget body;
   final Widget? floatingActionButton;
   final Widget? leading;
+  final List<Widget>? actions;
 
-  DSScaffoldWidet({required this.title, required this.body, this.floatingActionButton, this.leading});
+  DSScaffoldWidet(
+      {required this.title,
+      required this.body,
+      this.floatingActionButton,
+      this.leading,
+      this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +24,7 @@ class DSScaffoldWidet extends StatelessWidget {
         backgroundColor: DSColors.primary,
         title: DSTitle.base(title),
         leading: leading,
+        actions: actions,
       ),
       floatingActionButton: floatingActionButton,
       body: body,
