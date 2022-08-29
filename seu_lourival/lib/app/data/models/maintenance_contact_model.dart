@@ -11,9 +11,15 @@ class MaintenanceContactModel {
     this.id,
   });
 
-  factory MaintenanceContactModel.fromJson(Map<String, dynamic> json) {
+  factory MaintenanceContactModel.fromJson(
+      {required Map<String, dynamic> json}) {
     return MaintenanceContactModel(
-      category: json["category"],
+      /*
+        Foi necessário utilizar esse .cast<Type>() para converter o json["category"]
+        em List<String>, pois apenas utilizando 'as List<String>' estava quebrando
+        ao tentar realizar o parse
+      */
+      category: json["category"].cast<String>(),
       name: json["name"],
       phone: json["phone"],
       id: json["id"],

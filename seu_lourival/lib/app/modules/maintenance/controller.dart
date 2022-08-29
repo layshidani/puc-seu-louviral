@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:seu_lourival/app/modules/maintenance/page.dart';
+import 'package:seu_lourival/app/modules/maintenance/widgets/maintenance_contact_list_tile.dart';
 import 'package:seu_lourival/core/utils/input_validators.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../data/models/maintenance_contact_model.dart';
 import '../../widgets/custom_snack_bar.dart';
 import 'repository.dart';
@@ -20,7 +20,7 @@ class MaintenanceController extends GetxController {
   List<String> _categories = [];
   List<String> get categories => _categories;
 
-  var contacts = <MaintenanceContactModel>[].obs;
+  final contacts = <MaintenanceContactModel>[].obs;
 
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
@@ -31,13 +31,23 @@ class MaintenanceController extends GetxController {
     _isLoading.value = true;
     await Future.delayed(2.seconds);
     _categories = await _repository.getCategories();
+    await getMaintenanceContacts();
+    print(contacts);
     _isLoading.value = false;
     super.onInit();
   }
 
+  Future<void> getMaintenanceContacts() async {
+    final json = await _repository.getMaintenanceContacts();
+    print("--> ${json}");
+    final contactList = json.map((element) {
+      print("--> $element");
+      return MaintenanceContactModel.fromJson(json: element);
+    }).toList();
+    contacts.value = contactList;
+  }
+
   Future<void> saveMaintenanceContact() async {
-    print("--> is empty? ${contact.category.isEmpty}");
-    print("length: ${contact.category.length}");
     if (contact.category.isEmpty) {
       _showSnackbar(
         message: "Escolha pelo menos uma categoria",
@@ -76,5 +86,42 @@ class MaintenanceController extends GetxController {
       style: style,
     ).build();
     Get.showSnackbar(snackbar);
+  }
+
+  Future<void> didSelectAction(
+    MaintenanceContactListTileAction action, {
+    required MaintenanceContactModel contact,
+  }) {
+    switch (action) {
+      case MaintenanceContactListTileAction.call:
+        return _makePhoneCall(contact);
+      case MaintenanceContactListTileAction.whatsapp:
+        return _openWhatsapp(contact);
+    }
+  }
+
+  Future<void> _makePhoneCall(MaintenanceContactModel contact) async {
+    print("--> ${contact.phone}");
+    launchUrl(Uri.parse("tel:${contact.phone}"));
+  }
+
+  Future<void> _openWhatsapp(MaintenanceContactModel contact) async {
+    final phone = contact.phone.removeAllWhitespace
+        .replaceAll("(", "")
+        .replaceAll(")", "")
+        .replaceAll("-", "");
+    print("--> $phone");
+    try {
+      await FlutterLaunch.launchWhatsapp(
+          phone: phone,
+          message:
+              "Olá, ${contact.name}. Gostaria de solicitar um orçamento para seu serviço de manutenção.");
+    } catch (e) {
+      final snack = CustomSnackBar(
+        title: "Erro ao abrir Whatsapp",
+        style: SnackbarStyle.error,
+      ).build();
+      Get.showSnackbar(snack);
+    }
   }
 }

@@ -20,4 +20,22 @@ class MaintenanceRepository {
       throw Exception(e.toString());
     }
   }
+
+  Future<List<Map<String, dynamic>>> getMaintenanceContacts() async {
+    try {
+      final result = await _firestore
+          .collection(maintenanceContactDatabase)
+          .orderBy("name")
+          .get();
+      final json = result.docs.map((document) {
+        final data = document.data();
+        data["id"] = document.id;
+        return data;
+      });
+      return json.toList();
+    } catch (e) {
+      print("--> save maintenance contact error: ${e.toString()}");
+      throw Exception(e.toString());
+    }
+  }
 }
