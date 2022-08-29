@@ -6,11 +6,9 @@ import 'package:get/instance_manager.dart';
 import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/maintenance/widgets/category_selector.dart';
+import 'package:seu_lourival/app/modules/maintenance/widgets/maintenance_contact_list_tile.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
-import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
-import '../../../core/utils/input_validators.dart';
-import '../../../core/values/colors.dart';
 import 'controller.dart';
 
 class MaintenancePage extends StatelessWidget {
@@ -23,106 +21,125 @@ class MaintenancePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _loggedUser = Get.find<UserService>().user;
     return DSScaffold(
-        title: "Manutenção",
-        hasDrawer: true,
-        floatingActionButton: _loggedUser?.type == UserType.ADMIN
-            ? FloatingActionButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Novo contato de manutenção"),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text("Cancelar")),
-                            TextButton(
-                                onPressed: () {
-                                  if (_formKey.currentState?.validate() ??
-                                      false) {
-                                    _controller.saveMaintenanceContact();
-                                  }
-                                },
-                                child: Text("Salvar")),
-                          ],
-                          content: Obx(
-                            () => _controller.isLoading
-                                ? const Center(
-                                    child: CircularProgressIndicator(),
-                                  )
-                                : Form(
-                                    key: _formKey,
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        DSTextField(
-                                          labelText: "Nome",
-                                          onChange: (value) {
-                                            _controller.contact.name = value;
-                                          },
-                                          validator: (value) {
-                                            return _controller
-                                                .validateTextFormField(
-                                              value,
-                                              4,
-                                            );
-                                          },
-                                        ),
-                                        DSTextField(
-                                          labelText: "Telefone",
-                                          prefix: "+55 ",
-                                          keyboardType: TextInputType.phone,
-                                          formatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                            TelefoneInputFormatter(),
-                                          ],
-                                          onChange: (value) {
-                                            _controller.contact.phone = value;
-                                          },
-                                          validator: (value) {
-                                            if (value == null) {
-                                              return "Campo obrigatório";
-                                            } else if (value.length < 14) {
-                                              return "Preencha um número válido";
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Expanded(
-                                          child: Scrollbar(
-                                            thumbVisibility: true,
-                                            child: SingleChildScrollView(
-                                              child: Wrap(
-                                                direction: Axis.horizontal,
-                                                children: _controller.categories
-                                                    .map((category) {
-                                                  return CategorySelector(
-                                                    label: category,
-                                                    selectedCategories:
-                                                        _controller
-                                                            .contact.category,
-                                                  );
-                                                }).toList(),
-                                              ),
+      title: "Manutenção",
+      hasDrawer: true,
+      floatingActionButton: _loggedUser?.type == UserType.ADMIN
+          ? FloatingActionButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Novo contato de manutenção"),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Cancelar")),
+                          TextButton(
+                              onPressed: () {
+                                if (_formKey.currentState?.validate() ??
+                                    false) {
+                                  _controller.saveMaintenanceContact();
+                                }
+                              },
+                              child: Text("Salvar")),
+                        ],
+                        content: Obx(
+                          () => _controller.isLoading
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      DSTextField(
+                                        labelText: "Nome",
+                                        onChange: (value) {
+                                          _controller.contact.name = value;
+                                        },
+                                        validator: (value) {
+                                          return _controller
+                                              .validateTextFormField(
+                                            value,
+                                            4,
+                                          );
+                                        },
+                                      ),
+                                      DSTextField(
+                                        labelText: "Telefone",
+                                        prefix: "+55 ",
+                                        keyboardType: TextInputType.phone,
+                                        formatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          TelefoneInputFormatter(),
+                                        ],
+                                        onChange: (value) {
+                                          _controller.contact.phone = value;
+                                        },
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return "Campo obrigatório";
+                                          } else if (value.length < 14) {
+                                            return "Preencha um número válido";
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Expanded(
+                                        child: Scrollbar(
+                                          thumbVisibility: true,
+                                          child: SingleChildScrollView(
+                                            child: Wrap(
+                                              direction: Axis.horizontal,
+                                              children: _controller.categories
+                                                  .map((category) {
+                                                return CategorySelector(
+                                                  label: category,
+                                                  selectedCategories:
+                                                      _controller
+                                                          .contact.category,
+                                                );
+                                              }).toList(),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                          ),
-                        );
-                      });
-                },
-                child: const Icon(Icons.add),
+                                ),
+                        ),
+                      );
+                    });
+              },
+              child: const Icon(Icons.add),
+            )
+          : null,
+      body: Obx(
+        () => _controller.isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
               )
-            : null,
-        body: Center());
+            : ListView.builder(
+                itemBuilder: (context, index) {
+                  final contact = _controller.contacts[index];
+                  return MaintenanceContactListTile(
+                    contact: contact,
+                    onTap: (action) {
+                      _controller.didSelectAction(action, contact: contact);
+                    },
+                  );
+                },
+                padding: EdgeInsets.all(16),
+                itemCount: _controller.contacts.length,
+              ),
+      ),
+    );
   }
 }
