@@ -7,6 +7,7 @@ import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 enum MaintenanceContactListTileAction {
   whatsapp,
   call,
+  delete,
 }
 
 class MaintenanceContactListTile extends StatelessWidget {
@@ -84,10 +85,10 @@ class MaintenanceContactListTile extends StatelessWidget {
         children: [
           Container(
             alignment: Alignment.centerLeft,
-            margin: EdgeInsets.only(left: 16, bottom: 8),
+            margin: const EdgeInsets.only(left: 16, bottom: 8),
             child: Text(
               contact.phone,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
               ),
@@ -104,6 +105,11 @@ class MaintenanceContactListTile extends StatelessWidget {
                 icon: Icons.phone,
                 action: MaintenanceContactListTileAction.call,
               ),
+              if (true)
+                _buildGestureIcon(
+                  icon: Icons.delete,
+                  action: MaintenanceContactListTileAction.delete,
+                ),
             ],
           ),
           const SizedBox(

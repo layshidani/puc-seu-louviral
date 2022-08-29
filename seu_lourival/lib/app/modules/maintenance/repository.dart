@@ -38,4 +38,8 @@ class MaintenanceRepository {
       throw Exception(e.toString());
     }
   }
+
+  Future<void> deleteMaintenanceContact(String id) async {
+    await _firestore.collection(maintenanceContactDatabase).doc(id).delete();
+  }
 }

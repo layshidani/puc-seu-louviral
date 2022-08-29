@@ -9,6 +9,7 @@ import 'package:seu_lourival/app/modules/maintenance/widgets/category_selector.d
 import 'package:seu_lourival/app/modules/maintenance/widgets/maintenance_contact_list_tile.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/field/text_field.dart';
+import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'controller.dart';
 
 class MaintenancePage extends StatelessWidget {
@@ -126,18 +127,28 @@ class MaintenancePage extends StatelessWidget {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView.builder(
-                itemBuilder: (context, index) {
-                  final contact = _controller.contacts[index];
-                  return MaintenanceContactListTile(
-                    contact: contact,
-                    onTap: (action) {
-                      _controller.didSelectAction(action, contact: contact);
-                    },
-                  );
+            : RefreshIndicator(
+                onRefresh: () async {
+                  await _controller.getMaintenanceContacts();
                 },
-                padding: EdgeInsets.all(16),
-                itemCount: _controller.contacts.length,
+                child: _controller.contacts.length == 0
+                    ? Center(
+                        child: DSText.lg("Nenhum contato cadastrado"),
+                      )
+                    : ListView.builder(
+                        itemBuilder: (context, index) {
+                          final contact = _controller.contacts[index];
+                          return MaintenanceContactListTile(
+                            contact: contact,
+                            onTap: (action) {
+                              _controller.didSelectAction(action,
+                                  contact: contact);
+                            },
+                          );
+                        },
+                        padding: EdgeInsets.all(16),
+                        itemCount: _controller.contacts.length,
+                      ),
               ),
       ),
     );

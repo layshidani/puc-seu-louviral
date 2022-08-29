@@ -27,6 +27,21 @@ class CustomSnackBar {
       backgroundColor: style.backgroundColor ?? Colors.grey,
     );
   }
+
+  void showSnackbar() {
+    GetSnackBar(
+      duration: duration,
+      messageText: Text(
+        title,
+        style: TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.w600,
+          color: style.titleColor,
+        ),
+      ),
+      backgroundColor: style.backgroundColor ?? Colors.grey,
+    ).show();
+  }
 }
 
 enum SnackbarStyle {

@@ -1,11 +1,13 @@
 import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/modules/maintenance/widgets/maintenance_contact_list_tile.dart';
+import 'package:seu_lourival/app/widgets/custom_confirm_alert_dialog.dart';
 import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../data/models/maintenance_contact_model.dart';
 import '../../widgets/custom_snack_bar.dart';
 import 'repository.dart';
+import 'package:flutter/material.dart';
 
 class MaintenanceController extends GetxController {
   final MaintenanceRepository _repository;
@@ -91,16 +93,18 @@ class MaintenanceController extends GetxController {
   Future<void> didSelectAction(
     MaintenanceContactListTileAction action, {
     required MaintenanceContactModel contact,
-  }) {
+  }) async {
     switch (action) {
       case MaintenanceContactListTileAction.call:
         return _makePhoneCall(contact);
       case MaintenanceContactListTileAction.whatsapp:
-        return _openWhatsapp(contact);
+        return await _openWhatsapp(contact);
+      case MaintenanceContactListTileAction.delete:
+        return await _askToDeleteContact(contact);
     }
   }
 
-  Future<void> _makePhoneCall(MaintenanceContactModel contact) async {
+  void _makePhoneCall(MaintenanceContactModel contact) {
     print("--> ${contact.phone}");
     launchUrl(Uri.parse("tel:${contact.phone}"));
   }
@@ -122,6 +126,44 @@ class MaintenanceController extends GetxController {
         style: SnackbarStyle.error,
       ).build();
       Get.showSnackbar(snack);
+    }
+  }
+
+  Future<void> _askToDeleteContact(MaintenanceContactModel contact) async {
+    Get.dialog(
+      CustomConfirmAlertDialog(
+              title: contact.name,
+              description: "Gostaria de deletar este contato de manutenção?",
+              cancelAction: () => Get.back(),
+              cancelTitle: "Cancelar",
+              confirmAction: () async {
+                await _deleteContact(contact.id);
+              },
+              confirmTitle: "Confirmar")
+          .build(),
+    );
+  }
+
+  Future<void> _deleteContact(String? id) async {
+    Get.back();
+    if (id != null) {
+      isLoading = true;
+      await _repository.deleteMaintenanceContact(id);
+      contacts.removeWhere((contact) {
+        return contact.id == id;
+      });
+      // update();
+      print("--> LENGTH DOS CONTATOS DEPOIS DE DELETAR: ${contacts.length}");
+      CustomSnackBar(
+        title: 'Contato deletado com sucesso',
+        style: SnackbarStyle.success,
+      ).showSnackbar();
+      isLoading = false;
+    } else {
+      CustomSnackBar(
+        title: "Erro ao deletar contato de manutenção",
+        style: SnackbarStyle.error,
+      ).showSnackbar();
     }
   }
 }
