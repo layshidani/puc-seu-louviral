@@ -27,16 +27,16 @@ class NewReportPage extends StatelessWidget {
             onTap: () {
               _showImagePicker(ImageSource.camera);
             },
-            iconData: Icons.camera_alt_outlined,
+            icon: const Icon(Icons.camera_alt_outlined),
           ),
           BottomSheetOption(
             title: "Galeria",
             onTap: () {
               _showImagePicker(ImageSource.gallery);
             },
-            iconData: Icons.photo_album_outlined,
+            icon: const Icon(Icons.photo_album_outlined),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
       backgroundColor: Colors.white,
@@ -61,11 +61,11 @@ class NewReportPage extends StatelessWidget {
       title: NewReportStrings.title,
       body: Obx(
         () => _controller.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
+            ? const Center(
+                child: const CircularProgressIndicator(),
               )
             : SingleChildScrollView(
-                padding: EdgeInsets.all(Spacing.s4),
+                padding: const EdgeInsets.all(Spacing.s4),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -80,7 +80,7 @@ class NewReportPage extends StatelessWidget {
                             Container(
                               height: 250,
                               width: 250,
-                              padding: EdgeInsets.only(top: 10),
+                              padding: const EdgeInsets.only(top: 10),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(150),
                                 child: Container(
@@ -141,16 +141,17 @@ class NewReportPage extends StatelessWidget {
                         },
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: Spacing.s4),
+                        padding:
+                            const EdgeInsets.symmetric(vertical: Spacing.s4),
                         child: DropdownButtonFormField<String>(
                           isExpanded: true,
                           value: _controller.selectedCategory.value,
-                          hint: Text("Selecione a categoria"),
+                          hint: const Text("Selecione a categoria"),
                           items: _controller.categories.map((category) {
                             return DropdownMenuItem(
                               value: category,
                               child: category.trim().isEmpty
-                                  ? Text("")
+                                  ? const Text("")
                                   : Text(category),
                             );
                           }).toList(),
@@ -170,14 +171,14 @@ class NewReportPage extends StatelessWidget {
                           print("--> CHECKBOX VALUE: $value");
                           _controller.isPrivateReport = value ?? false;
                         },
-                        title: Text(NewReportStrings.privateReport),
+                        title: const Text(NewReportStrings.privateReport),
                         secondary: Icon(
                           _controller.isPrivateReport
                               ? Icons.lock
                               : Icons.lock_open_sharp,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       DSIconButton(
                         buttonText: "Salvar",
                         onPressAction: () {
@@ -214,22 +215,22 @@ class NewReportPage extends StatelessWidget {
 class BottomSheetOption extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
-  final IconData iconData;
+  final Icon icon;
 
   BottomSheetOption({
     required this.title,
     required this.onTap,
-    required this.iconData,
+    required this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: Icon(iconData),
+      leading: icon,
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.bold,
         ),
