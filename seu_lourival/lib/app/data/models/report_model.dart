@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/text_size.dart';
 
 class ReportModel {
@@ -115,14 +116,14 @@ extension ReportCategoryExtension on ReportCategory {
   }
 }
 
-Icon getReportStatusColor(String status) {
-  var st = ReportStatusHelper.fromString(status);
+Icon getReportStatusColor(ReportStatus status) {
+  // var st = ReportStatusHelper.fromString(status);
   print('♥️ $status');
-  switch (st) {
+  switch (status) {
     case ReportStatus.OPEN:
-      return Icon(
+      return const Icon(
         Icons.lightbulb_rounded,
-        color: Colors.amber[600],
+        color: Color.fromARGB(255, 95, 154, 170),
       );
     case ReportStatus.IN_PROGRESS:
       return const Icon(
