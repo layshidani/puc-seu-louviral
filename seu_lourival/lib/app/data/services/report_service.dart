@@ -43,4 +43,13 @@ class ReportService {
       return throw Exception(e);
     }
   }
+
+  static delete(String? id) async {
+    try {
+      await FirebaseFirestore.instance.collection('reports').doc(id).delete();
+    } catch (e) {
+      print('🚩 error $e');
+      return throw Exception(e);
+    }
+  }
 }
