@@ -9,7 +9,6 @@ class ReportService {
           // .orderBy("createdAt", descending: false)
           .orderBy("createdAt", descending: true)
           .get());
-
       if (result.isEmpty) {
         return [];
       }
@@ -27,7 +26,21 @@ class ReportService {
   static List<Map<String, dynamic>> _prepareData(
       QuerySnapshot<Map<String, dynamic>> data) {
     return data.docs.map((doc) {
-      return doc.data();
+      final data = doc.data();
+      data.addAll({'id': doc.id});
+      return data;
     }).toList();
+  }
+
+  static updateStatus(String id, ReportStatus status) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('reports')
+          .doc(id)
+          .update({'status': status.description, 'updatedAt': DateTime.now()});
+    } catch (e) {
+      print('🚩 error $e');
+      return throw Exception(e);
+    }
   }
 }

@@ -264,8 +264,8 @@ class ReportDetailPage extends StatelessWidget {
                               _buildListTile(controller.status, "Status"),
                               _buildListTile(controller.report.createdAt,
                                   "Data de criação"),
-                              _buildListTile(controller.report.updatedAt,
-                                  "Última modificação"),
+                              _buildListTile(
+                                  controller.updatedAt, "Última modificação"),
                             ],
                           ),
                         ],

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
+import 'package:seu_lourival/app/data/services/report_service.dart';
 import 'package:seu_lourival/app/modules/report/new_report/page.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
+import 'package:seu_lourival/core/utils/datetime_helper.dart';
 import 'package:seu_lourival/core/values/strings.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
 import 'package:seu_lourival/global_widgets/dialog/confirm_dialog.dart';
@@ -11,15 +13,17 @@ import 'package:seu_lourival/routes/routes.dart';
 
 class ReportDetailController extends GetxController {
   //loading
-  final _isLoading = false.obs;
+  final RxBool _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
   set isLoading(bool value) => _isLoading.value = value;
 
   ReportModel _report = Get.arguments;
   get report => _report;
 
-  Rx<String> _status = ''.obs;
+  final Rx<String> _status = ''.obs;
   String get status => _status.value;
+  final Rx<String> _updatedAt = ''.obs;
+  String get updatedAt => _updatedAt.value;
 
   @override
   onReady() {
@@ -96,13 +100,12 @@ class ReportDetailController extends GetxController {
         .show();
   }
 
-  _saveStatusChoice(ReportStatus status, context) {
+  _saveStatusChoice(ReportStatus status, context) async {
     try {
-      // TODO salvar no firebase
-      // TODO update o updatedAt no detalhe
-      // _report.updatedAt = updatedAt;
+      await ReportService.updateStatus(report.id, status);
 
       _status.value = status.description;
+      _updatedAt.value = DateTimeHelper.fromTimeStamp(DateTime.now());
 
       Navigator.popUntil(context, ModalRoute.withName(Routes.reportDetail));
 
