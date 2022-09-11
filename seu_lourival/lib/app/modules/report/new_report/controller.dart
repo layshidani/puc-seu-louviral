@@ -72,14 +72,15 @@ class NewReportController extends GetxController {
       isPrivate: _isPrivateReport.value,
       category: formModel.category,
     );
-    await _repository.addReport(report);
+    final reportId = await _repository.addReport(report);
     isLoading = false;
-    _addReportToList(report);
+    _addReportToList(report: report, reportId: reportId);
     onSuccess();
   }
 
-  void _addReportToList(Report report) {
+  void _addReportToList({required Report report, required String reportId}) {
     final reportModel = ReportModel(
+      id: reportId,
       phone: report.author.phone,
       authorId: report.author.uuid,
       isPrivate: report.isPrivate,
