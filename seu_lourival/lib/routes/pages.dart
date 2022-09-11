@@ -5,6 +5,8 @@ import 'package:seu_lourival/app/modules/login/binding.dart';
 import 'package:seu_lourival/app/modules/login/page.dart';
 import 'package:seu_lourival/app/modules/maintenance/binding.dart';
 import 'package:seu_lourival/app/modules/maintenance/page.dart';
+import 'package:seu_lourival/app/modules/onboarding/binding.dart';
+import 'package:seu_lourival/app/modules/onboarding/page.dart';
 import 'package:seu_lourival/app/modules/report/new_report/binding.dart';
 import 'package:seu_lourival/app/modules/report/new_report/page.dart';
 
@@ -88,7 +90,11 @@ class Pages {
       page: () => MaintenancePage(),
       binding: MaintenanceBinding(),
     ),
-
+    GetPage(
+      name: Routes.onboarding,
+      page: () => OnboardingPage(),
+      binding: OnboardingBinding(),
+    ),
     // Theme Catalog / Debug
     GetPage(
       name: Routes.themeCatalog,

@@ -11,6 +11,7 @@ class Routes {
   static const newReport = '/new-report';
   static const reportDetail = '/report-detail';
   static const maintenance = "/maintenance";
+  static const onboarding = "/onboarding";
 
   // debug / theme catalog
   static const themeCatalog = '/theme-catalog';
