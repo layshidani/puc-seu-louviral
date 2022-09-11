@@ -38,7 +38,6 @@ class _CategorySelectorState extends State<CategorySelector> {
           } else {
             widget.selectedCategories.remove(widget.label);
           }
-          print(widget.selectedCategories);
         },
         pressElevation: 5,
       ),

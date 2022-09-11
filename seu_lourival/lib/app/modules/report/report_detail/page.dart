@@ -132,8 +132,7 @@ class ReportDetailPage extends StatelessWidget {
                             onTap: () async {
                               controller.onDownloadImage(controller.report);
 
-                              // TODO
-                              print("exibir tela com imagem");
+                              // TODO exibir tela com imagem
                             },
                             child: Stack(
                               alignment: Alignment.bottomRight,
