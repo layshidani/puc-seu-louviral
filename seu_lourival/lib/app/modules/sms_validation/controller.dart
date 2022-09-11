@@ -63,12 +63,14 @@ class SmsValidationController extends GetxController {
 
   Future<bool> _validatePreRegister() async {
     debugPrint('--> _validateLogin');
-    debugPrint('--> telefone: ${Get.find<SmsAuthenticationService>().phone}');
+    debugPrint(
+        '--> telefone: ${Get.find<SmsAuthenticationService>().getUnmaskedPhone()}');
     try {
       final result = await FirebaseFirestore.instance
           .collection('pre-registered')
-          .where('telefone',
-              isEqualTo: Get.find<SmsAuthenticationService>().phone)
+          .where('phone',
+              isEqualTo:
+                  Get.find<SmsAuthenticationService>().getUnmaskedPhone())
           .get();
       if (result.docs.length != 1) {
         return false;
