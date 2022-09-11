@@ -83,7 +83,7 @@ class Report {
       "isPrivate": isPrivate,
       "author": author.name,
       "phone": author.phone,
-      "id": author.uuid,
+      "authorId": author.uuid,
       "category": category,
       "homeData": author.homeData.toJson(),
     };

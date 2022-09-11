@@ -65,7 +65,7 @@ class ReportListPage extends StatelessWidget {
                                 Get.toNamed(
                                   Routes.reportDetail,
                                   arguments: report,
-                                );
+                                )?.then((value) => _controller.getReports());
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),

@@ -3,8 +3,6 @@ import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
-import 'package:seu_lourival/app/data/models/user_model.dart';
-import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/report/report_detail/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
@@ -20,8 +18,6 @@ import 'package:url_launcher/url_launcher.dart';
 class ReportDetailPage extends StatelessWidget {
   final controller = Get.find<ReportDetailController>();
   final _formKey = GlobalKey<FormState>();
-
-  final loggedUser = Get.find<UserService>().user;
 
   Widget _buildListTile(String title, String subtitle) {
     return ListTile(
@@ -45,6 +41,19 @@ class ReportDetailPage extends StatelessWidget {
 
     return DSScaffold(
       title: ReportDetailsStrings.title,
+      actions: [
+        controller.canDeleteReport()
+            ? Row(
+                children: [
+                  IconButton(
+                    onPressed: () =>
+                        controller.onConfirmDelete(report, context),
+                    icon: const Icon(Icons.delete),
+                  ),
+                ],
+              )
+            : Container(),
+      ],
       floatingActionButton: SpeedDial(
         closedBackgroundColor: DSColors.primary,
         openBackgroundColor: DSColors.primary,
@@ -97,7 +106,7 @@ class ReportDetailPage extends StatelessWidget {
                           ),
                           backgroundColor: DSColors.tertiary,
                         ),
-                        loggedUser?.type == UserType.ADMIN
+                        controller.canEditReport()
                             ? TextButton(
                                 style: TextButton.styleFrom(
                                   backgroundColor: DSColors.tertiary,
@@ -108,8 +117,6 @@ class ReportDetailPage extends StatelessWidget {
                                   color: DSColors.grey800,
                                 ),
                                 onPressed: () {
-                                  print('🟢 ${loggedUser?.type}');
-
                                   controller
                                       .showChangeStatusBottomSheet(context);
                                 },
@@ -264,8 +271,8 @@ class ReportDetailPage extends StatelessWidget {
                               _buildListTile(controller.status, "Status"),
                               _buildListTile(controller.report.createdAt,
                                   "Data de criação"),
-                              _buildListTile(controller.report.updatedAt,
-                                  "Última modificação"),
+                              _buildListTile(
+                                  controller.updatedAt, "Última modificação"),
                             ],
                           ),
                         ],
@@ -277,25 +284,4 @@ class ReportDetailPage extends StatelessWidget {
       ),
     );
   }
-
-  // getChangeStatusWidgets() {
-  //   final List statusOptions = ['Em aberto', 'Em andamento', 'Concluído'];
-
-  //   return Row(
-  //     children: statusOptions
-  //         .map((status) => ChoiceChip(
-  //             selected: controller,
-  //             label: Text('Woolha'),
-  //             labelStyle:
-  //                 TextStyle(color: Colors.black, fontStyle: FontStyle.italic),
-  //             labelPadding: EdgeInsets.all(10),
-  //             avatar: Text('W'),
-  //             onSelected: (bool selected) {
-  //               setState(() {
-  //                 _selected = !_selected;
-  //               });
-  //             }))
-  //         .toList(),
-  //   );
-  // }
 }

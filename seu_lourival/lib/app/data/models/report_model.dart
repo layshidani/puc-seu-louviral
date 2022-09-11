@@ -6,6 +6,7 @@ import 'package:seu_lourival/core/values/text_size.dart';
 
 class ReportModel {
   final String? id;
+  final String? authorId;
   final String author;
   final String title;
   final String description;
@@ -20,6 +21,7 @@ class ReportModel {
 
   ReportModel({
     this.id,
+    this.authorId,
     this.author = '',
     this.title = '',
     this.description = '',
@@ -40,6 +42,7 @@ class ReportModel {
   factory ReportModel.fromJson(Map<String, dynamic> json) {
     return ReportModel(
         id: json['id'],
+        authorId: json['authorId'],
         author: json['author'],
         title: json['title'],
         description: json['description'],

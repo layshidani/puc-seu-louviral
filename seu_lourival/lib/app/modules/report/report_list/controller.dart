@@ -6,9 +6,9 @@ import 'package:seu_lourival/core/values/strings.dart';
 
 class ReportListController extends GetxController {
   @override
-  void onInit() async {
+  void onReady() async {
     await getReports();
-    super.onInit();
+    super.onReady();
   }
 
   final RxList _reportList = [].obs;
@@ -29,6 +29,8 @@ class ReportListController extends GetxController {
       final data = await ReportService.getReports();
       _setListValue(data);
       _setLoading(false);
+
+      print('🎯🎯🎯🎯🎯🎯🎯🎯🎯 GET REPORTS');
     } catch (e) {
       _setLoading(false);
       _showSnackBar(

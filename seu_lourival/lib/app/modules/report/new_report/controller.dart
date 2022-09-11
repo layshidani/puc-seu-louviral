@@ -1,15 +1,10 @@
 import 'dart:io';
-import 'dart:math';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/report/report_list/controller.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
-import 'package:seu_lourival/routes/routes.dart';
 import 'repository.dart';
 
 class NewReportController extends GetxController {
@@ -86,7 +81,7 @@ class NewReportController extends GetxController {
   void _addReportToList(Report report) {
     final reportModel = ReportModel(
       phone: report.author.phone,
-      id: report.author.uuid,
+      authorId: report.author.uuid,
       isPrivate: report.isPrivate,
       title: report.title,
       category: report.category,
