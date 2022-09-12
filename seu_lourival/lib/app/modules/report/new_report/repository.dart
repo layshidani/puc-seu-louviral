@@ -19,8 +19,10 @@ class NewReportRepository {
     return await _categoryProvider.getCategories();
   }
 
-  Future<void> addReport(Report model) async {
-    await _firestore.collection(reportCollection).add(model.toJson());
+  Future<String> addReport(Report model) async {
+    final result =
+        await _firestore.collection(reportCollection).add(model.toJson());
+    return result.id;
   }
 
   Future<String> uploadImage({required File file, required String ref}) async {

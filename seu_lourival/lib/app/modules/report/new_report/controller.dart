@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/report/report_list/controller.dart';
+import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
 import 'repository.dart';
 
@@ -72,14 +73,23 @@ class NewReportController extends GetxController {
       isPrivate: _isPrivateReport.value,
       category: formModel.category,
     );
-    await _repository.addReport(report);
-    isLoading = false;
-    _addReportToList(report);
-    onSuccess();
+    try {
+      final reportId = await _repository.addReport(report);
+      _addReportToList(report: report, reportId: reportId);
+      onSuccess();
+    } catch (e) {
+      CustomSnackBar(
+        title: "Erro ao salvar report: ${e.toString()}",
+        style: SnackbarStyle.error,
+      ).build().show();
+    } finally {
+      isLoading = false;
+    }
   }
 
-  void _addReportToList(Report report) {
+  void _addReportToList({required Report report, required String reportId}) {
     final reportModel = ReportModel(
+      id: reportId,
       phone: report.author.phone,
       authorId: report.author.uuid,
       isPrivate: report.isPrivate,
