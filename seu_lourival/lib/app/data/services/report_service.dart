@@ -14,11 +14,9 @@ class ReportService {
       }
 
       return result.map((json) {
-        print("--> JSOOOOOOON: ${json}");
         return ReportModel.fromJson(json);
       }).toList();
     } catch (e) {
-      print('🚩 $e');
       return throw Exception('Ops. Ocorreu um erro ao recuperar os dados');
     }
   }
@@ -39,7 +37,6 @@ class ReportService {
           .doc(id)
           .update({'status': status.description, 'updatedAt': DateTime.now()});
     } catch (e) {
-      print('🚩 error $e');
       return throw Exception(e);
     }
   }
@@ -48,7 +45,6 @@ class ReportService {
     try {
       await FirebaseFirestore.instance.collection('reports').doc(id).delete();
     } catch (e) {
-      print('🚩 error $e');
       return throw Exception(e);
     }
   }

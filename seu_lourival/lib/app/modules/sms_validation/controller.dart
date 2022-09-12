@@ -81,10 +81,8 @@ class SmsValidationController extends GetxController {
   }
 
   Future<bool> _validateTrustedUser() async {
-    print("--> _validateTrustedUser");
     try {
       final uuid = FirebaseAuth.instance.currentUser?.uid ?? '';
-      print("--> USER ID: ${uuid}");
       final result =
           await FirebaseFirestore.instance.collection('users').doc(uuid).get();
       if (result.exists) {
@@ -93,7 +91,6 @@ class SmsValidationController extends GetxController {
       }
       return false;
     } catch (e) {
-      print("--> _validateTrustedUser catch error: ${e}");
       return false;
     }
   }

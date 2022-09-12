@@ -16,7 +16,6 @@ class MaintenanceRepository {
           await _firestore.collection(maintenanceContactDatabase).add(json);
       return result.id;
     } catch (e) {
-      print("--> save maintenance contact error: ${e.toString()}");
       throw Exception(e.toString());
     }
   }
@@ -34,7 +33,6 @@ class MaintenanceRepository {
       });
       return json.toList();
     } catch (e) {
-      print("--> save maintenance contact error: ${e.toString()}");
       throw Exception(e.toString());
     }
   }

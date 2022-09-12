@@ -23,7 +23,6 @@ class LoginController extends GetxController {
   @override
   void onInit() async {
     if (_service.isLoggedIn) {
-      print("--> is logged in: ${FirebaseAuth.instance.currentUser}");
       _loading = true;
       final success = await _service.loadCurrentUser();
       if (success) {
@@ -44,12 +43,10 @@ class LoginController extends GetxController {
       verificationCompleted: (PhoneAuthCredential credential) {
         //  todo: retornar um credential
         _loading = false;
-        print('--> verificationCompleted');
       },
       // erro ao enviar sms
       verificationFailed: (FirebaseAuthException error) {
         //  todo: retornar um erro
-        print('--> verificationFailed: $error');
         _loading = false;
         final snackbar = CustomSnackBar(
           title: "Erro ao enviar token SMS",
@@ -61,14 +58,12 @@ class LoginController extends GetxController {
       // quando enviar o sms
       codeSent: (verificationId, _) {
         //  todo: retornar um id
-        print('--> codeSent');
         _loading = false;
         Get.find<SmsAuthenticationService>().id = verificationId;
         Get.find<SmsAuthenticationService>().phone = phone;
         Get.toNamed(Routes.smsValidation);
       },
       codeAutoRetrievalTimeout: (String str) {
-        print('--> codeAutoRetrievalTimeout');
         _loading = false;
       },
     );

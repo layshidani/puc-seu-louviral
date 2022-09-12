@@ -32,16 +32,13 @@ class MaintenanceController extends GetxController {
     await Future.delayed(2.seconds);
     _categories = await _repository.getCategories();
     await getMaintenanceContacts();
-    print(contacts);
     _isLoading.value = false;
     super.onInit();
   }
 
   Future<void> getMaintenanceContacts() async {
     final json = await _repository.getMaintenanceContacts();
-    print("--> ${json}");
     final contactList = json.map((element) {
-      print("--> $element");
       return MaintenanceContactModel.fromJson(json: element);
     }).toList();
     contacts.value = contactList;
@@ -101,7 +98,6 @@ class MaintenanceController extends GetxController {
   }
 
   Future<void> _makePhoneCall(MaintenanceContactModel contact) async {
-    print("--> ${contact.phone}");
     launchUrl(Uri.parse("tel:${contact.phone}"));
   }
 
@@ -110,7 +106,6 @@ class MaintenanceController extends GetxController {
         .replaceAll("(", "")
         .replaceAll(")", "")
         .replaceAll("-", "");
-    print("--> $phone");
     try {
       await FlutterLaunch.launchWhatsapp(
           phone: phone,

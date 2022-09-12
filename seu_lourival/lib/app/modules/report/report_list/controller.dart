@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
+import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/data/services/report_service.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:seu_lourival/core/values/strings.dart';
 
@@ -11,6 +13,7 @@ class ReportListController extends GetxController {
     super.onReady();
   }
 
+  UserModel? get loggedUser => Get.find<UserService>().user;
   final RxList _reportList = [].obs;
   get reportList => _reportList.value;
 
@@ -27,10 +30,9 @@ class ReportListController extends GetxController {
     try {
       _setLoading(true);
       final data = await ReportService.getReports();
-      _setListValue(data);
+      final visibleList = _filterPrivacyVisibility(data);
+      _setListValue(visibleList);
       _setLoading(false);
-
-      print('🎯🎯🎯🎯🎯🎯🎯🎯🎯 GET REPORTS');
     } catch (e) {
       _setLoading(false);
       _showSnackBar(
@@ -39,7 +41,27 @@ class ReportListController extends GetxController {
     }
   }
 
-  void _setListValue(data) {
+  List<ReportModel> _filterPrivacyVisibility(List<ReportModel> list) {
+    List<ReportModel> newList = [];
+    bool isAdmin = loggedUser!.type == UserType.ADMIN;
+    bool isSameAuthor;
+
+    list
+        .map((report) => {
+              isSameAuthor = (loggedUser!.uuid == report.authorId),
+              if (report.isPrivate == true)
+                {
+                  if (isAdmin || isSameAuthor) {newList.add(report)}
+                }
+              else
+                {newList.add(report)}
+            })
+        .toList();
+
+    return newList;
+  }
+
+  void _setListValue(List<ReportModel> data) {
     _reportList.value = data;
   }
 

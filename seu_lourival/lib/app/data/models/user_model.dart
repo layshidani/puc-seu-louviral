@@ -44,6 +44,7 @@ class UserModel {
       email: json?["email"],
       phone: json?["phone"],
       cpf: json?["cpf"],
+      // type: userType,
       type: kDebugMode ? UserType.ADMIN : userType,
       uuid: uuid,
     );
