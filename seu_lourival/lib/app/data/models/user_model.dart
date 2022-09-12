@@ -49,6 +49,17 @@ class UserModel {
       uuid: uuid,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "phone": phone,
+      "type": type.name.toLowerCase(),
+      "cpf": cpf,
+      "email": email,
+      "homeData": homeData?.toJson(),
+    };
+  }
 }
 
 class HomeData {

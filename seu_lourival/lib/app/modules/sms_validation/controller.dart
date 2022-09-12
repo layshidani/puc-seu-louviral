@@ -52,7 +52,7 @@ class SmsValidationController extends GetxController {
 
   void _validateUser() async {
     if (await _validatePreRegister()) {
-      Get.to(DummyPage('PRÉ REGISTER'));
+      Get.offAllNamed(Routes.onboarding);
     } else if (await _validateTrustedUser()) {
       Get.offAllNamed(Routes.reportList);
     } else {
@@ -63,16 +63,23 @@ class SmsValidationController extends GetxController {
 
   Future<bool> _validatePreRegister() async {
     debugPrint('--> _validateLogin');
-    debugPrint('--> telefone: ${Get.find<SmsAuthenticationService>().phone}');
+    debugPrint(
+        '--> telefone: ${Get.find<SmsAuthenticationService>().getUnmaskedPhone()}');
     try {
       final result = await FirebaseFirestore.instance
           .collection('pre-registered')
-          .where('telefone',
-              isEqualTo: Get.find<SmsAuthenticationService>().phone)
+          .where('phone',
+              isEqualTo:
+                  Get.find<SmsAuthenticationService>().getUnmaskedPhone())
           .get();
       if (result.docs.length != 1) {
         return false;
       } else {
+        if (result.docs.first.exists) {
+          final res = result.docs.first;
+          _service.user = UserModel.fromJson(res.data(), uuid: res.id);
+          return true;
+        }
         return true;
       }
     } catch (e) {
