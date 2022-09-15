@@ -39,6 +39,7 @@ class DSDrawerSidenav extends StatelessWidget {
                     ),
                     child: Image.network(
                       'https://www.pragmatismopolitico.com.br/wp-content/uploads/2022/04/predio.jpg',
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Text(

@@ -1,6 +1,7 @@
 import 'package:get/route_manager.dart';
 
 import 'package:seu_lourival/_debug/page.dart';
+import 'package:seu_lourival/app/modules/billboard/binding.dart';
 import 'package:seu_lourival/app/modules/login/binding.dart';
 import 'package:seu_lourival/app/modules/login/page.dart';
 import 'package:seu_lourival/app/modules/maintenance/binding.dart';
@@ -64,10 +65,6 @@ class Pages {
       page: () => const LoginErrorPage(),
     ),
     GetPage(
-      name: Routes.billboard,
-      page: () => const BillboardPage(),
-    ),
-    GetPage(
       name: Routes.financial,
       page: () => const FinancePage(),
     ),
@@ -94,6 +91,11 @@ class Pages {
       name: Routes.onboarding,
       page: () => OnboardingPage(),
       binding: OnboardingBinding(),
+    ),
+    GetPage(
+      name: Routes.billboard,
+      page: () => BillboardPage(),
+      binding: BillboardBinding(),
     ),
     // Theme Catalog / Debug
     GetPage(
