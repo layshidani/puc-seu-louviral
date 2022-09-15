@@ -55,7 +55,17 @@ class MaintenanceContactListTile extends StatelessWidget {
       child: ExpansionTile(
         iconColor: DSColors.primary,
         textColor: DSColors.primary,
-        title: DSText.lg(contact.name.capitalizeFirst ?? ""),
+        title: Row(
+          children: [
+            Expanded(child: DSText.lg(contact.name.capitalizeFirst ?? "")),
+            IconButton(
+              onPressed: () {
+                //  todo: exibir alerta para deletar o contato
+              },
+              icon: Icon(Icons.delete),
+            )
+          ],
+        ),
         subtitle: Scrollbar(
           thumbVisibility: true,
           controller: _scrollController,
@@ -87,7 +97,7 @@ class MaintenanceContactListTile extends StatelessWidget {
             margin: EdgeInsets.only(left: 16, bottom: 8),
             child: Text(
               contact.phone,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
               ),

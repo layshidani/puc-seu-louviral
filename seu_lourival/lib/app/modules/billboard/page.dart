@@ -1,18 +1,81 @@
-import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
+import 'package:seu_lourival/app/data/models/user_model.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
+import 'package:seu_lourival/app/modules/billboard/widgets/custom_story_view.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
+import 'package:story_view/story_view.dart';
+import 'package:video_player/video_player.dart';
+import 'controller.dart';
 
 class BillboardPage extends StatelessWidget {
-  const BillboardPage({Key? key}) : super(key: key);
+  BillboardPage({Key? key}) : super(key: key);
+
+  final _controller = Get.find<BillboardController>();
 
   @override
   Widget build(BuildContext context) {
     return DSScaffold(
       hasDrawer: true,
-      title: 'Comunicados',
-      body: Center(
-        child: DSText.lg('Comunicados - Em Construção'),
+      title: "Quadro de Avisos",
+      floatingActionButton: Get.find<UserService>().user?.type == UserType.ADMIN
+          ? FloatingActionButton(
+              onPressed: () {
+                //  todo: adicionar novo comunicado
+              },
+              child: Icon(Icons.add),
+            )
+          : null,
+      body: Obx(
+        () => _controller.isLoading.value
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView.separated(
+                itemBuilder: (context, index) {
+                  final model = _controller.storyCategories[index];
+                  final url = model.stories.first.url;
+                  final caption = model.stories.first.caption;
+                  return Card(
+                    elevation: 5,
+                    child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 16),
+                        leading: url != null
+                            ? CircleAvatar(
+                                backgroundImage: NetworkImage(url!),
+                              )
+                            : const Icon(Icons.camera_alt_outlined),
+                        trailing: CircleAvatar(
+                          backgroundColor: DSColors.tertiary,
+                          radius: 12,
+                          child: DSText.sm(
+                            model.stories.length.toString(),
+                          ),
+                        ),
+                        title: Text(model.category),
+                        subtitle: caption != null
+                            ? Text(
+                                caption,
+                                maxLines: 3,
+                              )
+                            : null,
+                        onTap: () {
+                          Get.to(CustomStoryView(
+                            _controller.storyController,
+                            stories: model.stories,
+                            title: model.category,
+                          ));
+                        }),
+                  );
+                },
+                separatorBuilder: (context, index) => Divider(),
+                padding: const EdgeInsets.all(8),
+                itemCount: _controller.storyCategories.length,
+              ),
       ),
     );
   }
