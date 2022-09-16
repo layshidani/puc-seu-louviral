@@ -2,6 +2,8 @@ import 'package:get/route_manager.dart';
 
 import 'package:seu_lourival/_debug/page.dart';
 import 'package:seu_lourival/app/modules/billboard/binding.dart';
+import 'package:seu_lourival/app/modules/billboard/new_billboard/binding.dart';
+import 'package:seu_lourival/app/modules/billboard/new_billboard/page.dart';
 import 'package:seu_lourival/app/modules/login/binding.dart';
 import 'package:seu_lourival/app/modules/login/page.dart';
 import 'package:seu_lourival/app/modules/maintenance/binding.dart';
@@ -96,6 +98,11 @@ class Pages {
       name: Routes.billboard,
       page: () => BillboardPage(),
       binding: BillboardBinding(),
+    ),
+    GetPage(
+      name: Routes.newBillboard,
+      page: () => NewBillboardPage(),
+      binding: NewBillboardBinding(),
     ),
     // Theme Catalog / Debug
     GetPage(

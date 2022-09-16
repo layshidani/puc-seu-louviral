@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/billboard/widgets/custom_story_view.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
-import 'package:story_view/story_view.dart';
-import 'package:video_player/video_player.dart';
+import 'package:seu_lourival/routes/routes.dart';
 import 'controller.dart';
 
 class BillboardPage extends StatelessWidget {
@@ -24,7 +22,7 @@ class BillboardPage extends StatelessWidget {
       floatingActionButton: Get.find<UserService>().user?.type == UserType.ADMIN
           ? FloatingActionButton(
               onPressed: () {
-                //  todo: adicionar novo comunicado
+                Get.toNamed(Routes.newBillboard);
               },
               child: Icon(Icons.add),
             )
@@ -46,7 +44,7 @@ class BillboardPage extends StatelessWidget {
                             horizontal: 16, vertical: 16),
                         leading: url != null
                             ? CircleAvatar(
-                                backgroundImage: NetworkImage(url!),
+                                backgroundImage: NetworkImage(url),
                               )
                             : const Icon(Icons.camera_alt_outlined),
                         trailing: CircleAvatar(
@@ -72,7 +70,7 @@ class BillboardPage extends StatelessWidget {
                         }),
                   );
                 },
-                separatorBuilder: (context, index) => Divider(),
+                separatorBuilder: (context, index) => const Divider(),
                 padding: const EdgeInsets.all(8),
                 itemCount: _controller.storyCategories.length,
               ),
