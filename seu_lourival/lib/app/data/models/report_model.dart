@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/core/utils/datetime_helper.dart';
-import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/text_size.dart';
 
 class ReportModel {
