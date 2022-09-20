@@ -34,6 +34,7 @@ class NewBillboardController extends GetxController {
   @override
   void onInit() async {
     isLoading = true;
+    print("CATEGORIAS: ${categories.isEmpty}");
     categories = await _repository.getCategories();
     isLoading = false;
     super.onInit();
