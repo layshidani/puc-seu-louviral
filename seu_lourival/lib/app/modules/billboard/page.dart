@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/models/user_model.dart';
+import 'package:seu_lourival/app/data/providers/billboard-category.provider.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/billboard/widgets/custom_story_view.dart';
 import 'package:seu_lourival/core/values/colors.dart';
@@ -22,9 +23,10 @@ class BillboardPage extends StatelessWidget {
       floatingActionButton: Get.find<UserService>().user?.type == UserType.ADMIN
           ? FloatingActionButton(
               onPressed: () {
+                Get.put(BillboardCategoryProvider());
                 Get.toNamed(Routes.newBillboard);
               },
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
             )
           : null,
       body: Obx(

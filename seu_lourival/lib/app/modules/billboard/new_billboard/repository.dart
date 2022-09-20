@@ -8,7 +8,9 @@ class NewBillboardRepository {
   final _storage = FirebaseStorage.instance;
   final categoryCollection = "categories-billboard";
   final billboardCollection = "billboards";
-  final _categoryProvider = BillboardCategoryProvider();
+  final BillboardCategoryProvider _categoryProvider;
+
+  NewBillboardRepository(this._categoryProvider);
 
   Future<List<String>> getCategories() async {
     return await _categoryProvider.getBillboardCategories();
