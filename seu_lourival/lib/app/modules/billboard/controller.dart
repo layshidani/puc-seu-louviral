@@ -15,6 +15,10 @@ class BillboardController extends GetxController {
     await _getStories();
   }
 
+  Future<void> reloadStories() async {
+    _getStories();
+  }
+
   Future<void> _getStories() async {
     isLoading.value = true;
     storyCategories.value = await _repository.getBillboardStories();
@@ -24,9 +28,13 @@ class BillboardController extends GetxController {
 
 class BillBoardModel {
   final String category;
-  final List<StoryModel> stories;
+  List<StoryModel> stories = [];
 
-  BillBoardModel({required this.category, required this.stories});
+  BillBoardModel({required this.category});
+
+  void addStory(StoryModel story) {
+    stories.add(story);
+  }
 }
 
 class StoryModel {

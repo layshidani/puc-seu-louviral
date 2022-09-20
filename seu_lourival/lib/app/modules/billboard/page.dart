@@ -34,47 +34,52 @@ class BillboardPage extends StatelessWidget {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView.separated(
-                itemBuilder: (context, index) {
-                  final model = _controller.storyCategories[index];
-                  final url = model.stories.first.url;
-                  final caption = model.stories.first.caption;
-                  return Card(
-                    elevation: 5,
-                    child: ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 16),
-                        leading: url != null
-                            ? CircleAvatar(
-                                backgroundImage: NetworkImage(url),
-                              )
-                            : const Icon(Icons.camera_alt_outlined),
-                        trailing: CircleAvatar(
-                          backgroundColor: DSColors.tertiary,
-                          radius: 12,
-                          child: DSText.sm(
-                            model.stories.length.toString(),
-                          ),
-                        ),
-                        title: Text(model.category),
-                        subtitle: caption != null
-                            ? Text(
-                                caption,
-                                maxLines: 3,
-                              )
-                            : null,
-                        onTap: () {
-                          Get.to(CustomStoryView(
-                            _controller.storyController,
-                            stories: model.stories,
-                            title: model.category,
-                          ));
-                        }),
-                  );
+            : RefreshIndicator(
+                onRefresh: () async {
+                  _controller.reloadStories();
                 },
-                separatorBuilder: (context, index) => const Divider(),
-                padding: const EdgeInsets.all(8),
-                itemCount: _controller.storyCategories.length,
+                child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    final model = _controller.storyCategories[index];
+                    final url = model.stories.first.url;
+                    final caption = model.stories.first.caption;
+                    return Card(
+                      elevation: 5,
+                      child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 16),
+                          leading: url != null
+                              ? CircleAvatar(
+                                  backgroundImage: NetworkImage(url),
+                                )
+                              : const Icon(Icons.camera_alt_outlined),
+                          trailing: CircleAvatar(
+                            backgroundColor: DSColors.tertiary,
+                            radius: 12,
+                            child: DSText.sm(
+                              model.stories?.length.toString() ?? "",
+                            ),
+                          ),
+                          title: Text(model.category),
+                          subtitle: caption != null
+                              ? Text(
+                                  caption,
+                                  maxLines: 3,
+                                )
+                              : null,
+                          onTap: () {
+                            Get.to(CustomStoryView(
+                              _controller.storyController,
+                              stories: model.stories ?? [],
+                              title: model.category,
+                            ));
+                          }),
+                    );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                  padding: const EdgeInsets.all(8),
+                  itemCount: _controller.storyCategories.length,
+                ),
               ),
       ),
     );
