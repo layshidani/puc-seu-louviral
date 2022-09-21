@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
 
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
@@ -101,7 +99,8 @@ class AddUsersFormController extends GetxController {
           message: AddUsersFormStrings.onSaveUserSuccess);
     } catch (e) {
       _showSnackBar(
-          style: SnackbarStyle.error, message: AddUsersFormStrings.onSaveUserError);
+          style: SnackbarStyle.error,
+          message: AddUsersFormStrings.onSaveUserError);
     }
   }
 
