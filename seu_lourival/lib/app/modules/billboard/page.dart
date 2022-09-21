@@ -57,7 +57,7 @@ class BillboardPage extends StatelessWidget {
                             backgroundColor: DSColors.tertiary,
                             radius: 12,
                             child: DSText.sm(
-                              model.stories?.length.toString() ?? "",
+                              model.stories.length.toString(),
                             ),
                           ),
                           title: Text(model.category),
@@ -69,8 +69,8 @@ class BillboardPage extends StatelessWidget {
                               : null,
                           onTap: () {
                             Get.to(CustomStoryView(
-                              _controller.storyController,
-                              stories: model.stories ?? [],
+                              _controller,
+                              stories: model.stories,
                               title: model.category,
                             ));
                           }),
