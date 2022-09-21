@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:story_view/story_view.dart';
 import 'repository.dart';
 
@@ -24,6 +25,22 @@ class BillboardController extends GetxController {
     storyCategories.value = await _repository.getBillboardStories();
     isLoading.value = false;
   }
+
+  Future<void> deleteStory(String id) async {
+    _repository.deleteBillboard(id).then((_) {
+      CustomSnackBar(
+              title: "Comunicado deletado com sucesso",
+              style: SnackbarStyle.success)
+          .build()
+          .show();
+    }).catchError((err) {
+      CustomSnackBar(
+              title: "Erro ao deletar Comunicado.", style: SnackbarStyle.error)
+          .build()
+          .show();
+      print("--> ERROOOOOOO AO DELETAR BILLBOARD: $err");
+    });
+  }
 }
 
 class BillBoardModel {
@@ -38,14 +55,14 @@ class BillBoardModel {
 }
 
 class StoryModel {
-  String? id;
+  String id;
   String? caption;
   String? url;
   String? category;
   DateTime? createdAt;
 
   StoryModel({
-    this.id,
+    required this.id,
     this.caption,
     this.category,
     this.createdAt,

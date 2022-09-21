@@ -7,6 +7,11 @@ class BillboardRepository {
   final _firestore = FirebaseFirestore.instance;
   final billboardCollection = "billboards";
 
+  Future<void> deleteBillboard(String id) async {
+    print("id to be deleted: $id");
+    await _firestore.collection(billboardCollection).doc(id).delete();
+  }
+
   Future<List<BillBoardModel>> getBillboardStories() async {
     final categories = <String>[];
     final result = await _firestore

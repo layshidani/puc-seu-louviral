@@ -24,7 +24,7 @@ class NewBillboardController extends GetxController {
   var path = "".obs;
 
   //form model
-  final formModel = StoryModel();
+  final formModel = StoryModel(id: "");
 
   NewBillboardController(
     this._repository,

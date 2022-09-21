@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
@@ -15,23 +17,40 @@ import 'package:story_view/widgets/story_view.dart';
 import '../../../../global_widgets/dialog/confirm_dialog.dart';
 
 class CustomStoryView extends StatelessWidget {
-  final StoryController _storyController;
   final List<StoryModel> stories;
   final bool repeat;
   final String title;
   final VoidCallback? onComplete;
+  final BillboardController _controller;
+  final isAdmin = Get.find<UserService>().user?.type == UserType.ADMIN;
 
-  const CustomStoryView(
-    this._storyController, {
+  String currentStoryId = "";
+
+  StoryController get _storyController => _controller.storyController;
+
+  List<StoryItem> storyItemList() {
+    return stories
+        .map(
+          (story) => StoryItemHelper.fromStoryModel(
+            story,
+            controller: _storyController,
+            isAdmin: !isAdmin,
+          ),
+        )
+        .toList();
+  }
+
+  CustomStoryView(
+    this._controller, {
+    Key? key,
     this.stories = const <StoryModel>[],
     this.repeat = false,
     this.onComplete,
     required this.title,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final isAdmin = Get.find<UserService>().user?.type == UserType.ADMIN;
     return DSScaffold(
       title: title,
       hasDrawer: false,
@@ -44,11 +63,13 @@ class CustomStoryView extends StatelessWidget {
                 DSConfirmDialog(
                         context: context,
                         onConfirmAction: () {
-                          //  todo: deletar billboard do banco de dados
-                          //  todo: dar um pop na tela
-                          // todo: Exibir snackbar de sucesso
+                          _controller.deleteStory(currentStoryId);
+                          _controller.reloadStories();
+
                           Navigator.popUntil(
-                              context, ModalRoute.withName(Routes.billboard));
+                            context,
+                            ModalRoute.withName(Routes.billboard),
+                          );
                         },
                         title: '🗑 Excluir manifesto',
                         descriptionLine1: 'Essa ação não poderá ser desfeita.',
@@ -62,15 +83,7 @@ class CustomStoryView extends StatelessWidget {
         )
       ],
       body: StoryView(
-        storyItems: stories
-            .map(
-              (story) => StoryItemHelper.fromStoryModel(
-                story,
-                controller: _storyController,
-                isAdmin: !isAdmin,
-              ),
-            )
-            .toList(),
+        storyItems: storyItemList(),
         controller: _storyController,
         repeat: repeat,
         onVerticalSwipeComplete: (direction) {
@@ -83,6 +96,13 @@ class CustomStoryView extends StatelessWidget {
           if (onComplete != null) {
             onComplete!();
           }
+        },
+        onStoryShow: (story) {
+          final id = story.view.key
+              .toString()
+              .replaceAll("[<'", "")
+              .replaceAll("'>]", "");
+          currentStoryId = id;
         },
       ),
     );
@@ -97,12 +117,14 @@ extension StoryItemHelper on StoryItem {
   }) {
     if (model.url == null) {
       return StoryItem.text(
+        key: ValueKey(model.id),
         title: model.caption ?? "",
         backgroundColor: Colors.green,
         duration: isAdmin ? 100.seconds : 5.seconds,
       );
     } else {
       return StoryItem.pageImage(
+        key: ValueKey(model.id),
         url: model.url ?? "",
         controller: controller,
         caption: model.caption,
