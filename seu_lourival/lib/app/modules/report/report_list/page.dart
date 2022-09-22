@@ -91,15 +91,8 @@ class ReportListPage extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             DSTitle.base('${report.title}'),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                DSText.sm(report.author),
-                                                DSText.sm(report.createdAt),
-                                              ],
-                                            ),
+                                            DSText.sm(report.author),
+                                            DSText.sm(report.createdAt),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
