@@ -9,8 +9,7 @@ extension DSStringExtensions on String {
 
 extension DSStringRegex on String {
   bool isValidName() {
-    return RegExp(
-            r'^[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+\s([A-ZÀ-ŸA-zÀ-ÿ]\s?)*[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+$')
+    return RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
         .hasMatch(this);
   }
 }
