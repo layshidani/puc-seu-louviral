@@ -7,6 +7,7 @@ import 'package:seu_lourival/app/data/models/user_model.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/billboard/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/core/scaffold/scaffold.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/title.dart';
 import 'package:seu_lourival/routes/routes.dart';
@@ -51,37 +52,42 @@ class CustomStoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DSScaffold(
-      title: title,
-      hasDrawer: false,
-      actions: [
-        Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                _storyController.pause();
-                DSConfirmDialog(
-                        context: context,
-                        onConfirmAction: () {
-                          _controller.deleteStory(currentStoryId);
-                          _controller.reloadStories();
+    return Scaffold(
+      appBar: isAdmin
+          ? AppBar(
+              title: Text(title),
+              backgroundColor: DSColors.primary,
+              actions: [
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        _storyController.pause();
+                        DSConfirmDialog(
+                                context: context,
+                                onConfirmAction: () {
+                                  _controller.deleteStory(currentStoryId);
+                                  _controller.reloadStories();
 
-                          Navigator.popUntil(
-                            context,
-                            ModalRoute.withName(Routes.billboard),
-                          );
-                        },
-                        title: '🗑 Excluir manifesto',
-                        descriptionLine1: 'Essa ação não poderá ser desfeita.',
-                        descriptionLine2:
-                            'Você tem certeza que deseja excluir esse manifesto?')
-                    .show();
-              },
-              icon: const Icon(Icons.delete),
-            ),
-          ],
-        )
-      ],
+                                  Navigator.popUntil(
+                                    context,
+                                    ModalRoute.withName(Routes.billboard),
+                                  );
+                                },
+                                title: '🗑 Excluir manifesto',
+                                descriptionLine1:
+                                    'Essa ação não poderá ser desfeita.',
+                                descriptionLine2:
+                                    'Você tem certeza que deseja excluir esse manifesto?')
+                            .show();
+                      },
+                      icon: const Icon(Icons.delete),
+                    ),
+                  ],
+                )
+              ],
+            )
+          : null,
       body: StoryView(
         storyItems: storyItemList(),
         controller: _storyController,
