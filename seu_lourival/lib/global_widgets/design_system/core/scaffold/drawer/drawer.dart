@@ -14,8 +14,13 @@ class DSDrawer extends StatefulWidget {
   final String title;
   final Widget body;
   final Widget? floatButton;
+  final List<Widget>? actions;
 
-  DSDrawer({required this.title, required this.body, this.floatButton});
+  DSDrawer(
+      {required this.title,
+      required this.body,
+      this.floatButton,
+      this.actions});
 
   @override
   _DSDrawerState createState() => _DSDrawerState();
@@ -44,6 +49,7 @@ class _DSDrawerState extends State<DSDrawer> {
         body: widget.body,
         leading: getDefaultLeading(),
         floatingActionButton: widget.floatButton,
+        actions: widget.actions,
       ),
     );
   }

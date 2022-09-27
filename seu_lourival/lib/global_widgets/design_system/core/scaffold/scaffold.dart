@@ -21,7 +21,12 @@ class DSScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (hasDrawer == true)
-        ? DSDrawer(title: title, body: body, floatButton: floatingActionButton)
+        ? DSDrawer(
+            title: title,
+            body: body,
+            floatButton: floatingActionButton,
+            actions: actions,
+          )
         : DSScaffoldWidet(
             title: title,
             body: body,

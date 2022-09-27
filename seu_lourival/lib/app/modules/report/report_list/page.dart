@@ -22,6 +22,14 @@ class ReportListPage extends StatelessWidget {
     return DSScaffold(
       hasDrawer: true,
       title: ReportListStrings.scaffoldTitle,
+      actions: [
+        IconButton(
+          onPressed: () {
+            showSearch(context: context, delegate: _controller.reportSearch);
+          },
+          icon: const Icon(Icons.search),
+        ),
+      ],
       floatingActionButton: FloatingActionButton(
         backgroundColor: DSColors.primary,
         onPressed: () {
@@ -132,8 +140,8 @@ class ReportListPage extends StatelessWidget {
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: [
-                                                  const Icon(
+                                                children: const [
+                                                  Icon(
                                                     Icons
                                                         .arrow_forward_ios_rounded,
                                                     color: DSColors.primary,

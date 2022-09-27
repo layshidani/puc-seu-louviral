@@ -5,6 +5,7 @@ import 'package:seu_lourival/app/data/services/report_service.dart';
 import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:seu_lourival/core/values/strings.dart';
+import '../../../data/delegates/report_search.dart';
 
 class ReportListController extends GetxController {
   @override
@@ -25,6 +26,8 @@ class ReportListController extends GetxController {
   _setLoading(bool isLoading) {
     _isLoading.value = isLoading;
   }
+
+  ReportSearch get reportSearch => ReportSearch(reports: reportList);
 
   Future<void> getReports() async {
     try {
