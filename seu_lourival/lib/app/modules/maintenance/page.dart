@@ -131,6 +131,9 @@ class MaintenancePage extends StatelessWidget {
                   final contact = _controller.contacts[index];
                   return MaintenanceContactListTile(
                     contact: contact,
+                    onDelete: () async {
+                      await _controller.deleteMaintenanceContact(contact);
+                    },
                     onTap: (action) {
                       _controller.didSelectAction(action, contact: contact);
                     },

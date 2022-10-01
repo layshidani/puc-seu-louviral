@@ -108,7 +108,7 @@ class MaintenanceController extends GetxController {
         .replaceAll("-", "");
     try {
       await FlutterLaunch.launchWhatsapp(
-          phone: phone,
+          phone: "55${phone}",
           message:
               "Olá, ${contact.name}. Gostaria de solicitar um orçamento para seu serviço de manutenção.");
     } catch (e) {
@@ -118,5 +118,14 @@ class MaintenanceController extends GetxController {
       ).build();
       Get.showSnackbar(snack);
     }
+  }
+
+  Future<void> deleteMaintenanceContact(MaintenanceContactModel model) async {
+    isLoading = true;
+    if (model.id != null) {
+      await _repository.deleteMaintenanceContact(model.id!);
+      contacts.remove(model);
+    }
+    isLoading = false;
   }
 }
