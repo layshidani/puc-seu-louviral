@@ -64,7 +64,8 @@ class ReportListPage extends StatelessWidget {
                       child: ListView.builder(
                         itemCount: _controller.reportList.length,
                         itemBuilder: (context, index) {
-                          final report = _controller.reportList[index];
+                          final report =
+                              _controller.reportList[index] as ReportModel;
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 5.0, horizontal: 5.0),
@@ -78,15 +79,15 @@ class ReportListPage extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(
-                                  height: 110,
+                                  height: 150,
                                   color: Colors.white,
                                   child: Row(
                                     children: <Widget>[
                                       Container(
                                         color: getReportCategoryColor(
                                             report.category),
-                                        width: 70,
-                                        height: 110,
+                                        width: 60,
+                                        height: double.maxFinite,
                                         child: getReportCategoryIcon(
                                             report.category),
                                       ),
@@ -98,7 +99,14 @@ class ReportListPage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
-                                            DSTitle.base('${report.title}'),
+                                            Text(
+                                              report.title,
+                                              maxLines: 2,
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                             DSText.sm(report.author),
                                             DSText.sm(report.createdAt),
                                             Row(
