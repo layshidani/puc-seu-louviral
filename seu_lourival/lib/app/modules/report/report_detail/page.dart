@@ -3,6 +3,8 @@ import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:seu_lourival/app/data/models/report_model.dart';
+import 'package:seu_lourival/app/data/models/user_model.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/app/modules/report/report_detail/controller.dart';
 import 'package:seu_lourival/app/widgets/custom_loading.dart';
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
@@ -17,6 +19,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ReportDetailPage extends StatelessWidget {
   final controller = Get.find<ReportDetailController>();
+  final isAdmin = Get.find<UserService>().user?.type == UserType.ADMIN;
   final _formKey = GlobalKey<FormState>();
 
   Widget _buildListTile(String title, String subtitle) {
@@ -54,38 +57,40 @@ class ReportDetailPage extends StatelessWidget {
               )
             : Container(),
       ],
-      floatingActionButton: SpeedDial(
-        closedBackgroundColor: DSColors.primary,
-        openBackgroundColor: DSColors.primary,
-        child: const Icon(Icons.contact_phone),
-        speedDialChildren: [
-          SpeedDialChild(
-            child: const Icon(Icons.phone),
-            backgroundColor: Colors.amber[700],
-            onPressed: () {
-              launchUrl(Uri.parse("tel:${controller.report.phone}"));
-            },
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.whatsapp),
-            backgroundColor: Colors.green[700],
-            onPressed: () async {
-              try {
-                await FlutterLaunch.launchWhatsapp(
-                    phone: controller.report.phone,
-                    message:
-                        "Olá, estou entrando em contato para falar sobre seu manifesto: *${controller.report.title}*");
-              } catch (e) {
-                final snack = CustomSnackBar(
-                  title: "Erro ao abrir Whatsapp",
-                  style: SnackbarStyle.error,
-                ).build();
-                Get.showSnackbar(snack);
-              }
-            },
-          ),
-        ],
-      ),
+      floatingActionButton: !isAdmin
+          ? null
+          : SpeedDial(
+              closedBackgroundColor: DSColors.primary,
+              openBackgroundColor: DSColors.primary,
+              child: const Icon(Icons.contact_phone),
+              speedDialChildren: [
+                SpeedDialChild(
+                  child: const Icon(Icons.phone),
+                  backgroundColor: Colors.amber[700],
+                  onPressed: () {
+                    launchUrl(Uri.parse("tel:${controller.report.phone}"));
+                  },
+                ),
+                SpeedDialChild(
+                  child: const Icon(Icons.whatsapp),
+                  backgroundColor: Colors.green[700],
+                  onPressed: () async {
+                    try {
+                      await FlutterLaunch.launchWhatsapp(
+                          phone: controller.report.phone,
+                          message:
+                              "Olá, estou entrando em contato para falar sobre seu manifesto: *${controller.report.title}*");
+                    } catch (e) {
+                      final snack = CustomSnackBar(
+                        title: "Erro ao abrir Whatsapp",
+                        style: SnackbarStyle.error,
+                      ).build();
+                      Get.showSnackbar(snack);
+                    }
+                  },
+                ),
+              ],
+            ),
       body: Obx(
         () => controller.isLoading
             ? CustomLoading()
