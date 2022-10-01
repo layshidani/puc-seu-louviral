@@ -20,6 +20,14 @@ class MaintenanceRepository {
     }
   }
 
+  Future<void> deleteMaintenanceContact(String id) async {
+    try {
+      _firestore.collection(maintenanceContactDatabase).doc(id).delete();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<List<Map<String, dynamic>>> getMaintenanceContacts() async {
     try {
       final result = await _firestore

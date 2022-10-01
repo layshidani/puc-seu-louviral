@@ -6,6 +6,7 @@ class UserService {
   UserModel? user;
 
   bool get isLoggedIn => FirebaseAuth.instance.currentUser != null;
+  bool get isAdmin => user?.type == UserType.ADMIN;
 
   Future<bool> loadCurrentUser() async {
     final currentUser = FirebaseAuth.instance.currentUser;

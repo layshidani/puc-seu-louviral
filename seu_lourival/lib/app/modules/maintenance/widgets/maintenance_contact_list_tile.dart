@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seu_lourival/app/data/models/maintenance_contact_model.dart';
+import 'package:seu_lourival/app/data/services/user_service.dart';
 import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/global_widgets/design_system/text/text.dart';
+import 'package:seu_lourival/global_widgets/dialog/confirm_dialog.dart';
 
 enum MaintenanceContactListTileAction {
   whatsapp,
@@ -10,14 +12,17 @@ enum MaintenanceContactListTileAction {
 }
 
 class MaintenanceContactListTile extends StatelessWidget {
+  final isAdmin = Get.find<UserService>().isAdmin;
   final MaintenanceContactModel contact;
   final Function(MaintenanceContactListTileAction) onTap;
+  final Function onDelete;
   final ScrollController _scrollController =
       ScrollController(initialScrollOffset: 0);
   MaintenanceContactListTile({
     Key? key,
     required this.contact,
     required this.onTap,
+    required this.onDelete,
   }) : super(key: key);
 
   Widget _buildGestureIcon({
@@ -58,12 +63,22 @@ class MaintenanceContactListTile extends StatelessWidget {
         title: Row(
           children: [
             Expanded(child: DSText.lg(contact.name.capitalizeFirst ?? "")),
-            IconButton(
-              onPressed: () {
-                //  todo: exibir alerta para deletar o contato
-              },
-              icon: Icon(Icons.delete),
-            )
+            if (isAdmin)
+              IconButton(
+                onPressed: () {
+                  //  todo: exibir alerta para deletar o contato
+                  DSConfirmDialog(
+                    title: contact.name,
+                    context: context,
+                    onConfirmAction: () {
+                      Navigator.of(context).pop();
+                      onDelete();
+                    },
+                    descriptionLine1: 'Gostaria de deletar este contato?',
+                  ).show();
+                },
+                icon: Icon(Icons.delete),
+              )
           ],
         ),
         subtitle: Scrollbar(
