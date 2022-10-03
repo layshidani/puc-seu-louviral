@@ -37,11 +37,13 @@ class MaintenanceController extends GetxController {
   }
 
   Future<void> getMaintenanceContacts() async {
+    isLoading = true;
     final json = await _repository.getMaintenanceContacts();
     final contactList = json.map((element) {
       return MaintenanceContactModel.fromJson(json: element);
     }).toList();
     contacts.value = contactList;
+    isLoading = false;
   }
 
   Future<void> saveMaintenanceContact() async {

@@ -71,6 +71,8 @@ class NewBillboardController extends GetxController {
         style: SnackbarStyle.error,
       );
     } finally {
+      final billboardController = Get.find<BillboardController>();
+      billboardController.reloadStories();
       isLoading = false;
     }
   }
