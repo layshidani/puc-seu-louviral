@@ -41,7 +41,7 @@ class LoginErrorPage extends StatelessWidget {
           DSIconButton(
             buttonText: 'Tentar novamente',
             iconData: Icons.refresh_outlined,
-            onPressAction: () => Get.toNamed(Routes.login),
+            onPressAction: () => Get.offAllNamed(Routes.login),
           ),
         ],
       ),

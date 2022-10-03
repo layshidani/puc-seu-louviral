@@ -92,6 +92,8 @@ class SmsValidationController extends GetxController {
       final uuid = FirebaseAuth.instance.currentUser?.uid ?? '';
       final result =
           await FirebaseFirestore.instance.collection('users').doc(uuid).get();
+      print("-=-=-=-=-=-=-");
+      print(result.data());
       if (result.exists) {
         _service.user = UserModel.fromJson(result.data(), uuid: result.id);
         return true;

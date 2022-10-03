@@ -112,12 +112,7 @@ class AddUsersFormController extends GetxController {
         email: addUserForm.email,
         phone: addUserForm.phone,
       );
-
       await emailService.sendEmail(model: model);
-
-      _showSnackBar(
-          style: SnackbarStyle.success,
-          message: AddUsersFormStrings.onSaveUserSuccess);
       return true;
     } catch (e) {
       _showSnackBar(

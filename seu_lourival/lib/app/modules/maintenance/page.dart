@@ -126,22 +126,39 @@ class MaintenancePage extends StatelessWidget {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView.builder(
-                itemBuilder: (context, index) {
-                  final contact = _controller.contacts[index];
-                  return MaintenanceContactListTile(
-                    contact: contact,
-                    onDelete: () async {
-                      await _controller.deleteMaintenanceContact(contact);
+            : _controller.contacts.isEmpty
+                ? const Center(
+                    child: Text(
+                      "Nenhum contato de manutenção cadastrado",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                : RefreshIndicator(
+                    onRefresh: () async {
+                      await _controller.getMaintenanceContacts();
                     },
-                    onTap: (action) {
-                      _controller.didSelectAction(action, contact: contact);
-                    },
-                  );
-                },
-                padding: EdgeInsets.all(16),
-                itemCount: _controller.contacts.length,
-              ),
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        final contact = _controller.contacts[index];
+                        return MaintenanceContactListTile(
+                          contact: contact,
+                          onDelete: () async {
+                            await _controller.deleteMaintenanceContact(contact);
+                          },
+                          onTap: (action) {
+                            _controller.didSelectAction(action,
+                                contact: contact);
+                          },
+                        );
+                      },
+                      padding: EdgeInsets.all(16),
+                      itemCount: _controller.contacts.length,
+                    ),
+                  ),
       ),
     );
   }

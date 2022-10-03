@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seu_lourival/app/modules/report/new_report/strings.dart';
+import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/core/values/spacing.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
@@ -123,7 +124,7 @@ class NewReportPage extends StatelessWidget {
                         labelText: NewReportStrings.reportTitle,
                         validator: (value) {
                           return DSInputValidators.isFieldValid(
-                              minCharacters: 10, value: value);
+                              minCharacters: 5, value: value);
                         },
                         onChange: (value) {
                           _controller.formModel.title = value;
@@ -183,13 +184,10 @@ class NewReportPage extends StatelessWidget {
                           if (_formKey.currentState?.validate() ?? false) {
                             _controller.saveReport(onSuccess: () {
                               Get.back();
-                              Get.showSnackbar(
-                                GetSnackBar(
-                                  title: "Sucesso",
-                                  message: "Seu manifesto foi cadastrado",
-                                  duration: 3.seconds,
-                                ),
-                              );
+                              CustomSnackBar(
+                                title: "Seu manifesto foi cadastrado",
+                                style: SnackbarStyle.success,
+                              ).build().show();
                             }, onFailure: (errorMessage) {
                               Get.showSnackbar(
                                 GetSnackBar(

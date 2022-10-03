@@ -76,6 +76,7 @@ class ReportDetailPage extends StatelessWidget {
                   backgroundColor: Colors.green[700],
                   onPressed: () async {
                     try {
+                      await FlutterLaunch.hasApp(name: "whatsapp");
                       await FlutterLaunch.launchWhatsapp(
                           phone: controller.report.phone,
                           message:
