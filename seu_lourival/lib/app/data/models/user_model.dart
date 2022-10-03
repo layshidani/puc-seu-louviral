@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class UserModel {
   String? uuid;
   final String name;
@@ -5,7 +7,7 @@ class UserModel {
   final String phone;
   final String cpf;
   final HomeData? homeData;
-  final String type;
+  final UserType type;
 
   UserModel({
     this.uuid,
@@ -34,15 +36,28 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic>? json,
       {required String uuid}) {
+    final String userTypeString = json?['type'] ?? "morador";
+    final userType = UserType.values.byName(userTypeString.toUpperCase());
     return UserModel(
       name: json?["name"],
       homeData: HomeData.fromJson(json?["homeData"]),
       email: json?["email"],
       phone: json?["phone"],
       cpf: json?["cpf"],
-      type: json?["type"],
+      type: userType,
       uuid: uuid,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "phone": phone,
+      "type": type.name.toLowerCase(),
+      "cpf": cpf,
+      "email": email,
+      "homeData": homeData?.toJson(),
+    };
   }
 }
 
@@ -66,3 +81,5 @@ class HomeData {
     };
   }
 }
+
+enum UserType { MORADOR, ADMIN }

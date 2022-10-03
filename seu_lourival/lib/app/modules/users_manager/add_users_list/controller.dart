@@ -43,8 +43,10 @@ class AddUsersListController extends GetxController {
 
   void onFilterPreRegisterUsers(String filter) async {
     _selectedFilter.value = filter;
-    var result =
-        preRegisteredList.where((user) => user['type'] == filter).toList();
+    var result = preRegisteredList
+        .where((user) =>
+            user['type'].toString().toLowerCase() == filter.toLowerCase())
+        .toList();
 
     if (filter == defaultFilter) {
       _preRegisteredListFiltered.value = _preRegisteredList.value;
@@ -79,7 +81,8 @@ class AddUsersListController extends GetxController {
             context: context,
             title: 'Excluir usuário',
             descriptionLine1: 'Essa ação não poderá ser desfeita.',
-            descriptionLine2: 'Você deseja excluir o usuário  ${_userToDelete['name']} (${_userToDelete['type']}) do pré registro?',
+            descriptionLine2:
+                'Você deseja excluir o usuário  ${_userToDelete['name']} (${_userToDelete['type']}) do pré registro?',
             onConfirmAction: _onDeletePreregistered)
         .show();
   }

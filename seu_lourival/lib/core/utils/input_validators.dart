@@ -1,4 +1,5 @@
 import 'package:get/utils.dart';
+import 'package:seu_lourival/core/utils/ds_extensions.dart';
 
 class DSInputValidators {
   static String? isValidName(String? value) {
@@ -48,19 +49,10 @@ class DSInputValidators {
 
   static String? isFieldValid({required int minCharacters, String? value}) {
     if (value == null) {
-      print("--> ${value}, --> ${value?.length}");
       return "Campo obrigatório";
     } else if (value.length < minCharacters) {
       return "Este campo deve ter pelo menos $minCharacters caracteres";
     }
     return null;
-  }
-}
-
-extension StringRegex on String {
-  bool isValidName() {
-    return RegExp(
-            r'^[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+\s([A-ZÀ-ŸA-zÀ-ÿ]\s?)*[A-ZÀ-ŸA-zÀ-ÿ][A-ZÀ-ŸA-zÀ-ÿ]+$')
-        .hasMatch(this);
   }
 }

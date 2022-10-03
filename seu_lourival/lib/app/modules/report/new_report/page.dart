@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seu_lourival/app/modules/report/new_report/strings.dart';
+import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:seu_lourival/core/utils/input_validators.dart';
 import 'package:seu_lourival/core/values/spacing.dart';
 import 'package:seu_lourival/global_widgets/design_system/button/icon_button.dart';
@@ -27,16 +28,16 @@ class NewReportPage extends StatelessWidget {
             onTap: () {
               _showImagePicker(ImageSource.camera);
             },
-            iconData: Icons.camera_alt_outlined,
+            icon: const Icon(Icons.camera_alt_outlined),
           ),
           BottomSheetOption(
             title: "Galeria",
             onTap: () {
               _showImagePicker(ImageSource.gallery);
             },
-            iconData: Icons.photo_album_outlined,
+            icon: const Icon(Icons.photo_album_outlined),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
       backgroundColor: Colors.white,
@@ -61,11 +62,11 @@ class NewReportPage extends StatelessWidget {
       title: NewReportStrings.title,
       body: Obx(
         () => _controller.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
+            ? const Center(
+                child: const CircularProgressIndicator(),
               )
             : SingleChildScrollView(
-                padding: EdgeInsets.all(Spacing.s4),
+                padding: const EdgeInsets.all(Spacing.s4),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -80,7 +81,7 @@ class NewReportPage extends StatelessWidget {
                             Container(
                               height: 250,
                               width: 250,
-                              padding: EdgeInsets.only(top: 10),
+                              padding: const EdgeInsets.only(top: 10),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(150),
                                 child: Container(
@@ -123,7 +124,7 @@ class NewReportPage extends StatelessWidget {
                         labelText: NewReportStrings.reportTitle,
                         validator: (value) {
                           return DSInputValidators.isFieldValid(
-                              minCharacters: 10, value: value);
+                              minCharacters: 5, value: value);
                         },
                         onChange: (value) {
                           _controller.formModel.title = value;
@@ -141,21 +142,21 @@ class NewReportPage extends StatelessWidget {
                         },
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: Spacing.s4),
+                        padding:
+                            const EdgeInsets.symmetric(vertical: Spacing.s4),
                         child: DropdownButtonFormField<String>(
                           isExpanded: true,
                           value: _controller.selectedCategory.value,
-                          hint: Text("Selecione a categoria"),
+                          hint: const Text("Selecione a categoria"),
                           items: _controller.categories.map((category) {
                             return DropdownMenuItem(
                               value: category,
                               child: category.trim().isEmpty
-                                  ? Text("")
+                                  ? const Text("")
                                   : Text(category),
                             );
                           }).toList(),
                           onChanged: (value) {
-                            print(value);
                             _controller.formModel.category = value ?? "";
                           },
                           validator: (value) {
@@ -167,30 +168,26 @@ class NewReportPage extends StatelessWidget {
                       CheckboxListTile(
                         value: _controller.isPrivateReport,
                         onChanged: (value) {
-                          print("--> CHECKBOX VALUE: $value");
                           _controller.isPrivateReport = value ?? false;
                         },
-                        title: Text(NewReportStrings.privateReport),
+                        title: const Text(NewReportStrings.privateReport),
                         secondary: Icon(
                           _controller.isPrivateReport
                               ? Icons.lock
                               : Icons.lock_open_sharp,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       DSIconButton(
                         buttonText: "Salvar",
                         onPressAction: () {
                           if (_formKey.currentState?.validate() ?? false) {
                             _controller.saveReport(onSuccess: () {
                               Get.back();
-                              Get.showSnackbar(
-                                GetSnackBar(
-                                  title: "Sucesso",
-                                  message: "Seu manifesto foi cadastrado",
-                                  duration: 3.seconds,
-                                ),
-                              );
+                              CustomSnackBar(
+                                title: "Seu manifesto foi cadastrado",
+                                style: SnackbarStyle.success,
+                              ).build().show();
                             }, onFailure: (errorMessage) {
                               Get.showSnackbar(
                                 GetSnackBar(
@@ -214,22 +211,22 @@ class NewReportPage extends StatelessWidget {
 class BottomSheetOption extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
-  final IconData iconData;
+  final Icon icon;
 
   BottomSheetOption({
     required this.title,
     required this.onTap,
-    required this.iconData,
+    required this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: Icon(iconData),
+      leading: icon,
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.bold,
         ),

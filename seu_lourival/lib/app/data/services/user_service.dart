@@ -6,6 +6,7 @@ class UserService {
   UserModel? user;
 
   bool get isLoggedIn => FirebaseAuth.instance.currentUser != null;
+  bool get isAdmin => user?.type == UserType.ADMIN;
 
   Future<bool> loadCurrentUser() async {
     final currentUser = FirebaseAuth.instance.currentUser;
@@ -13,6 +14,9 @@ class UserService {
       final id = currentUser.uid;
       final result =
           await FirebaseFirestore.instance.collection("users").doc(id).get();
+      if (result.data() == null) {
+        return false;
+      }
       user = UserModel.fromJson(result.data(), uuid: id);
       return true;
     }
@@ -23,7 +27,7 @@ class UserService {
     try {
       await FirebaseAuth.instance.signOut();
     } catch (e) {
-       return throw Exception('Ops, ocorreu um erro. Tente novamente');
+      return throw Exception('Ops, ocorreu um erro. Tente novamente');
     }
   }
 

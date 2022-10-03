@@ -22,6 +22,14 @@ class ReportListPage extends StatelessWidget {
     return DSScaffold(
       hasDrawer: true,
       title: ReportListStrings.scaffoldTitle,
+      actions: [
+        IconButton(
+          onPressed: () {
+            showSearch(context: context, delegate: _controller.reportSearch);
+          },
+          icon: const Icon(Icons.search),
+        ),
+      ],
       floatingActionButton: FloatingActionButton(
         backgroundColor: DSColors.primary,
         onPressed: () {
@@ -56,7 +64,8 @@ class ReportListPage extends StatelessWidget {
                       child: ListView.builder(
                         itemCount: _controller.reportList.length,
                         itemBuilder: (context, index) {
-                          final report = _controller.reportList[index];
+                          final report =
+                              _controller.reportList[index] as ReportModel;
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 5.0, horizontal: 5.0),
@@ -65,20 +74,20 @@ class ReportListPage extends StatelessWidget {
                                 Get.toNamed(
                                   Routes.reportDetail,
                                   arguments: report,
-                                );
+                                )?.then((value) => _controller.getReports());
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(
-                                  height: 110,
+                                  height: 150,
                                   color: Colors.white,
                                   child: Row(
                                     children: <Widget>[
                                       Container(
                                         color: getReportCategoryColor(
                                             report.category),
-                                        width: 70,
-                                        height: 110,
+                                        width: 60,
+                                        height: double.maxFinite,
                                         child: getReportCategoryIcon(
                                             report.category),
                                       ),
@@ -90,16 +99,16 @@ class ReportListPage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
-                                            DSTitle.base('${report.title}'),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                DSText.sm(report.author),
-                                                DSText.sm(report.createdAt),
-                                              ],
+                                            Text(
+                                              report.title,
+                                              maxLines: 2,
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
+                                            DSText.sm(report.author),
+                                            DSText.sm(report.createdAt),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -139,8 +148,8 @@ class ReportListPage extends StatelessWidget {
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: [
-                                                  const Icon(
+                                                children: const [
+                                                  Icon(
                                                     Icons
                                                         .arrow_forward_ios_rounded,
                                                     color: DSColors.primary,

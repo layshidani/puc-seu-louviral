@@ -1,8 +1,15 @@
 import 'package:get/route_manager.dart';
 
 import 'package:seu_lourival/_debug/page.dart';
+import 'package:seu_lourival/app/modules/billboard/binding.dart';
+import 'package:seu_lourival/app/modules/billboard/new_billboard/binding.dart';
+import 'package:seu_lourival/app/modules/billboard/new_billboard/page.dart';
 import 'package:seu_lourival/app/modules/login/binding.dart';
 import 'package:seu_lourival/app/modules/login/page.dart';
+import 'package:seu_lourival/app/modules/maintenance/binding.dart';
+import 'package:seu_lourival/app/modules/maintenance/page.dart';
+import 'package:seu_lourival/app/modules/onboarding/binding.dart';
+import 'package:seu_lourival/app/modules/onboarding/page.dart';
 import 'package:seu_lourival/app/modules/report/new_report/binding.dart';
 import 'package:seu_lourival/app/modules/report/new_report/page.dart';
 
@@ -60,10 +67,6 @@ class Pages {
       page: () => const LoginErrorPage(),
     ),
     GetPage(
-      name: Routes.billboard,
-      page: () => const BillboardPage(),
-    ),
-    GetPage(
       name: Routes.financial,
       page: () => const FinancePage(),
     ),
@@ -81,8 +84,26 @@ class Pages {
       page: () => AddUsersFormPage(),
       binding: AddUsersFormBinding(),
     ),
-
-
+    GetPage(
+      name: Routes.maintenance,
+      page: () => MaintenancePage(),
+      binding: MaintenanceBinding(),
+    ),
+    GetPage(
+      name: Routes.onboarding,
+      page: () => OnboardingPage(),
+      binding: OnboardingBinding(),
+    ),
+    GetPage(
+      name: Routes.billboard,
+      page: () => BillboardPage(),
+      binding: BillboardBinding(),
+    ),
+    GetPage(
+      name: Routes.newBillboard,
+      page: () => NewBillboardPage(),
+      binding: NewBillboardBinding(),
+    ),
     // Theme Catalog / Debug
     GetPage(
       name: Routes.themeCatalog,

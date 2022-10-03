@@ -15,16 +15,15 @@ class DSConfirmDialog {
     required this.context,
     required this.title,
     required this.descriptionLine1,
-
+    required this.onConfirmAction,
     this.shouldHideCancel = false,
     this.descriptionLine2 = '',
-    this.onConfirmAction,
   });
 
   Future<void> show() async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: DSTitle.sm(title),
@@ -37,7 +36,9 @@ class DSConfirmDialog {
             ),
           ),
           actions: <Widget>[
-            shouldHideCancel ? Container() : TextButton(
+            shouldHideCancel
+                ? Container()
+                : TextButton(
                     child: DSText.base('Cancelar'),
                     onPressed: () {
                       Get.back();
@@ -45,7 +46,7 @@ class DSConfirmDialog {
                   ),
             TextButton(
               onPressed: onConfirmAction,
-              child: DSText.base('Ok'),
+              child: DSText.base('Confirmar'),
             ),
           ],
         );

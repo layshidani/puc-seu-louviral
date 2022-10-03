@@ -5,11 +5,14 @@ class Routes {
   static const usersManager = '/users-manager';
   static const addUsersForm = '/add-usersform';
   static const billboard = '/billboard';
+  static const newBillboard = '/new-billboard';
   static const financial = '/financial';
   static const visitors = '/visitors';
   static const reportList = '/report-list';
   static const newReport = '/new-report';
   static const reportDetail = '/report-detail';
+  static const maintenance = "/maintenance";
+  static const onboarding = "/onboarding";
 
   // debug / theme catalog
   static const themeCatalog = '/theme-catalog';

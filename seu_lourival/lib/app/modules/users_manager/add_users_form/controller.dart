@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seu_lourival/app/data/models/user_model.dart';
+import 'package:seu_lourival/app/data/services/email_service.dart';
 import 'package:seu_lourival/app/modules/users_manager/add_users_list/controller.dart';
 
 import 'package:seu_lourival/app/widgets/custom_snack_bar.dart';
 import 'package:seu_lourival/core/utils/string_formater_helper.dart';
+import 'package:seu_lourival/core/values/colors.dart';
 import 'package:seu_lourival/core/values/strings.dart';
 
 class AddUsersFormController extends GetxController {
@@ -55,9 +55,19 @@ class AddUsersFormController extends GetxController {
         break;
       case _lastFormStep:
         if (_isValidForm()) {
-          await _onSaveUser();
-          await _addUsersListController.getPreRegisteredList();
-          _addStep();
+          Get.showOverlay(
+              asyncFunction: () async {
+                final result = await _onSaveUser();
+                if (result) {
+                  await _addUsersListController.getPreRegisteredList();
+                  _addStep();
+                } else {}
+              },
+              loadingWidget: const Center(
+                child: CircularProgressIndicator(
+                  color: DSColors.primary,
+                ),
+              ));
         }
         break;
       default:
@@ -90,18 +100,25 @@ class AddUsersFormController extends GetxController {
     Get.showSnackbar(snackbar);
   }
 
-  Future<void> _onSaveUser() async {
+  Future<bool> _onSaveUser() async {
     try {
       await FirebaseFirestore.instance
           .collection('pre-registered')
           .add(getFormData());
 
-      _showSnackBar(
-          style: SnackbarStyle.success,
-          message: AddUsersFormStrings.onSaveUserSuccess);
+      final emailService = EmailService();
+      final model = EmailServiceModel(
+        name: addUserForm.name,
+        email: addUserForm.email,
+        phone: addUserForm.phone,
+      );
+      await emailService.sendEmail(model: model);
+      return true;
     } catch (e) {
       _showSnackBar(
-          style: SnackbarStyle.error, message: AddUsersFormStrings.onSaveUserError);
+          style: SnackbarStyle.error,
+          message: AddUsersFormStrings.onSaveUserError);
+      return false;
     }
   }
 

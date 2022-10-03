@@ -24,13 +24,11 @@ class DebugHomePage extends StatelessWidget {
               onPressed: () => Get.toNamed(Routes.smsValidation),
             ),
             ElevatedButton(
-              child: const Text(
-                  'Aplicação >> ReportList'),
+              child: const Text('Aplicação >> ReportList'),
               onPressed: () => Get.toNamed(Routes.reportList),
             ),
             ElevatedButton(
-              child: const Text(
-                  'Aplicação >> Detalhe report'),
+              child: const Text('Aplicação >> Detalhe report'),
               onPressed: () => Get.toNamed(Routes.reportDetail),
             ),
             ElevatedButton(
@@ -72,9 +70,7 @@ class DebugHomePage extends StatelessWidget {
                 try {
                   await picker.pickImage(
                       source: ImageSource.camera, imageQuality: 50);
-                } catch (e) {
-                  print(e.toString());
-                }
+                } catch (e) {}
               },
             ),
           ],

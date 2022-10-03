@@ -5,6 +5,7 @@ import 'package:seu_lourival/core/values/text_size.dart';
 
 class ReportModel {
   final String? id;
+  final String? authorId;
   final String author;
   final String title;
   final String description;
@@ -19,6 +20,7 @@ class ReportModel {
 
   ReportModel({
     this.id,
+    this.authorId,
     this.author = '',
     this.title = '',
     this.description = '',
@@ -39,6 +41,7 @@ class ReportModel {
   factory ReportModel.fromJson(Map<String, dynamic> json) {
     return ReportModel(
         id: json['id'],
+        authorId: json['authorId'],
         author: json['author'],
         title: json['title'],
         description: json['description'],
@@ -115,14 +118,12 @@ extension ReportCategoryExtension on ReportCategory {
   }
 }
 
-Icon getReportStatusColor(String status) {
-  var st = ReportStatusHelper.fromString(status);
-  print('♥️ $status');
-  switch (st) {
+Icon getReportStatusColor(ReportStatus status) {
+  switch (status) {
     case ReportStatus.OPEN:
-      return Icon(
+      return const Icon(
         Icons.lightbulb_rounded,
-        color: Colors.amber[600],
+        color: Color.fromARGB(255, 95, 154, 170),
       );
     case ReportStatus.IN_PROGRESS:
       return const Icon(
@@ -223,10 +224,8 @@ class ReportStatusHelper {
 
 class ReportCategoryHelper {
   static ReportCategory fromString(String category) {
-    print("--> CAAAAAATegory: ${category}");
     try {
       final cat = ReportCategory.values.firstWhere((reportCategory) {
-        print("--> report category desc: ${reportCategory.description}");
         return category.contains(reportCategory.description);
       });
       return cat;
