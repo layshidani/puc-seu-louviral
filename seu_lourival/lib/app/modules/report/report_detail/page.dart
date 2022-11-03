@@ -55,7 +55,7 @@ class ReportDetailPage extends StatelessWidget {
             : Container(),
       ],
       floatingActionButton: SpeedDial(
-        closedBackgroundColor: DSColors.primary,
+        closedBackgroundColor: DSColors.secondary,
         openBackgroundColor: DSColors.primary,
         child: const Icon(Icons.contact_phone),
         speedDialChildren: [
